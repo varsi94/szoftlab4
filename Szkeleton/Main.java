@@ -1,9 +1,8 @@
+package Szkeleton;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import Varazsko.ITVarazsko;
-import Varazsko.KekVarazsko;
 
 public class Main {
 	private static BufferedReader in;
@@ -48,7 +47,7 @@ public class Main {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
 		StringBuilder build = new StringBuilder(stack.length + 64);
 		for (int i = 0; i < stack.length - 4; i++) {
-			build.append("|\t");
+			build.append("\t");
 		}
 		System.out.print(build);
 		return stack[3];
