@@ -3,6 +3,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import Torony.ITorony;
+import Torony.Torony;
+import Varazsko.ITVarazsko;
+import Varazsko.KekVarazsko;
 
 public class Main {
 	private static BufferedReader in;
@@ -56,6 +60,10 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		in = new BufferedReader(new InputStreamReader(System.in));
 		log();
+		ITorony t = new Torony();
+		ITVarazsko vk = new KekVarazsko(); 
+		vk.hat(t);
+		vk.getKoltseg();
 		in.close();
 	}
 }
