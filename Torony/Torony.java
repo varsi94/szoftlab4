@@ -17,18 +17,27 @@ public class Torony implements ITorony {
 	 */
 	private int[] sebzes;
 	/**
-	 * Hatótávolság, tüzelési gyakoriság, költség.
+	 * Hatótávolság.
 	 */
-	private int hatotav, tuzgyak, koltseg;
+	private int hatotav;
+	/**
+	 * Tüzelési gyakoriság
+	 */
+	private int tuzgyak;
+	/**
+	 * Költség.
+	 */
+	private int koltseg;
 
 	/*
 	 * private Cella pozicio; private List<Cella> list;
 	 */
 
 	/**
-	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ
-	 * cellákon van-e valaki és ha van akkor a legközelebbi ellenséget meglövi.
+	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ cellákon van-e valaki és ha van akkor a legközelebbi ellenséget
+	 * meglövi.
 	 */
+	@Override
 	public void loves() {
 		Main.log();
 	}
@@ -38,6 +47,7 @@ public class Torony implements ITorony {
 	 * 
 	 * @return a költség
 	 */
+	@Override
 	public int getKoltseg() {
 		Main.log();
 		return koltseg;
@@ -47,10 +57,10 @@ public class Torony implements ITorony {
 	 * Az ellenség lekéri a sebzést amit a torony rá lõ.
 	 * 
 	 * @param idx
-	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2:
-	 *            torp, 3: tunde
+	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
 	 * @return sebzés nagysága
 	 */
+	@Override
 	public int getSebzes(int idx) {
 		Main.log();
 		return sebzes[idx];

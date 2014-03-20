@@ -4,8 +4,7 @@ import Szkeleton.Main;
 import Torony.ITorony;
 
 /**
- * Fekete varázskõ a torony fejlesztésére. Megnöveli a torony sebzését a
- * törpökkel szemben.
+ * Fekete varázskõ a torony fejlesztésére. Megnöveli a torony sebzését a törpökkel szemben.
  * 
  * @author Varsi
  * 
@@ -22,19 +21,20 @@ public class FeketeVarazsko implements ITVarazsko {
 	 * 
 	 * @return költség
 	 */
+	@Override
 	public int getKoltseg() {
 		Main.log();
 		return koltseg;
 	}
 
 	/**
-	 * A függvény megvizsgálja, hogy hathat-e a toronyra. Ha igen, kifejti
-	 * hatását.
+	 * A függvény megvizsgálja, hogy hathat-e a toronyra. Ha igen, kifejti hatását.
 	 * 
 	 * @param t
 	 *            a céltorony
 	 * @return sikerült-e a mûvelet
 	 */
+	@Override
 	public boolean hat(ITorony t) {
 		Main.log();
 		return true;

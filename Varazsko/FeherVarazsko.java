@@ -1,16 +1,16 @@
 package Varazsko;
+
 import Szkeleton.Main;
 import Torony.ITorony;
 
-
 /**
- * Varázskõ, mely a torony sebzését megnöveli a tündékkel szemben. 
- * Csak toronyra lehet ráhelyezni. 
+ * Varázskõ, mely a torony sebzését megnöveli a tündékkel szemben. Csak toronyra lehet ráhelyezni.
+ * 
  * @author Varsi
- *
+ * 
  */
 public class FeherVarazsko implements ITVarazsko {
-	
+
 	/**
 	 * Azt tárolja, hogy mennyi varázserõbe kerül a használata.
 	 */
@@ -18,8 +18,10 @@ public class FeherVarazsko implements ITVarazsko {
 
 	/**
 	 * Visszaadja, hogy mennyibe kerül lerakni a varázskövet.
+	 * 
 	 * @return a költség
 	 */
+	@Override
 	public int getKoltseg() {
 		Main.log();
 		return koltseg;
@@ -27,7 +29,9 @@ public class FeherVarazsko implements ITVarazsko {
 
 	/**
 	 * A függvény megvizsgálja hogy hathat-e toronyra. Ha igen kifejti hatását.
-	 * @param t a céltorony
+	 * 
+	 * @param t
+	 *            a céltorony
 	 * @return sikerült-e elérni a hatást
 	 */
 	@Override
@@ -35,13 +39,13 @@ public class FeherVarazsko implements ITVarazsko {
 		Main.log();
 		return true;
 	}
-	
+
 	/**
 	 * Konstruktor
 	 */
 	public FeherVarazsko() {
 		Main.log();
-		koltseg=0;
+		koltseg = 0;
 	}
 
 }

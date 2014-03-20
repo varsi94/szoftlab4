@@ -1,4 +1,5 @@
 package Szkeleton;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -42,7 +43,7 @@ public class Main {
 		System.out.println(e);
 	}
 
-	public static void printLn(String line) {
+	public static void println(String line) {
 		ident();
 		System.out.println(line);
 	}
@@ -61,7 +62,7 @@ public class Main {
 		in = new BufferedReader(new InputStreamReader(System.in));
 		log();
 		ITorony t = new Torony();
-		ITVarazsko vk = new KekVarazsko(); 
+		ITVarazsko vk = new KekVarazsko();
 		vk.hat(t);
 		vk.getKoltseg();
 		in.close();

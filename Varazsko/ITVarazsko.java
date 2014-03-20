@@ -7,7 +7,7 @@ import Torony.ITorony;
  * 
  * @author Varsi
  */
-public interface ITVarazsko {	
+public interface ITVarazsko {
 	/**
 	 * Visszaadja hogy hány varázserõbe kerül az adott kõ használata.
 	 * 

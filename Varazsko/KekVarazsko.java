@@ -19,6 +19,7 @@ public class KekVarazsko implements ITVarazsko {
 	/**
 	 * @return mennyibe kerül lerakni egy varázskövet.
 	 */
+	@Override
 	public int getKoltseg() {
 		Main.log();
 		return koltseg;
@@ -31,6 +32,7 @@ public class KekVarazsko implements ITVarazsko {
 	 *            a céltorony
 	 * @return sikerült-e a hatást elérni.
 	 */
+	@Override
 	public boolean hat(ITorony t) {
 		Main.log();
 		return true;

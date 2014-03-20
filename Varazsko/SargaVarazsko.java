@@ -4,8 +4,7 @@ import Szkeleton.Main;
 import Torony.ITorony;
 
 /**
- * Varázskõ, mely a torony sebzését megnöveli az emberekkel szemben. Csak
- * toronyra lehet ráhelyezni.
+ * Varázskõ, mely a torony sebzését megnöveli az emberekkel szemben. Csak toronyra lehet ráhelyezni.
  * 
  * @author Varsi
  * 
@@ -22,6 +21,7 @@ public class SargaVarazsko implements ITVarazsko {
 	 * 
 	 * @return a költség
 	 */
+	@Override
 	public int getKoltseg() {
 		Main.log();
 		return koltseg;
@@ -34,6 +34,7 @@ public class SargaVarazsko implements ITVarazsko {
 	 *            a céltorony
 	 * @return sikerült-e a mûvelet
 	 */
+	@Override
 	public boolean hat(ITorony t) {
 		Main.log();
 		return true;
