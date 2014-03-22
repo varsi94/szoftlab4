@@ -1,5 +1,6 @@
 package Akadaly;
 
+import Cella.Cella;
 import Ellenseg.IEllenseg;
 import Szkeleton.Main;
 
@@ -16,6 +17,7 @@ public class Ork extends AAkadaly {
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
 		Main.log();
+		e.meghal();
 		return false;
 	}
 

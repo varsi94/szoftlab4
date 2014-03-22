@@ -47,7 +47,7 @@ public class Cella {
 	 */
 	public void hozzaad(IEllenseg e) {
 		Main.log();
-		ellensegek.add(e);
+		//ellensegek.add(e);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class Cella {
 	 */
 	public void kivesz(IEllenseg e) {
 		Main.log();
-		ellensegek.remove(e);
+		//ellensegek.remove(e);
 	}
 
 	/**

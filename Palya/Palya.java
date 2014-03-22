@@ -30,5 +30,11 @@ public class Palya {
 		Main.log();
 		this.varazsero = varazsero;
 	}
-
+	
+	/**
+	 * Vége a játéknak.
+	 */
+	public void lost() {
+		Main.log();
+	}
 }

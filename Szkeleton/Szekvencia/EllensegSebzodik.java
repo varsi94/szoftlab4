@@ -3,6 +3,9 @@
  */
 package Szkeleton.Szekvencia;
 
+import Ellenseg.Ember;
+import Ellenseg.IEllenseg;
+import Torony.ITorony;
 import Torony.Torony;
 
 /**
@@ -13,18 +16,18 @@ import Torony.Torony;
 public class EllensegSebzodik implements ISzekvencia {
 
 	/**
-	 * 
+	 * Szekvencia indítása
 	 */
-	@Override
 	public void indit() {
-		Torony t = new Torony();
-		t.loves();
+		IEllenseg ember = new Ember();
+		ITorony torony = new Torony();
+		ember.sebzodik(torony);
 	}
 
 	/**
-	 * @return
+	 * Metódus, amely visszaadja a szekvencia nevét - kiíráshoz szükséges
+	 * @return a szekvencia neves
 	 */
-	@Override
 	public String getName() {
 		return "Ellenség sebzõdik";
 	}

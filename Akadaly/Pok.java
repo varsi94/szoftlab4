@@ -16,6 +16,7 @@ public class Pok extends AAkadaly {
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
 		Main.log();
+		e.megall(this.hatas);
 		return false;
 	}
 

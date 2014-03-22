@@ -24,9 +24,27 @@ public class SzekvenciaKezelo {
 	 */
 	public SzekvenciaKezelo() {
 		szekvenciak = new ArrayList<ISzekvencia>();
-		for (int i = 0; i < 21; i++) {
-			szekvenciak.add(new EllensegSebzodik());
-		}
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(null);
+		szekvenciak.add(new EllensegSebzodik());
+		szekvenciak.add(new EllensegElpusztul());
+		szekvenciak.add(new AkadalyElpusztitjaEllenseget());
+		szekvenciak.add(new AkadalyEltunik());
+		szekvenciak.add(new AkadalyLelassit());
+		szekvenciak.add(new EllensegLelassitasa());
+		szekvenciak.add(new EllensegLeptetese());
+		szekvenciak.add(new EllensegEleriHegyet());
+		szekvenciak.add(new JatekVege());
+		szekvenciak.add(new RanglistabaIras());
 	}
 	
 	/**
@@ -34,7 +52,7 @@ public class SzekvenciaKezelo {
 	 * @param idx a szekvencia indexe
 	 */
 	public void megjelenit(int idx) {
-		System.out.println(szekvenciak.get(idx).getName());
+		System.out.println("-----------" + szekvenciak.get(idx).getName() + "-----------");
 		szekvenciak.get(idx).indit();
 	}
 }
