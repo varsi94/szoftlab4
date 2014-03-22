@@ -24,6 +24,7 @@ public class Ork extends AAkadaly {
 	@Override
 	public void fejleszt() {
 		Main.log();
+		hatas++;
 	}
 
 }

@@ -20,5 +20,9 @@ public class Ranglista {
 			System.out.println(e.getKey() + " " + e.getValue());
 		}
 	}
+	
+	public Ranglista(){
+		Main.log();
+	}
 
 }

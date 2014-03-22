@@ -12,6 +12,7 @@ public class Palya {
 
 	public void motor() {
 		Main.log();
+		this.korNovel();
 	}
 
 	/**
@@ -36,5 +37,32 @@ public class Palya {
 	 */
 	public void lost() {
 		Main.log();
+	}
+	
+	/**
+	 * Kör növelése
+	 */
+	private void korNovel() {
+		Main.log();
+		this.ment();
+	}
+	
+	/*
+	 * Játék mentése. Csak a körök végén.
+	 */
+	
+	private void ment(){
+		Main.log();
+		System.out.println("ObjectOutputStream.writeObject();");
+	}
+	
+	/**
+	 * Konstruktor
+	 */
+	public Palya() {
+		Main.log();
+		varazsero = 0;
+		kor = 1;
+		
 	}
 }

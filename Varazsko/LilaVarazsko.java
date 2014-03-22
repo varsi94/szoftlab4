@@ -36,6 +36,7 @@ public class LilaVarazsko implements IAVarazsko {
 	@Override
 	public boolean hat(IAkadaly a) {
 		Main.log();
+		a.fejleszt();
 		return true;
 	}
 

@@ -24,17 +24,17 @@ public class SzekvenciaKezelo {
 	 */
 	public SzekvenciaKezelo() {
 		szekvenciak = new ArrayList<ISzekvencia>();
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
-		szekvenciak.add(null);
+		szekvenciak.add(new UjJatek());
+		szekvenciak.add(new JatekBetoltese());
+		szekvenciak.add(new RanglistaMegtekintese());
+		szekvenciak.add(new JatekbolKilepes());
+		szekvenciak.add(new ToronyLerakasa());
+		szekvenciak.add(new ToronyFejleszteseVarazskovel());
+		szekvenciak.add(new AkadalyLerakasa());
+		szekvenciak.add(new AkadalyFejleszteseLilaVarazskovel());
+		szekvenciak.add(new UjKor());
+		szekvenciak.add(new JatekMentese());
+		szekvenciak.add(new ToronyEllensegreLo());
 		szekvenciak.add(new EllensegSebzodik());
 		szekvenciak.add(new EllensegElpusztul());
 		szekvenciak.add(new AkadalyElpusztitjaEllenseget());

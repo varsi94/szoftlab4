@@ -70,9 +70,30 @@ public class Torony implements ITorony {
 		Main.log();
 		return sebzes[idx];
 	}
-
+	
+	/**
+	 * Sebzés növelése bizonyos ellenségre.
+	 * 
+	 * @param idx
+	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2:
+	 *            torp, 3: tunde
+	 * @return 
+	 */
+	@Override
+	public void setSebzes(int idx) {
+		Main.log();
+		sebzes[idx]++;
+	}
+	
+	/**
+	 * Konstruktor
+	 */
 	public Torony() {
 		Main.log();
-		sebzes = new int[4];
+		sebzes = new int[] {0,0,0,0};
+		hatotav = 0;
+		tuzgyak = 0;
+		koltseg = 0;
+		
 	}
 }

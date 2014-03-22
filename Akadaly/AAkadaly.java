@@ -18,7 +18,6 @@ public abstract class AAkadaly implements IAkadaly {
 	protected int hatas;
 
 	public AAkadaly(int koltseg, int hatas) {
-		Main.log();
 		this.koltseg = koltseg;
 		this.hatas = hatas;
 	}

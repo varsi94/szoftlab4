@@ -34,6 +34,8 @@ public class ZoldVarazsko implements ITVarazsko {
 	@Override
 	public boolean hat(ITorony t) {
 		Main.log();
+		t.getSebzes(1);
+		t.setSebzes(1);
 		return true;
 	}
 

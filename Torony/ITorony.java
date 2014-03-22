@@ -1,5 +1,7 @@
 package Torony;
 
+import Szkeleton.Main;
+
 /**
  * ITorony interfész a torony által elvárt metódusok definiálására.
  * 
@@ -28,4 +30,15 @@ public interface ITorony {
 	 * @return sebzés nagysága
 	 */
 	public int getSebzes(int idx);
+	
+	/**
+	 * Sebzés növelése bizonyos ellenségre.
+	 * 
+	 * @param idx
+	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2:
+	 *            torp, 3: tunde
+	 * @return 
+	 */
+	public void setSebzes(int idx);
+	
 }
