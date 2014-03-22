@@ -19,6 +19,7 @@ public class UjJatek implements ISzekvencia {
 	public void indit() {
 		Palya p = new Palya();
 		
+		p.motor();
 	}
 
 	/**

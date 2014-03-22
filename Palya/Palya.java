@@ -25,7 +25,10 @@ public class Palya {
 		if (Main.currSzekvencia == 8 || Main.currSzekvencia == 9)
 			this.korNovel();
 		// Ellenség elpusztul
-		else if (Main.currSzekvencia == 12) {
+		else if (Main.currSzekvencia == 10){
+			ITorony t = new Torony();
+			t.loves();
+		} else if (Main.currSzekvencia == 12) {
 			ITorony torony = new Torony();
 			torony.loves();
 		} else if (Main.currSzekvencia == 13 || Main.currSzekvencia == 14) {		//Akadály elpusztítja az ellenséget

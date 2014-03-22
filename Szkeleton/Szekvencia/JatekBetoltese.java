@@ -18,8 +18,8 @@ public class JatekBetoltese implements ISzekvencia {
 	@Override
 	public void indit() {
 		Palya p = new Palya();
-		
 		System.out.println("ObjectInputStream.readObject(p);");
+		p.motor();
 	}
 
 	/**

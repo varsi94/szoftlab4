@@ -3,10 +3,7 @@
  */
 package Szkeleton.Szekvencia;
 
-import Ellenseg.Ember;
-import Ellenseg.IEllenseg;
-import Torony.ITorony;
-import Torony.Torony;
+import Palya.Palya;
 
 
 /**
@@ -21,10 +18,10 @@ public class ToronyEllensegreLo implements ISzekvencia {
 	 */
 	@Override
 	public void indit() {
-		IEllenseg ember = new Ember();
-		ITorony torony = new Torony();
+		Palya p = new Palya();
 		
-		ember.sebzodik(torony);
+		p.motor();
+		
 	}
 
 	/**
