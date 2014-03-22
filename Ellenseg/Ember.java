@@ -9,6 +9,7 @@ public class Ember extends Kaszt {
 	@Override
 	public void sebzodik(ITorony t) {
 		Main.log();
+		t.getSebzes(0);
 	}
 
 	@Override

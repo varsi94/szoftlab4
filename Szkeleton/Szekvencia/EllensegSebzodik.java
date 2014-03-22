@@ -3,6 +3,8 @@
  */
 package Szkeleton.Szekvencia;
 
+import Torony.Torony;
+
 /**
  * Osztály az "ellenség sebzõdik" szekvencia kezelésére
  * @author Varsi
@@ -15,8 +17,8 @@ public class EllensegSebzodik implements ISzekvencia {
 	 */
 	@Override
 	public void indit() {
-		// TODO Auto-generated method stub
-
+		Torony t = new Torony();
+		t.loves();
 	}
 
 	/**

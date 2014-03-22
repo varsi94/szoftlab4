@@ -3,6 +3,8 @@
  */
 package Torony;
 
+import Ellenseg.Ember;
+import Ellenseg.IEllenseg;
 import Szkeleton.Main;
 
 /**
@@ -40,6 +42,8 @@ public class Torony implements ITorony {
 	@Override
 	public void loves() {
 		Main.log();
+		IEllenseg ember = new Ember();
+		ember.sebzodik(this);
 	}
 
 	/**

@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 //a szkeletonban a kezelõfelület megvalósítása kerül itt implementálásra
 public class Main {
 	private static BufferedReader in;
+	private static SzekvenciaKezelo szekvKezelo;
 
 	// ez a statikus metódus jelzi ki a szkeleton kezelõfelületének menüjében a
 	// választási lehetõségeket
@@ -89,74 +90,11 @@ public class Main {
 		}
 
 		// ha sikerült a kaszt, akkor a megfelelõ funkció kerül meghívásra
-		switch (uzenet) {
-		case 0:
-			// **ide a meghívandó függvény neve**
+		if (uzenet >= 0 && uzenet <= 20) {
+			szekvKezelo.megjelenit(uzenet);
 			return 0;
-		case 1:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 2:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 3:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 4:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 5:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 6:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 7:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 8:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 9:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 10:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 11:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 12:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 13:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 14:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 15:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 16:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 17:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 18:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 19:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		case 20:
-			// **ide a meghívandó függvény neve**
-			return 0;
-		default:
-			// máskülönben nem definiált a kapott szám: vissza a menübe
+		} else
 			return 1;
-		}
 	}
 
 	public static String readString() throws IOException {
@@ -193,7 +131,7 @@ public class Main {
 	private static StackTraceElement ident() {
 		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
 		StringBuilder build = new StringBuilder(stack.length + 64);
-		for (int i = 0; i < stack.length - 4; i++) {
+		for (int i = 0; i < stack.length - 8; i++) {
 			build.append("\t");
 		}
 		System.out.print(build);
@@ -202,6 +140,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		in = new BufferedReader(new InputStreamReader(System.in));
+		szekvKezelo = new SzekvenciaKezelo();
 		// kezdetben 'm', hiszen a menübe lép be
 		char uzenet = 'm';
 
