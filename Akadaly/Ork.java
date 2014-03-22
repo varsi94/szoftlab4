@@ -9,8 +9,8 @@ import Szkeleton.Main;
  */
 public class Ork extends AAkadaly {
 
-	public Ork(int koltseg, int hatas) {
-		super(koltseg, hatas);
+	public Ork(int koltseg, int hatas, Cella c) {
+		super(koltseg, hatas, c);
 		Main.log();
 	}
 
@@ -18,6 +18,8 @@ public class Ork extends AAkadaly {
 	public boolean akadalyoz(IEllenseg e) {
 		Main.log();
 		e.meghal();
+		if (Main.currSzekvencia == 14)
+			cella.setAkadaly(null);
 		return false;
 	}
 

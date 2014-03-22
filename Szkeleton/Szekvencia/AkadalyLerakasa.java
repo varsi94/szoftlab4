@@ -24,9 +24,9 @@ public class AkadalyLerakasa implements ISzekvencia {
 	 */
 	@Override
 	public void indit() {
-		IAkadaly ork = new Ork(0,0);
 		Palya p = new Palya();
 		Cella c = new Cella(0,0,false);
+		IAkadaly ork = new Ork(0,0, c);
 		
 		p.getVarazsero();
 		int v = ork.getKoltseg();

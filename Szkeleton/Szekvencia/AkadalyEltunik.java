@@ -7,10 +7,10 @@ import Akadaly.IAkadaly;
 import Akadaly.Ork;
 import Ellenseg.Ember;
 import Ellenseg.IEllenseg;
+import Palya.Palya;
 
 /**
  * Osztály az "akadály eltûnik" szekvencia reprezentálására.
- * Nincs teljesen kész!
  * @author Varsi
  *
  */
@@ -19,11 +19,9 @@ public class AkadalyEltunik implements ISzekvencia {
 	/**
 	 * Ez a metódus indítja el a szekvenciát.
 	 */
-	@Override
 	public void indit() {
-		IAkadaly ork = new Ork(0, 0);
-		IEllenseg ember = new Ember();
-		ork.akadalyoz(ember);
+		Palya p = new Palya();
+		p.motor();
 	}
 
 	/**

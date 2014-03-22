@@ -3,10 +3,7 @@
  */
 package Szkeleton.Szekvencia;
 
-import Akadaly.IAkadaly;
-import Akadaly.Pok;
-import Ellenseg.Ember;
-import Ellenseg.IEllenseg;
+import Palya.Palya;
 
 
 /**
@@ -21,9 +18,8 @@ public class AkadalyLelassit implements ISzekvencia {
 	 */
 	@Override
 	public void indit() {
-		IAkadaly pok = new Pok(0, 0);
-		IEllenseg ember = new Ember();
-		pok.akadalyoz(ember);
+		Palya p = new Palya();
+		p.motor();
 	}
 
 	/**

@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 public class Main {
 	private static BufferedReader in;
 	private static SzekvenciaKezelo szekvKezelo;
+	public static int currSzekvencia;
 
 	// ez a statikus metódus jelzi ki a szkeleton kezelõfelületének menüjében a
 	// választási lehetõségeket
@@ -91,6 +92,7 @@ public class Main {
 
 		// ha sikerült a kaszt, akkor a megfelelõ funkció kerül meghívásra
 		if (uzenet >= 0 && uzenet <= 20) {
+			currSzekvencia = uzenet;
 			szekvKezelo.megjelenit(uzenet);
 			return 0;
 		} else

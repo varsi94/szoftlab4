@@ -27,7 +27,7 @@ public class AkadalyFejleszteseLilaVarazskovel implements ISzekvencia {
 		IAVarazsko l = new LilaVarazsko();
 		Palya p = new  Palya();
 		Cella c = new Cella(0,0,false);
-		IAkadaly ork = new Ork(0,0);
+		IAkadaly ork = new Ork(0,0, c);
 		
 		l.getKoltseg();
 		p.getVarazsero();

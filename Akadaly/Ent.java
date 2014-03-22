@@ -1,5 +1,6 @@
 package Akadaly;
 
+import Cella.Cella;
 import Ellenseg.IEllenseg;
 import Szkeleton.Main;
 
@@ -8,8 +9,8 @@ import Szkeleton.Main;
  */
 public class Ent extends AAkadaly {
 
-	public Ent(int koltseg, int hatas) {
-		super(koltseg, hatas);
+	public Ent(int koltseg, int hatas, Cella c) {
+		super(koltseg, hatas, c);
 		Main.log();
 	}
 

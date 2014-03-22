@@ -1,6 +1,5 @@
 package Szkeleton.Szekvencia;
-import Torony.ITorony;
-import Torony.Torony;
+import Palya.Palya;
 
 /**
  * 
@@ -17,9 +16,8 @@ public class EllensegElpusztul implements ISzekvencia {
 	 * A szekvencia elindítása
 	 */
 	public void indit() {
-		ITorony torony = new Torony();
-		torony.loves();
-		
+		Palya p = new Palya();
+		p.motor();
 	}
 
 	/**

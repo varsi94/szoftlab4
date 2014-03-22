@@ -3,9 +3,7 @@
  */
 package Szkeleton.Szekvencia;
 
-import Cella.Cella;
-import Ellenseg.Ember;
-import Ellenseg.IEllenseg;
+import Palya.Palya;
 
 /**
  * Osztály az "ellenség léptetése" szekvencia ábrázolására.
@@ -19,10 +17,8 @@ public class EllensegLeptetese implements ISzekvencia {
 	 * Ez a metódus indítja el a szekvenciát.
 	 */
 	public void indit() {
-		IEllenseg ember = new Ember();
-		ember.getCellaIndex();
-		Cella ujCella = new Cella(0, 0, true);
-		ember.halad(ujCella);
+		Palya p = new Palya();
+		p.motor();
 	}
 
 	/**

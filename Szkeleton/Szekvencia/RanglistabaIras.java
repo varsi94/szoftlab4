@@ -1,9 +1,6 @@
 package Szkeleton.Szekvencia;
 
-import java.io.IOException;
-
-import Ranglista.Ranglista;
-import Szkeleton.Main;
+import Palya.Palya;
 
 /**
  * Osztály a ranglistába írás szekvencia megvalósítására.
@@ -16,14 +13,8 @@ public class RanglistabaIras implements ISzekvencia {
 	 * Ez a metódus indítja el a szekvenciát.
 	 */
 	public void indit() {
-		Ranglista ranglista = new Ranglista();
-		System.out.println("Adja meg a nevet!");
-		String name = null;
-		try {
-			name = Main.readString();
-			ranglista.frissit(name, 45);
-		} catch (IOException e) {
-		}
+		Palya p = new Palya();
+		p.motor();
 	}
 
 	/**

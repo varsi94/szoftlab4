@@ -1,5 +1,6 @@
 package Akadaly;
 
+import Cella.Cella;
 import Ellenseg.IEllenseg;
 import Szkeleton.Main;
 
@@ -16,10 +17,16 @@ public abstract class AAkadaly implements IAkadaly {
 	 * Ez az attribútum tárolja hogy hány ellenségre tudja végrehajtani a képességét mielõtt eltûnik.
 	 */
 	protected int hatas;
+	
+	/**
+	 * Ez az attribútum tárolja az aktuális cellát;
+	 */
+	protected Cella cella;
 
-	public AAkadaly(int koltseg, int hatas) {
+	public AAkadaly(int koltseg, int hatas, Cella c) {
 		this.koltseg = koltseg;
 		this.hatas = hatas;
+		this.cella = c;
 	}
 
 	@Override
