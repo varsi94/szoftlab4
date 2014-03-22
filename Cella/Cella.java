@@ -7,7 +7,7 @@ import Ellenseg.IEllenseg;
 import Szkeleton.Main;
 import Torony.ITorony;
 
-public class Cellac {
+public class Cella {
 	/**
 	 * Az x koordinátája a pontnak.
 	 */
