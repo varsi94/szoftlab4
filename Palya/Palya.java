@@ -24,11 +24,7 @@ public class Palya {
 		Main.log();
 		if (Main.currSzekvencia == 8 || Main.currSzekvencia == 9)	 // Új kör és mentés
 			this.korNovel();
-
-		else if (Main.currSzekvencia == 10){	 // Torony lõ
-			ITorony t = new Torony();
-			t.loves();
-		} else if (Main.currSzekvencia == 12) { 	// Ellenség elpusztul
+		else if (Main.currSzekvencia == 10 || Main.currSzekvencia == 12) { 	// Torony lõ || // Ellenség elpusztul 
 			ITorony torony = new Torony();
 			torony.loves();
 		} else if (Main.currSzekvencia == 13 || Main.currSzekvencia == 14) {		//Akadály elpusztítja az ellenséget
