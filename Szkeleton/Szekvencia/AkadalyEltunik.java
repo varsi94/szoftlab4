@@ -3,10 +3,6 @@
  */
 package Szkeleton.Szekvencia;
 
-import Akadaly.IAkadaly;
-import Akadaly.Ork;
-import Ellenseg.Ember;
-import Ellenseg.IEllenseg;
 import Palya.Palya;
 
 /**

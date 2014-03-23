@@ -3,7 +3,10 @@
  */
 package Szkeleton.Szekvencia;
 
+import java.io.IOException;
+
 import Palya.Palya;
+import Szkeleton.Main;
 
 /**
  * Osztály a "játék vége" szekvencia ábrázolására.
@@ -17,7 +20,20 @@ public class JatekVege implements ISzekvencia {
 	 */
 	public void indit() {
 		Palya p = new Palya();
-		p.lost();
+		String s = null;
+		while (s == null) {
+			System.out.println("Veszítsen a játékos? I/N");
+			try {
+				String tmp = Main.readString();
+				if (tmp.equals("I") || tmp.equals("N"))
+					s = tmp;
+			} catch (IOException e) {
+			}
+		}
+		if (s.equals("I"))
+			p.lost();
+		else
+			p.win();
 	}
 
 	/**

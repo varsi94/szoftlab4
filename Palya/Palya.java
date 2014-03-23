@@ -81,6 +81,13 @@ public class Palya {
 	public void lost() {
 		Main.log();
 	}
+	
+	/**
+	 * A játékos megnyerte a játékot.
+	 */
+	public void win() {
+		Main.log();
+	}
 
 	/**
 	 * Kör növelése
