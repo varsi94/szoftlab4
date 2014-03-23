@@ -46,6 +46,7 @@ public class ToronyFejleszteseVarazskovel implements ISzekvencia {
 		if (s.equals("I")) {
 			c.getTorony();
 			z.hat(t);
+			p.setVarazsero(v);
 		}
 	}
 

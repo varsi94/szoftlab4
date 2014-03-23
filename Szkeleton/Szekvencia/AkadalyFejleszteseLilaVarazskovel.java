@@ -29,7 +29,7 @@ public class AkadalyFejleszteseLilaVarazskovel implements ISzekvencia {
 		Cella c = new Cella(0,0,false);
 		IAkadaly ork = new Ork(0,0, c);
 		
-		l.getKoltseg();
+		int v = l.getKoltseg();
 		p.getVarazsero();
 		
 		String s = null;
@@ -45,6 +45,7 @@ public class AkadalyFejleszteseLilaVarazskovel implements ISzekvencia {
 		if (s.equals("I")) {
 			c.getAkadaly();
 			l.hat(ork);
+			p.setVarazsero(v);
 		}
 	}
 
