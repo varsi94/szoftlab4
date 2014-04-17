@@ -18,6 +18,7 @@ public class Torony implements ITorony {
 	public static final int KOD_OSZTO_NEVEZO = 5;
 	private static final int START_HATOTAV = 2;
 	private static final int START_TUZGYAK = 4;
+	private String TUZELESI_TIPUS;
 
 	private Palya palya;
 	private Cella cella;
@@ -99,9 +100,10 @@ public class Torony implements ITorony {
 	/**
 	 * Konstruktor
 	 */
-	public Torony(Palya palya, Cella cella) {
+	public Torony(Palya palya, Cella cella, String tipus) {
 		this.palya = palya;
 		this.cella = cella;
+		this.TUZELESI_TIPUS = tipus;
 		sebzes = new int[] { 1, 1, 1, 1 };
 		hatotav = START_HATOTAV;
 		tuzgyak = START_TUZGYAK;

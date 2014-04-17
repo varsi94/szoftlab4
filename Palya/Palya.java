@@ -43,7 +43,7 @@ public class Palya {
 		logPalya();
 	}
 
-	private void leptet() {
+	public void leptet() {
 		for (int i = 0; i < ellensegek.size(); i++) {
 			final IEllenseg e = ellensegek.get(i);
 			final int size = ellensegek.size();
@@ -145,16 +145,26 @@ public class Palya {
 		ellensegek = new ArrayList<IEllenseg>();
 		tornyok = new ArrayList<ITorony>();
 		akadalyok = new ArrayList<IAkadaly>();
-		tornyotLerak(new Torony(this, terkep[8][3]), terkep[8][3]);
+		/*tornyotLerak(new Torony(this, terkep[8][3]), terkep[8][3]);
 		tornyotLerak(new Torony(this, terkep[8][4]), terkep[8][4]);
 		tornyotLerak(new Torony(this, terkep[7][3]), terkep[7][3]);
 		tornyotLerak(new Torony(this, terkep[7][4]), terkep[7][4]);
 
-		akadalytLerak(new Ent(ut[0][8]), ut[0][8]);
+		akadalytLerak(new Ent(ut[0][8]), ut[0][8]);*/
 	}
 
 	public Cella getUtCella(int utindex, int cellaindex) {
 		return ut[utindex][cellaindex];
+	}
+	
+	public Cella getUtCellaByKord(int x, int y) {
+		for(int i = 0; i < 3 ; i++){
+			for(int j = 0; j < ut[i].length; j++){
+				if(ut[i][j].getX() == x && ut[i][j].getY() == y)
+					return ut[i][j];
+			}
+		}
+		return null;
 	}
 
 	public Cella getTerkepCella(int x, int y) {
