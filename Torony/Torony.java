@@ -40,8 +40,8 @@ public class Torony implements ITorony {
 	private boolean kod;
 
 	/**
-	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ cellákon van-e valaki és ha van akkor a legközelebbi ellenséget
-	 * meglövi.
+	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ
+	 * cellákon van-e valaki és ha van akkor a legközelebbi ellenséget meglövi.
 	 */
 	@Override
 	public void loves() {
@@ -50,13 +50,16 @@ public class Torony implements ITorony {
 			return;
 		}
 		korVar = tuzgyak;
-		final int hatotav = kod ? this.hatotav * KOD_OSZTO_SZAMLALO / KOD_OSZTO_NEVEZO : this.hatotav;
+		final int hatotav = kod ? this.hatotav * KOD_OSZTO_SZAMLALO
+				/ KOD_OSZTO_NEVEZO : this.hatotav;
 		final int x = cella.getX();
 		final int y = cella.getY();
 		final int minx = x - hatotav < 0 ? 0 : x - hatotav;
-		final int maxx = x + hatotav > Palya.PALYA_MAX_X_INDEX ? Palya.PALYA_MAX_X_INDEX : x + hatotav;
+		final int maxx = x + hatotav > Palya.PALYA_MAX_X_INDEX ? Palya.PALYA_MAX_X_INDEX
+				: x + hatotav;
 		final int miny = y - hatotav < 0 ? 0 : y - hatotav;
-		final int maxy = y + hatotav > Palya.PALYA_MAX_Y_INDEX ? Palya.PALYA_MAX_Y_INDEX : y + hatotav;
+		final int maxy = y + hatotav > Palya.PALYA_MAX_Y_INDEX ? Palya.PALYA_MAX_Y_INDEX
+				: y + hatotav;
 
 		boolean lott = false;
 
@@ -68,20 +71,46 @@ public class Torony implements ITorony {
 					continue;
 				final int hp = ell.getHp();
 				if (ell != null) {
-					if (Veletlen.duplaLovedek() || TUZELESI_TIPUS.equals("ketszerez")) {
+					if (TUZELESI_TIPUS.equals("ketszerez")) {
 						// dupplázzuk az ellenséget
 						final IEllenseg uj = ell.clone();
 						final IEllenseg uj2 = ell.clone();
 						uj.setHp(hp / 2);
 						uj2.setHp(hp / 2);
-						palya.addEllenseg(uj, palya.getUtCella(ell.getUtIndex(), ell.getCellaIndex()));
-						palya.addEllenseg(uj2, palya.getUtCella(ell.getUtIndex(), ell.getCellaIndex()));
+						palya.addEllenseg(
+								uj,
+								palya.getUtCella(ell.getUtIndex(),
+										ell.getCellaIndex()));
+						palya.addEllenseg(
+								uj2,
+								palya.getUtCella(ell.getUtIndex(),
+										ell.getCellaIndex()));
 						ell.meghal();
-					} else if (TUZELESI_TIPUS == null || TUZELESI_TIPUS.equals("sima lovedek")) {
+					} else if (TUZELESI_TIPUS.equals("sima lovedek")) {
 						ell.sebzodik(this);
+					} else {
+						if (Veletlen.duplaLovedek()) {
+							// dupplázzuk az ellenséget
+							final IEllenseg uj = ell.clone();
+							final IEllenseg uj2 = ell.clone();
+							uj.setHp(hp / 2);
+							uj2.setHp(hp / 2);
+							palya.addEllenseg(
+									uj,
+									palya.getUtCella(ell.getUtIndex(),
+											ell.getCellaIndex()));
+							palya.addEllenseg(
+									uj2,
+									palya.getUtCella(ell.getUtIndex(),
+											ell.getCellaIndex()));
+							ell.meghal();
+						} else {
+							ell.sebzodik(this);
+						}
 					}
 					lott = true;
-					break kulso;// ellenség keresés befejezése, külsõ ciklus break
+					break kulso;// ellenség keresés befejezése, külsõ ciklus
+								// break
 				}
 			}
 		}
