@@ -1,50 +1,47 @@
 package Ellenseg;
 
-import java.io.IOException;
-
-import Cella.Cella;
-import Szkeleton.Main;
+import Palya.Palya;
 import Torony.ITorony;
 
 public class Ember extends Kaszt {
 
-	@Override
-	public void sebzodik(ITorony t) {
-		Main.log();
-		t.getSebzes(0);
-		String s = null;
-		while (s == null) {
-			System.out.println("Meghaljon az ellenség? I/N");
-			try {
-				String tmp = Main.readString();
-				if (tmp.equals("I") || tmp.equals("N"))
-					s = tmp;
-			} catch (IOException e) {
-			}
-		}
-		if (s.equals("I")) {
-			meghal();
-		}
+	private static final int EMBER_START_HP = 6;
+	private static final int EMBER_START_SPEED = 3;
+
+	/**
+	 * Konstruktor az út elejérõl való induláshoz
+	 * 
+	 * @param palya
+	 *            a pálya
+	 * @param utIndex
+	 *            az út indexe
+	 */
+	public Ember(Palya palya, int utIndex) {
+		this(palya, utIndex, 0);
+	}
+
+	/**
+	 * Konstruktor ellenség torony lövés duplikációhoz
+	 * 
+	 * @param palya
+	 *            a pálya
+	 * @param utIndex
+	 *            az ut indexe
+	 * @param cellaIndex
+	 *            a cella indexe
+	 */
+	public Ember(Palya palya, int utIndex, int cellaIndex) {
+		super(palya, EMBER_START_SPEED, EMBER_START_HP, utIndex, cellaIndex);
 	}
 
 	@Override
-	public void megall(int kor) {
-		Main.log();
+	protected int getSebzodes(ITorony t) {
+		return t.getSebzes(ITorony.SEBZODES_EMBER_INDEX);
 	}
 
 	@Override
-	public void halad(Cella c) {
-		Main.log();
-		Cella regiCella = new Cella(0, 0, true);
-		regiCella.kivesz(this);
-		c.hozzaad(this);
-	}
-
-	@Override
-	public void meghal() {
-		Main.log();
-		Cella c = new Cella(0, 0, true);
-		c.kivesz(this);
+	public char getMarkChar() {
+		return 'e';
 	}
 
 }

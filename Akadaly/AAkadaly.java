@@ -2,7 +2,6 @@ package Akadaly;
 
 import Cella.Cella;
 import Ellenseg.IEllenseg;
-import Szkeleton.Main;
 
 /**
  * Az akadályt implementáló absztrakt osztály
@@ -17,7 +16,7 @@ public abstract class AAkadaly implements IAkadaly {
 	 * Ez az attribútum tárolja hogy hány ellenségre tudja végrehajtani a képességét mielõtt eltûnik.
 	 */
 	protected int hatas;
-	
+
 	/**
 	 * Ez az attribútum tárolja az aktuális cellát;
 	 */
@@ -37,8 +36,11 @@ public abstract class AAkadaly implements IAkadaly {
 
 	@Override
 	public final int getKoltseg() {
-		Main.log();
 		return koltseg;
 	}
 
+	@Override
+	public final Cella getCella() {
+		return cella;
+	}
 }

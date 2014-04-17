@@ -2,28 +2,27 @@ package Akadaly;
 
 import Cella.Cella;
 import Ellenseg.IEllenseg;
-import Szkeleton.Main;
 
 /**
  * Pokot reprezentáló osztály
  */
 public class Pok extends AAkadaly {
+	private static final int POK_KOLTSEG = 10;
+	private static final int POK_HATAS = 2;
 
-	public Pok(int koltseg, int hatas, Cella c) {
-		super(koltseg, hatas, c);
-		Main.log();
+	public Pok(Cella c) {
+		super(POK_KOLTSEG, POK_HATAS, c);
 	}
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		Main.log();
 		e.megall(this.hatas);
-		return false;
+		return --hatas > 0;
 	}
 
 	@Override
 	public void fejleszt() {
-		Main.log();
+		hatas += 3;
 	}
 
 }

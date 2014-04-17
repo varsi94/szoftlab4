@@ -1,13 +1,14 @@
 package Cella;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Akadaly.IAkadaly;
 import Ellenseg.IEllenseg;
-import Szkeleton.Main;
+import Prototipus.Veletlen;
 import Torony.ITorony;
 
-public class Cella {
+public class Cella implements Iterable<IEllenseg> {
 	/**
 	 * Az x koordinátája a pontnak.
 	 */
@@ -34,10 +35,10 @@ public class Cella {
 	private ITorony torony;
 
 	public Cella(int x, int y, boolean uteleme) {
-		Main.log();
 		this.x = x;
 		this.y = y;
 		this.uteleme = uteleme;
+		ellensegek = new ArrayList<IEllenseg>();
 	}
 
 	/**
@@ -46,8 +47,7 @@ public class Cella {
 	 * @param e
 	 */
 	public void hozzaad(IEllenseg e) {
-		Main.log();
-		//ellensegek.add(e);
+		ellensegek.add(e);
 	}
 
 	/**
@@ -56,8 +56,7 @@ public class Cella {
 	 * @param e
 	 */
 	public void kivesz(IEllenseg e) {
-		Main.log();
-		//ellensegek.remove(e);
+		ellensegek.remove(e);
 	}
 
 	/**
@@ -66,7 +65,6 @@ public class Cella {
 	 * @return the akadaly
 	 */
 	public IAkadaly getAkadaly() {
-		Main.log();
 		return akadaly;
 	}
 
@@ -75,10 +73,14 @@ public class Cella {
 	 * 
 	 * @param akadaly
 	 *            the akadaly to set
+	 * @return sikerült-e lerakni az akadályt
 	 */
-	public void setAkadaly(IAkadaly akadaly) {
-		Main.log();
-		this.akadaly = akadaly;
+	public boolean setAkadaly(IAkadaly akadaly) {
+		if (uteleme) {
+			this.akadaly = akadaly;
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -87,7 +89,6 @@ public class Cella {
 	 * @return the torony
 	 */
 	public ITorony getTorony() {
-		Main.log();
 		return torony;
 	}
 
@@ -96,10 +97,14 @@ public class Cella {
 	 * 
 	 * @param torony
 	 *            the torony to set
+	 * @return sikerült-e lerakni a tornyot
 	 */
-	public void setTorony(ITorony torony) {
-		Main.log();
-		this.torony = torony;
+	public boolean setTorony(ITorony torony) {
+		if (!uteleme) {
+			this.torony = torony;
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -108,8 +113,33 @@ public class Cella {
 	 * @return the ellensegek
 	 */
 	public List<IEllenseg> getEllensegek() {
-		Main.log();
 		return ellensegek;
 	}
 
+	public final boolean isUteleme() {
+		return uteleme;
+	}
+
+	@Override
+	public java.util.Iterator<IEllenseg> iterator() {
+		return ellensegek.iterator();
+	}
+
+	public IEllenseg getRandomEllenseg() {
+		final int size = ellensegek.size();
+		return size == 0 ? null : ellensegek.get(Veletlen.nextInt(size));
+	}
+
+	@Override
+	public String toString() {
+		return "[Cella " + x + " " + y + "]";
+	}
+
+	public final int getX() {
+		return x;
+	}
+
+	public final int getY() {
+		return y;
+	}
 }

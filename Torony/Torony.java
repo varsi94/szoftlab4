@@ -3,9 +3,10 @@
  */
 package Torony;
 
-import Ellenseg.Ember;
+import Cella.Cella;
 import Ellenseg.IEllenseg;
-import Szkeleton.Main;
+import Palya.Palya;
+import Prototipus.Veletlen;
 
 /**
  * 
@@ -13,7 +14,13 @@ import Szkeleton.Main;
  * 
  */
 public class Torony implements ITorony {
+	public static final int KOD_OSZTO_SZAMLALO = 3;
+	public static final int KOD_OSZTO_NEVEZO = 5;
+	private static final int START_HATOTAV = 2;
+	private static final int START_TUZGYAK = 4;
 
+	private Palya palya;
+	private Cella cella;
 	/**
 	 * Az egyes ellenfelek elleni sebzés.
 	 */
@@ -26,74 +33,108 @@ public class Torony implements ITorony {
 	 * Tüzelési gyakoriság
 	 */
 	private int tuzgyak;
-	/**
-	 * Költség.
-	 */
-	private int koltseg;
 
-	/*
-	 * private Cella pozicio; private List<Cella> list;
-	 */
+	private int korVar;
+
+	private boolean kod;
 
 	/**
-	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ
-	 * cellákon van-e valaki és ha van akkor a legközelebbi ellenséget meglövi.
+	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ cellákon van-e valaki és ha van akkor a legközelebbi ellenséget
+	 * meglövi.
 	 */
 	@Override
 	public void loves() {
-		Main.log();
-		IEllenseg ember = new Ember();
-		ember.sebzodik(this);
+		if (--korVar > 0) {
+			// nem lövünk
+			return;
+		}
+		korVar = tuzgyak;
+		final int hatotav = kod ? this.hatotav * KOD_OSZTO_SZAMLALO / KOD_OSZTO_NEVEZO : this.hatotav;
+		final int x = cella.getX();
+		final int y = cella.getY();
+		final int minx = x - hatotav < 0 ? 0 : x - hatotav;
+		final int maxx = x + hatotav > Palya.PALYA_MAX_X_INDEX ? Palya.PALYA_MAX_X_INDEX : x + hatotav;
+		final int miny = y - hatotav < 0 ? 0 : y - hatotav;
+		final int maxy = y + hatotav > Palya.PALYA_MAX_Y_INDEX ? Palya.PALYA_MAX_Y_INDEX : y + hatotav;
+
+		boolean lott = false;
+
+		kulso: for (int i = minx; i <= maxx; i++) {
+			for (int j = miny; j <= maxy; j++) {
+				final Cella c = palya.getTerkepCella(i, j);
+				final IEllenseg ell = c.getRandomEllenseg();
+				if (ell == null)
+					continue;
+				final int hp = ell.getHp();
+				if (ell != null) {
+					if (Veletlen.duplaLovedek()) {
+						// dupplázzuk az ellenséget
+						final IEllenseg uj = ell.clone();
+						uj.setHp(hp / 2);
+						ell.setHp(hp / 2);
+						palya.addEllenseg(uj, palya.getUtCella(ell.getUtIndex(), ell.getCellaIndex()));
+					} else {
+						ell.sebzodik(this);
+					}
+					lott = true;
+					break kulso;// ellenség keresés befejezése, külsõ ciklus break
+				}
+			}
+		}
+		if (!lott) {
+			korVar = 1;
+		}
 	}
 
-	/**
-	 * Visszaadja hogy mennyibe kerül megépíteni a tornyot
-	 * 
-	 * @return a költség
-	 */
-	@Override
-	public int getKoltseg() {
-		Main.log();
-		return koltseg;
-	}
-
-	/**
-	 * Az ellenség lekéri a sebzést amit a torony rá lõ.
-	 * 
-	 * @param idx
-	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2:
-	 *            torp, 3: tunde
-	 * @return sebzés nagysága
-	 */
 	@Override
 	public int getSebzes(int idx) {
-		Main.log();
 		return sebzes[idx];
 	}
-	
-	/**
-	 * Sebzés növelése bizonyos ellenségre.
-	 * 
-	 * @param idx
-	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2:
-	 *            torp, 3: tunde
-	 * @return 
-	 */
+
 	@Override
 	public void setSebzes(int idx) {
-		Main.log();
 		sebzes[idx]++;
 	}
-	
+
 	/**
 	 * Konstruktor
 	 */
-	public Torony() {
-		Main.log();
-		sebzes = new int[] {0,0,0,0};
-		hatotav = 0;
-		tuzgyak = 0;
-		koltseg = 0;
-		
+	public Torony(Palya palya, Cella cella) {
+		this.palya = palya;
+		this.cella = cella;
+		sebzes = new int[] { 1, 1, 1, 1 };
+		hatotav = START_HATOTAV;
+		tuzgyak = START_TUZGYAK;
+		korVar = tuzgyak;
 	}
+
+	@Override
+	public final boolean isKod() {
+		return kod;
+	}
+
+	@Override
+	public final void setKod(boolean kod) {
+		this.kod = kod;
+	}
+
+	@Override
+	public String toString() {
+		return "[Torony " + cella.getX() + " " + cella.getY() + "]";
+	}
+
+	@Override
+	public boolean setTuzgyak() {
+		if (--tuzgyak == 0) {
+			tuzgyak = 0;
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void setHatotav() {
+		hatotav++;
+	}
+
 }

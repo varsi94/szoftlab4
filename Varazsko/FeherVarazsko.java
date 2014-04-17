@@ -1,6 +1,5 @@
 package Varazsko;
 
-import Szkeleton.Main;
 import Torony.ITorony;
 
 /**
@@ -16,27 +15,14 @@ public class FeherVarazsko implements ITVarazsko {
 	 */
 	private int koltseg;
 
-	/**
-	 * Visszaadja, hogy mennyibe kerül lerakni a varázskövet.
-	 * 
-	 * @return a költség
-	 */
 	@Override
 	public int getKoltseg() {
-		Main.log();
 		return koltseg;
 	}
 
-	/**
-	 * A függvény megvizsgálja hogy hathat-e toronyra. Ha igen kifejti hatását.
-	 * 
-	 * @param t
-	 *            a céltorony
-	 * @return sikerült-e elérni a hatást
-	 */
 	@Override
 	public boolean hat(ITorony t) {
-		Main.log();
+		t.setSebzes(ITorony.SEBZODES_TUNDE_INEDX);
 		return true;
 	}
 
@@ -44,8 +30,6 @@ public class FeherVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public FeherVarazsko() {
-		Main.log();
-		koltseg = 0;
 	}
 
 }

@@ -1,17 +1,18 @@
 package Ranglista;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Szkeleton.Main;
-
 /**
  * Osztály a ranglista tárolására
+ * 
  * @author Sipka
- *
+ * 
  */
-public class Ranglista {
+public class Ranglista implements Serializable {
+	private static final long serialVersionUID = 1242587070802683790L;
 	/**
 	 * Ebben vannak az adatok.
 	 */
@@ -19,11 +20,13 @@ public class Ranglista {
 
 	/**
 	 * Ezzel a metódussal tudjuk frissíteni
-	 * @param name játékos neve
-	 * @param ido játék ideje
+	 * 
+	 * @param name
+	 *            játékos neve
+	 * @param ido
+	 *            játék ideje
 	 */
 	public void frissit(String name, int ido) {
-		Main.log();
 		lista.put(name, ido);
 	}
 
@@ -31,17 +34,15 @@ public class Ranglista {
 	 * Kiírjuk a ranglistát
 	 */
 	public void kiir() {
-		Main.log();
 		for (Entry<String, Integer> e : lista.entrySet()) {
 			System.out.println(e.getKey() + " " + e.getValue());
 		}
 	}
-	
+
 	/**
 	 * Konstruktor
 	 */
-	public Ranglista(){
-		Main.log();
+	public Ranglista() {
 	}
 
 }
