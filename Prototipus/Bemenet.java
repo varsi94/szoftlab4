@@ -1,10 +1,13 @@
 package Prototipus;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 
 import Palya.Palya;
+import Ranglista.Ranglista;
 import Torony.ITorony;
 import Torony.Torony;
 
@@ -109,6 +112,23 @@ public class Bemenet {
 	}
 
 	public void ranglista() {
+		Ranglista r = new Ranglista();
+		
+		try {
+			FileInputStream fileIn = new FileInputStream("mittomen");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			r = (Ranglista) in.readObject();
+			in.close();
+			fileIn.close();
+		} catch (IOException i) {
+			System.out.println("Nem sikerült a beolvasás!");
+			i.printStackTrace();
+		} catch (ClassNotFoundException c) {
+			System.out.println("Nem található mentés!");
+			c.printStackTrace();
+		}
+		
+		r.kiir();
 
 	}
 
