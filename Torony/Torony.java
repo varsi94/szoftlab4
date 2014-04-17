@@ -68,13 +68,16 @@ public class Torony implements ITorony {
 					continue;
 				final int hp = ell.getHp();
 				if (ell != null) {
-					if (Veletlen.duplaLovedek()) {
+					if (Veletlen.duplaLovedek() || TUZELESI_TIPUS.equals("ketszerez")) {
 						// dupplázzuk az ellenséget
 						final IEllenseg uj = ell.clone();
+						final IEllenseg uj2 = ell.clone();
 						uj.setHp(hp / 2);
-						ell.setHp(hp / 2);
+						uj2.setHp(hp / 2);
 						palya.addEllenseg(uj, palya.getUtCella(ell.getUtIndex(), ell.getCellaIndex()));
-					} else {
+						palya.addEllenseg(uj2, palya.getUtCella(ell.getUtIndex(), ell.getCellaIndex()));
+						ell.meghal();
+					} else if (TUZELESI_TIPUS == null || TUZELESI_TIPUS.equals("sima lovedek")) {
 						ell.sebzodik(this);
 					}
 					lott = true;
