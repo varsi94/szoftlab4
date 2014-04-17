@@ -16,6 +16,7 @@ public class Palya {
 	private static final int UTAK_SZAMA = 3;
 	public static final int PALYA_MAX_X_INDEX = 15;
 	public static final int PALYA_MAX_Y_INDEX = 15;
+	private int pontszam = 0;
 
 	private Cella hegy;
 	private Cella[][] terkep;
@@ -118,10 +119,15 @@ public class Palya {
 	public void win() {
 	}
 
+	public void setKor(int x){
+		this.kor = x;
+	}
+	
 	/**
 	 * Kör növelése
 	 */
 	private void korNovel() {
+		this.kor++;
 		this.ment();
 	}
 
@@ -130,7 +136,7 @@ public class Palya {
 	 */
 
 	private void ment() {
-		System.out.println("ObjectOutputStream.writeObject();");
+		
 	}
 
 	/**
@@ -145,6 +151,8 @@ public class Palya {
 		ellensegek = new ArrayList<IEllenseg>();
 		tornyok = new ArrayList<ITorony>();
 		akadalyok = new ArrayList<IAkadaly>();
+		System.out.println("Palya meret: 16*16");
+		System.out.println("Utak száma: 3");
 		/*tornyotLerak(new Torony(this, terkep[8][3]), terkep[8][3]);
 		tornyotLerak(new Torony(this, terkep[8][4]), terkep[8][4]);
 		tornyotLerak(new Torony(this, terkep[7][3]), terkep[7][3]);
@@ -193,6 +201,10 @@ public class Palya {
 			}
 			System.out.println();
 		}
+	}
+	
+	public void setPontszam(int x){
+		pontszam+= x;
 	}
 
 	public static Cella[][] csinaljTerkepet() {

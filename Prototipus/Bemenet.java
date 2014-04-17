@@ -1,7 +1,9 @@
 package Prototipus;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -55,8 +57,9 @@ public class Bemenet {
 			}
 
 			else if (splitted[0].equals("ellenseg")) {
+				
 				if (splitted[1].equals("tunde")) {
-
+					
 				} else if (splitted[1].equals("ember")) {
 
 				} else if (splitted[1].equals("torp")) {
@@ -108,6 +111,20 @@ public class Bemenet {
 	}
 
 	public void betolt() {
+		p = new Palya();
+		String line;
+		BufferedReader reader;
+
+		try {
+			reader = new BufferedReader(new FileReader("mentes.txt"));
+			line = reader.readLine();
+			String[] splittedline = line.split("\\s+");
+			p.setKor(Integer.parseInt(splittedline[0]));
+			p.setPontszam(Integer.parseInt(splittedline[1]));
+			reader.close();
+		} catch (IOException e) {
+			System.out.println("Nincs betöltendõ játék!");
+		}
 
 	}
 
