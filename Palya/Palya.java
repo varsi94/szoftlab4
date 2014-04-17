@@ -117,6 +117,13 @@ public class Palya {
 	 */
 	public void win() {
 	}
+	
+	/**
+	 * A játékos megnyerte a játékot.
+	 */
+	public void win() {
+		Main.log();
+	}
 
 	/**
 	 * Kör növelése
