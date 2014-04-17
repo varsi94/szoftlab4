@@ -1,5 +1,6 @@
 package Akadaly;
 
+import Cella.Cella;
 import Ellenseg.IEllenseg;
 
 /**
@@ -12,7 +13,7 @@ public interface IAkadaly {
 	 * 
 	 * @param e
 	 *            ellenség
-	 * @return
+	 * @return hogy az akadály még létezik-e az akadály
 	 */
 	public boolean akadalyoz(IEllenseg e);
 
@@ -27,5 +28,7 @@ public interface IAkadaly {
 	 * @return a költség
 	 */
 	public int getKoltseg();
+
+	public Cella getCella();
 
 }

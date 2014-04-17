@@ -1,10 +1,12 @@
 package Ellenseg;
 
+import Akadaly.IAkadaly;
 import Cella.Cella;
-import Szkeleton.Main;
+import Palya.Palya;
 import Torony.ITorony;
 
 public abstract class Kaszt implements IEllenseg {
+	private Palya palya;
 	/**
 	 * Az objektum sebességét tartja számon. Ez egy egész típusú érték.
 	 */
@@ -27,46 +29,110 @@ public abstract class Kaszt implements IEllenseg {
 	 */
 	private int cellaIndex;
 
-	@Override
-	public abstract void sebzodik(ITorony t);
+	public Kaszt(Palya palya, int speed, int hp, int utIndex, int cellaIndex) {
+		this.palya = palya;
+		this.speed = speed;
+		this.kimarad = speed;
+		this.hp = hp;
+		this.utIndex = utIndex;
+		this.cellaIndex = cellaIndex;
+	}
 
 	@Override
-	public abstract void megall(int kor);
+	public final void sebzodik(ITorony t) {
+		hp -= getSebzodes(t);
+
+		System.out.println("Hit: " + this + " dmg: " + getSebzodes(t) + " hp: " + hp);
+
+		if (hp <= 0) {
+			meghal();
+		}
+	}
+
+	protected abstract int getSebzodes(ITorony t);
 
 	@Override
-	public abstract void halad(Cella c);
+	public final void megall(int kor) {
+		kimarad += kor;
+	}
 
 	@Override
-	public abstract void meghal();
+	public final void halad() {
+		if (--kimarad > 0) {
+			// kimaradunk
+			return;
+		}
+
+		kimarad = speed;
+		final Cella regi = palya.getUtCella(utIndex, cellaIndex);
+		final Cella uj = palya.getUtCella(utIndex, ++cellaIndex);
+		regi.kivesz(this);
+		uj.hozzaad(this);
+		final IAkadaly akadaly = uj.getAkadaly();
+		if (akadaly != null) {
+			final boolean letezik = akadaly.akadalyoz(this);
+			if (!letezik) {
+				uj.setAkadaly(null);
+				palya.meghaltam(akadaly);
+			}
+		}
+		// System.out.println("Move: " + this + " from: " + regi + " to " + uj);
+	}
 
 	@Override
-	public int getSpeed() {
-		Main.log();
+	public final void meghal() {
+		System.out.println("Dead: " + this);
+		final Cella cella = palya.getUtCella(utIndex, cellaIndex);
+		cella.kivesz(this);
+		palya.meghaltam(this);
+	}
+
+	@Override
+	public final int getSpeed() {
 		return speed;
 	}
 
 	@Override
-	public int getKimarad() {
-		Main.log();
+	public final int getKimarad() {
 		return kimarad;
 	}
 
 	@Override
-	public int getHp() {
-		Main.log();
+	public final int getHp() {
 		return hp;
 	}
 
 	@Override
-	public int getUtIndex() {
-		Main.log();
+	public final void setHp(int hp) {
+		this.hp = hp;
+		if (hp == 0) {
+			meghal();
+		}
+	}
+
+	@Override
+	public final int getUtIndex() {
 		return utIndex;
 	}
 
 	@Override
-	public int getCellaIndex() {
-		Main.log();
+	public final int getCellaIndex() {
 		return cellaIndex;
 	}
 
+	@Override
+	public IEllenseg clone() {
+		// shallow copy
+		try {
+			return (IEllenseg) super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "[" + getClass().getSimpleName() + " ut: " + utIndex + " cella: " + cellaIndex + "]";
+	}
 }

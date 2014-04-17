@@ -1,29 +1,47 @@
 package Ellenseg;
 
-import Cella.Cella;
-import Szkeleton.Main;
+import Palya.Palya;
 import Torony.ITorony;
 
 public class Hobbit extends Kaszt {
 
-	@Override
-	public void sebzodik(ITorony t) {
-		Main.log();
+	private static final int HOBBIT_START_HP = 3;
+	private static final int HOBBIT_START_SPEED = 1;
+
+	/**
+	 * Konstruktor az út elejérõl való induláshoz
+	 * 
+	 * @param palya
+	 *            a pálya
+	 * @param utIndex
+	 *            az út indexe
+	 */
+	public Hobbit(Palya palya, int utIndex) {
+		this(palya, utIndex, 0);
+	}
+
+	/**
+	 * Konstruktor ellenség torony lövés duplikációhoz
+	 * 
+	 * @param palya
+	 *            a pálya
+	 * @param utIndex
+	 *            az ut indexe
+	 * @param cellaIndex
+	 *            a cella indexe
+	 */
+	public Hobbit(Palya palya, int utIndex, int cellaIndex) {
+		super(palya, HOBBIT_START_SPEED, HOBBIT_START_HP, utIndex, cellaIndex);
 	}
 
 	@Override
-	public void megall(int kor) {
-		Main.log();
+	protected int getSebzodes(ITorony t) {
+		return t.getSebzes(ITorony.SEBZODES_HOBBIT_INDEX);
 	}
 
 	@Override
-	public void halad(Cella c) {
-		Main.log();
-	}
-
-	@Override
-	public void meghal() {
-		Main.log();
+	public char getMarkChar() {
+		return 'h';
 	}
 
 }

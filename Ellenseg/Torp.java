@@ -1,29 +1,48 @@
 package Ellenseg;
 
-import Cella.Cella;
-import Szkeleton.Main;
+import Palya.Palya;
 import Torony.ITorony;
 
 public class Torp extends Kaszt {
 
-	@Override
-	public void sebzodik(ITorony t) {
-		Main.log();
+	private static final int TORP_START_HP = 20;
+	private static final int TORP_START_SPEED = 5;
+
+	/**
+	 * Konstruktor az út elejérõl való induláshoz
+	 * 
+	 * @param palya
+	 *            a pálya
+	 * @param utIndex
+	 *            az út indexe
+	 */
+	public Torp(Palya palya, int utIndex) {
+		this(palya, utIndex, 0);
+	}
+
+	/**
+	 * Konstruktor ellenség torony lövés duplikációhoz
+	 * 
+	 * @param palya
+	 *            a pálya
+	 * @param utIndex
+	 *            az ut indexe
+	 * @param cellaIndex
+	 *            a cella indexe
+	 */
+	public Torp(Palya palya, int utIndex, int cellaIndex) {
+		super(palya, TORP_START_SPEED, TORP_START_HP, utIndex, cellaIndex);
 	}
 
 	@Override
-	public void megall(int kor) {
-		Main.log();
+	protected int getSebzodes(ITorony t) {
+		return t.getSebzes(ITorony.SEBZODES_TORP_INDEX);
 	}
 
 	@Override
-	public void halad(Cella c) {
-		Main.log();
-	}
-
-	@Override
-	public void meghal() {
-		Main.log();
+	public char getMarkChar() {
+		// Dwarf
+		return 'd';
 	}
 
 }

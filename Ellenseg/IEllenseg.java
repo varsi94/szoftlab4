@@ -1,6 +1,5 @@
 package Ellenseg;
 
-import Cella.Cella;
 import Torony.ITorony;
 
 /**
@@ -8,7 +7,7 @@ import Torony.ITorony;
  * 
  * 
  */
-public interface IEllenseg {
+public interface IEllenseg extends Cloneable {
 	/**
 	 * Ez a függvény van meghívva amikor találat éri az objektumot. Õ lekéri sebzés nagyságát a toronytól.
 	 * 
@@ -28,7 +27,7 @@ public interface IEllenseg {
 	 * 
 	 * @param c
 	 */
-	public void halad(Cella c);
+	public void halad();
 
 	/**
 	 * Ha az élete 0 vagy az alá csökken illetve ha belefut egy akadályba akkor ez a függvény hívódik meg.
@@ -69,4 +68,15 @@ public interface IEllenseg {
 	 * @return
 	 */
 	public int getCellaIndex();
+
+	public void setHp(int hp);
+
+	public IEllenseg clone();
+
+	/**
+	 * Debug-ra visszaadja a térképen milyen karakterként jelenjen meg
+	 * 
+	 * @return a karakter
+	 */
+	public char getMarkChar();
 }

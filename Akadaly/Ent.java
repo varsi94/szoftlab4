@@ -2,27 +2,28 @@ package Akadaly;
 
 import Cella.Cella;
 import Ellenseg.IEllenseg;
-import Szkeleton.Main;
 
 /**
  * Entet reprezentáló osztály
  */
 public class Ent extends AAkadaly {
 
-	public Ent(int koltseg, int hatas, Cella c) {
-		super(koltseg, hatas, c);
-		Main.log();
+	private static final int ENT_KOLTSEG = 30;
+	private static final int ENT_HATAS = 3;
+
+	public Ent(Cella c) {
+		super(ENT_KOLTSEG, ENT_HATAS, c);
 	}
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		Main.log();
-		return false;
+		e.meghal();
+		return --hatas > 0;
 	}
 
 	@Override
 	public void fejleszt() {
-		Main.log();
+		hatas += 3;
 	}
 
 }

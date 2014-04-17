@@ -2,31 +2,28 @@ package Akadaly;
 
 import Cella.Cella;
 import Ellenseg.IEllenseg;
-import Szkeleton.Main;
 
 /**
  * Orkot reprezentáló osztály
  */
 public class Ork extends AAkadaly {
 
-	public Ork(int koltseg, int hatas, Cella c) {
-		super(koltseg, hatas, c);
-		Main.log();
+	private static final int ORK_KOLTSEG = 20;
+	private static final int ORK_HATAS = 1;
+
+	public Ork(Cella c) {
+		super(ORK_KOLTSEG, ORK_HATAS, c);
 	}
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		Main.log();
 		e.meghal();
-		if (Main.currSzekvencia == 14)
-			cella.setAkadaly(null);
-		return false;
+		return --hatas > 0;
 	}
 
 	@Override
 	public void fejleszt() {
-		Main.log();
-		hatas++;
+		hatas += 3;
 	}
 
 }
