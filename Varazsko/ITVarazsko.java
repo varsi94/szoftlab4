@@ -13,7 +13,7 @@ public interface ITVarazsko {
 	 * 
 	 * @return költség
 	 */
-	public int getKoltseg();
+	public int getKoltseg()
 
 	/**
 	 * A függvény megvizsgálja hogy hathat-e toronyra. Ha igen kifejti hatását.

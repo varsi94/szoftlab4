@@ -15,7 +15,7 @@ public interface IAVarazsko {
 	 * 
 	 * @return
 	 */
-	public int getKoltseg();
+	public int getKoltseg()
 
 	/**
 	 * A függvény megvizsgálja hogy hathat-e akadályra. Ha igen kifejti hatását.
