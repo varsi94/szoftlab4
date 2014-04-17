@@ -115,7 +115,7 @@ public class Bemenet {
 		Ranglista r = new Ranglista();
 		
 		try {
-			FileInputStream fileIn = new FileInputStream("mittomen");
+			FileInputStream fileIn = new FileInputStream("mittomen.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			r = (Ranglista) in.readObject();
 			in.close();

@@ -1,5 +1,9 @@
 package Ranglista;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +47,22 @@ public class Ranglista implements Serializable {
 	 * Konstruktor
 	 */
 	public Ranglista() {
+	}
+	
+	public void szerializalas(){
+		try {
+			String path = System.getProperty("user.dir") + "\\";
+			File f1 = new File(path + "mittomen.ser");
+			f1.delete();
+			FileOutputStream fileOut = new FileOutputStream("resources/ment.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(this);
+			out.close();
+			fileOut.close();
+		} catch (IOException i) {
+			i.printStackTrace();
+			System.out.println("Nem sikerült a mentés!");
+		}
 	}
 
 }
