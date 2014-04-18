@@ -8,6 +8,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 
+import Cella.Cella;
+import Ellenseg.Ember;
+import Ellenseg.Hobbit;
+import Ellenseg.IEllenseg;
+import Ellenseg.Kaszt;
+import Ellenseg.Torp;
+import Ellenseg.Tunde;
 import Palya.Palya;
 import Ranglista.Ranglista;
 import Torony.ITorony;
@@ -57,16 +64,27 @@ public class Bemenet {
 			}
 
 			else if (splitted[0].equals("ellenseg")) {
-				
-				if (splitted[1].equals("tunde")) {
-					
-				} else if (splitted[1].equals("ember")) {
+				int[] koords = new int[2];
+				koords = p.getUtCellaByKord(Integer.parseInt(splitted[2]),
+						Integer.parseInt(splitted[3]));
 
-				} else if (splitted[1].equals("torp")) {
+				if (koords != null) {
 
-				} else if (splitted[1].equals("hobbit")) {
-
-				}
+					if (splitted[1].equals("tunde")) {
+						IEllenseg tunde = new Tunde(p,koords[0],koords[1]);
+						p.addEllenseg(tunde,p.getUtbyC(koords[0],koords[1]));
+					} else if (splitted[1].equals("ember")) {
+						IEllenseg tunde = new Ember(p,koords[0],koords[1]);
+						p.addEllenseg(tunde,p.getUtbyC(koords[0],koords[1]));
+					} else if (splitted[1].equals("torp")) {
+						IEllenseg tunde = new Torp(p,koords[0],koords[1]);
+						p.addEllenseg(tunde,p.getUtbyC(koords[0],koords[1]));
+					} else if (splitted[1].equals("hobbit")) {
+						IEllenseg tunde = new Hobbit(p,koords[0],koords[1]);
+						p.addEllenseg(tunde,p.getUtbyC(koords[0],koords[1]));
+					}
+				}else
+					System.out.println("Sikertelen!");
 
 			}
 
@@ -130,7 +148,7 @@ public class Bemenet {
 
 	public void ranglista() {
 		Ranglista r = new Ranglista();
-		
+
 		try {
 			FileInputStream fileIn = new FileInputStream("mittomen.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -144,7 +162,7 @@ public class Bemenet {
 			System.out.println("Nem található mentés!");
 			c.printStackTrace();
 		}
-		
+
 		r.kiir();
 
 	}

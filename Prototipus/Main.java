@@ -19,20 +19,20 @@ public class Main {
 			System.out.println("3. Ranglista");
 			System.out.println("4. Kilépés");
 
-			String be = in.readLine();
+			int be = Integer.parseInt(in.readLine());
 			Bemenet b = new Bemenet();
 
-			switch (be.charAt(0)) {
-			case '1':
+			switch (be) {
+			case 1:
 				b.Kezelo();
 
-			case '2':
+			case 2:
 				b.betolt();
 
-			case '3':
+			case 3:
 				b.ranglista();
 
-			case '4':
+			case 4:
 				System.exit(0);
 			default: 
 				

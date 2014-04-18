@@ -15,7 +15,7 @@ public class Palya {
 	public static final int MAX_ELLENSEGEK_SZAMA = 10;
 	private static final int UTAK_SZAMA = 3;
 	public static final int PALYA_MAX_X_INDEX = 15;
-	public static final int PALYA_MAX_Y_INDEX = 15;
+	public static final int PALYA_MAX_Y_INDEX = 15;	
 	private int pontszam = 0;
 
 	private Cella hegy;
@@ -165,11 +165,15 @@ public class Palya {
 		return ut[utindex][cellaindex];
 	}
 	
-	public Cella getUtCellaByKord(int x, int y) {
+	public int[] getUtCellaByKord(int x, int y) {
 		for(int i = 0; i < 3 ; i++){
 			for(int j = 0; j < ut[i].length; j++){
-				if(ut[i][j].getX() == x && ut[i][j].getY() == y)
-					return ut[i][j];
+				if(ut[i][j].getX() == x && ut[i][j].getY() == y){
+					int[] ret = new int[2];
+					ret[0] = i;
+					ret[1] = j;
+					return ret;
+				}
 			}
 		}
 		return null;
@@ -181,6 +185,10 @@ public class Palya {
 
 	public boolean isHegyCella(Cella c) {
 		return hegy == c;
+	}
+	
+	public Cella getUtbyC(int x, int y){
+		return ut[x][y];
 	}
 
 	public void logPalya() {
