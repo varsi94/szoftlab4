@@ -25,17 +25,18 @@ public class Main {
 			switch (be) {
 			case 1:
 				b.Kezelo();
-
+				break;
 			case 2:
 				b.betolt();
-
+				break;
 			case 3:
 				b.ranglista();
-
+				break;
 			case 4:
 				System.exit(0);
+				break;
 			default: 
-				
+				break;
 				
 			}
 

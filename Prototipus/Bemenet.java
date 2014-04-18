@@ -45,7 +45,7 @@ public class Bemenet {
 			String[] splitted = unsplitted.split("\\s+");
 
 			if (splitted[0].equals("kilepes")) {
-				System.exit(0);
+				return;
 			}
 
 			else if (splitted[0].equals("torony")) {
@@ -142,9 +142,10 @@ public class Bemenet {
 			}
 
 			else if (splitted[0].equals("utemleptetes")) {
-				for(int i = 0; i < Integer.parseInt(splitted[1]);i++)
-				p.leptet();
+				for (int i = 0; i < Integer.parseInt(splitted[1]); i++)
+					p.leptet();
 			}
+
 
 		}
 	}
