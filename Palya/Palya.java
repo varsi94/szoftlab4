@@ -186,10 +186,6 @@ public class Palya {
 	public boolean isHegyCella(Cella c) {
 		return hegy == c;
 	}
-	
-	public Cella getUtbyC(int x, int y){
-		return ut[x][y];
-	}
 
 	public void logPalya() {
 		for (int i = 0; i < terkep.length; i++) {

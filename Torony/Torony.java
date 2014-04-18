@@ -150,6 +150,7 @@ public class Torony implements ITorony {
 	@Override
 	public final void setKod(boolean kod) {
 		this.kod = kod;
+		System.out.println("Köd ezen a tornyon:" + this.cella.getX() + "," + this.cella.getY());
 	}
 
 	@Override

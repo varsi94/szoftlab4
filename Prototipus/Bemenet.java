@@ -77,16 +77,17 @@ public class Bemenet {
 
 					if (splitted[1].equals("tunde")) {
 						IEllenseg tunde = new Tunde(p, koords[0], koords[1]);
-						p.addEllenseg(tunde, p.getUtbyC(koords[0], koords[1]));
+						p.addEllenseg(tunde, p.getUtCella(koords[0], koords[1]));
 					} else if (splitted[1].equals("ember")) {
 						IEllenseg ember = new Ember(p, koords[0], koords[1]);
-						p.addEllenseg(ember, p.getUtbyC(koords[0], koords[1]));
+						p.addEllenseg(ember, p.getUtCella(koords[0], koords[1]));
 					} else if (splitted[1].equals("torp")) {
 						IEllenseg torp = new Torp(p, koords[0], koords[1]);
-						p.addEllenseg(torp, p.getUtbyC(koords[0], koords[1]));
+						p.addEllenseg(torp, p.getUtCella(koords[0], koords[1]));
 					} else if (splitted[1].equals("hobbit")) {
 						IEllenseg hobbit = new Hobbit(p, koords[0], koords[1]);
-						p.addEllenseg(hobbit, p.getUtbyC(koords[0], koords[1]));
+						p.addEllenseg(hobbit,
+								p.getUtCella(koords[0], koords[1]));
 					}
 				} else
 					System.out.println("Sikertelen!");
@@ -101,14 +102,17 @@ public class Bemenet {
 				if (koords != null) {
 
 					if (splitted[1].equals("ork")) {
-						IAkadaly ork = new Ork(p.getUtbyC(koords[0], koords[1]));
-						p.akadalytLerak(ork, p.getUtbyC(koords[0], koords[1]));
+						IAkadaly ork = new Ork(p.getUtCella(koords[0],
+								koords[1]));
+						p.akadalytLerak(ork, p.getUtCella(koords[0], koords[1]));
 					} else if (splitted[1].equals("ent")) {
-						IAkadaly ent = new Ent(p.getUtbyC(koords[0], koords[1]));
-						p.akadalytLerak(ent, p.getUtbyC(koords[0], koords[1]));
+						IAkadaly ent = new Ent(p.getUtCella(koords[0],
+								koords[1]));
+						p.akadalytLerak(ent, p.getUtCella(koords[0], koords[1]));
 					} else if (splitted[1].equals("pok")) {
-						IAkadaly pok = new Pok(p.getUtbyC(koords[0], koords[1]));
-						p.akadalytLerak(pok, p.getUtbyC(koords[0], koords[1]));
+						IAkadaly pok = new Pok(p.getUtCella(koords[0],
+								koords[1]));
+						p.akadalytLerak(pok, p.getUtCella(koords[0], koords[1]));
 					}
 				}
 
@@ -133,10 +137,12 @@ public class Bemenet {
 			}
 
 			else if (splitted[0].equals("kod")) {
-
+				p.getTerkepCella(Integer.parseInt(splitted[1]),
+						Integer.parseInt(splitted[2])).getTorony().setKod(true);
 			}
 
 			else if (splitted[0].equals("utemleptetes")) {
+				for(int i = 0; i < Integer.parseInt(splitted[1]);i++)
 				p.leptet();
 			}
 
