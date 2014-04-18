@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 
+import Akadaly.AAkadaly;
+import Akadaly.Ent;
+import Akadaly.IAkadaly;
+import Akadaly.Ork;
+import Akadaly.Pok;
 import Cella.Cella;
 import Ellenseg.Ember;
 import Ellenseg.Hobbit;
@@ -71,30 +76,40 @@ public class Bemenet {
 				if (koords != null) {
 
 					if (splitted[1].equals("tunde")) {
-						IEllenseg tunde = new Tunde(p,koords[0],koords[1]);
-						p.addEllenseg(tunde,p.getUtbyC(koords[0],koords[1]));
+						IEllenseg tunde = new Tunde(p, koords[0], koords[1]);
+						p.addEllenseg(tunde, p.getUtbyC(koords[0], koords[1]));
 					} else if (splitted[1].equals("ember")) {
-						IEllenseg tunde = new Ember(p,koords[0],koords[1]);
-						p.addEllenseg(tunde,p.getUtbyC(koords[0],koords[1]));
+						IEllenseg ember = new Ember(p, koords[0], koords[1]);
+						p.addEllenseg(ember, p.getUtbyC(koords[0], koords[1]));
 					} else if (splitted[1].equals("torp")) {
-						IEllenseg tunde = new Torp(p,koords[0],koords[1]);
-						p.addEllenseg(tunde,p.getUtbyC(koords[0],koords[1]));
+						IEllenseg torp = new Torp(p, koords[0], koords[1]);
+						p.addEllenseg(torp, p.getUtbyC(koords[0], koords[1]));
 					} else if (splitted[1].equals("hobbit")) {
-						IEllenseg tunde = new Hobbit(p,koords[0],koords[1]);
-						p.addEllenseg(tunde,p.getUtbyC(koords[0],koords[1]));
+						IEllenseg hobbit = new Hobbit(p, koords[0], koords[1]);
+						p.addEllenseg(hobbit, p.getUtbyC(koords[0], koords[1]));
 					}
-				}else
+				} else
 					System.out.println("Sikertelen!");
 
 			}
 
 			else if (splitted[0].equals("akaday")) {
-				if (splitted[1].equals("ork")) {
+				int[] koords = new int[2];
+				koords = p.getUtCellaByKord(Integer.parseInt(splitted[2]),
+						Integer.parseInt(splitted[3]));
 
-				} else if (splitted[1].equals("ent")) {
+				if (koords != null) {
 
-				} else if (splitted[1].equals("pok")) {
-
+					if (splitted[1].equals("ork")) {
+						IAkadaly ork = new Ork(p.getUtbyC(koords[0], koords[1]));
+						p.akadalytLerak(ork, p.getUtbyC(koords[0], koords[1]));
+					} else if (splitted[1].equals("ent")) {
+						IAkadaly ent = new Ent(p.getUtbyC(koords[0], koords[1]));
+						p.akadalytLerak(ent, p.getUtbyC(koords[0], koords[1]));
+					} else if (splitted[1].equals("pok")) {
+						IAkadaly pok = new Pok(p.getUtbyC(koords[0], koords[1]));
+						p.akadalytLerak(pok, p.getUtbyC(koords[0], koords[1]));
+					}
 				}
 
 			}
