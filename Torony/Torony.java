@@ -171,5 +171,16 @@ public class Torony implements ITorony {
 	public void setHatotav() {
 		hatotav++;
 	}
+	
+	@Override
+	public int getTuzgyak(){
+		return tuzgyak;
+	}
+	
+	@Override
+	public int getHatotav(){
+		return hatotav;
+	}
+
 
 }

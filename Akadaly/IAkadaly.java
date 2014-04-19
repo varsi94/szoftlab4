@@ -30,5 +30,7 @@ public interface IAkadaly {
 	public int getKoltseg();
 
 	public Cella getCella();
+	
+	public int getHatas();
 
 }

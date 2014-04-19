@@ -43,4 +43,8 @@ public abstract class AAkadaly implements IAkadaly {
 	public final Cella getCella() {
 		return cella;
 	}
+	
+	public final int getHatas(){
+		return hatas;
+	}
 }

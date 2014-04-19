@@ -52,5 +52,9 @@ public interface ITorony {
 	public boolean isKod();
 
 	public void setKod(boolean kod);
+	
+	public int getTuzgyak();
+	
+	public int getHatotav();
 
 }
