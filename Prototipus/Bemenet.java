@@ -39,9 +39,8 @@ public class Bemenet {
 	public Bemenet() {
 	}
 
-	public void Kezelo() throws IOException {
+	public void Kezelo(Palya p) throws IOException {
 
-		p = new Palya();
 		// hogy mindent sikerüljön lerakni
 		p.setVarazsero(Integer.MAX_VALUE);
 
@@ -222,9 +221,10 @@ public class Bemenet {
 							piros.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							Kimenet.fejlesztes(p.getTerkepCella(
-									Integer.parseInt(splitted[3]),
-									Integer.parseInt(splitted[2]))
+							Kimenet.fejlesztes(p
+									.getTerkepCella(
+											Integer.parseInt(splitted[3]),
+											Integer.parseInt(splitted[2]))
 									.getTorony().getHatotav());
 						}
 
@@ -243,9 +243,10 @@ public class Bemenet {
 							kek.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							Kimenet.fejlesztes(p.getTerkepCella(
-									Integer.parseInt(splitted[3]),
-									Integer.parseInt(splitted[2]))
+							Kimenet.fejlesztes(p
+									.getTerkepCella(
+											Integer.parseInt(splitted[3]),
+											Integer.parseInt(splitted[2]))
 									.getTorony().getTuzgyak());
 						}
 
@@ -264,9 +265,10 @@ public class Bemenet {
 							zold.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							Kimenet.fejlesztes(p.getTerkepCella(
-									Integer.parseInt(splitted[3]),
-									Integer.parseInt(splitted[2]))
+							Kimenet.fejlesztes(p
+									.getTerkepCella(
+											Integer.parseInt(splitted[3]),
+											Integer.parseInt(splitted[2]))
 									.getTorony().getSebzes(1));
 						}
 
@@ -285,9 +287,10 @@ public class Bemenet {
 							sarga.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							Kimenet.fejlesztes(p.getTerkepCella(
-									Integer.parseInt(splitted[3]),
-									Integer.parseInt(splitted[2]))
+							Kimenet.fejlesztes(p
+									.getTerkepCella(
+											Integer.parseInt(splitted[3]),
+											Integer.parseInt(splitted[2]))
 									.getTorony().getSebzes(0));
 						}
 
@@ -307,9 +310,10 @@ public class Bemenet {
 							lila.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getAkadaly());
-							Kimenet.fejlesztes(p.getTerkepCella(
-									Integer.parseInt(splitted[3]),
-									Integer.parseInt(splitted[2]))
+							Kimenet.fejlesztes(p
+									.getTerkepCella(
+											Integer.parseInt(splitted[3]),
+											Integer.parseInt(splitted[2]))
 									.getAkadaly().getHatas());
 						}
 					}
@@ -335,9 +339,15 @@ public class Bemenet {
 			}
 
 			else if (splitted[0].equals("utemleptetes")) {
-				for (int i = 0; i < Integer.parseInt(splitted[1]); i++)
-					if (p.utemLep())
-						break;
+				try {
+					for (int i = 0; i < Integer.parseInt(splitted[1]); i++)
+						if (p.utemLep())
+							break;
+				} catch (NumberFormatException ex) {
+					System.out.println("Hibás bemenet!");
+				} catch(ArrayIndexOutOfBoundsException ex){
+					System.out.println("Hibás bemenet!");
+				}
 			} else
 				System.out.println("Ismeretlen bemenet!");
 		}

@@ -25,7 +25,8 @@ public class Main {
 
 				switch (be) {
 				case 1:
-					b.Kezelo();
+					Palya p = new Palya();
+					b.Kezelo(p);
 					break;
 				case 2:
 					b.betolt();
