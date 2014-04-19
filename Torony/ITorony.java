@@ -1,7 +1,7 @@
 package Torony;
 
 /**
- * ITorony interfész a torony által elvárt metódusok definiálására.
+ * ITorony interfï¿½sz a torony ï¿½ltal elvï¿½rt metï¿½dusok definiï¿½lï¿½sï¿½ra.
  * 
  * @author Varsi
  * 
@@ -11,41 +11,41 @@ public interface ITorony {
 	public static final int SEBZODES_EMBER_INDEX = 0;
 	public static final int SEBZODES_HOBBIT_INDEX = 1;
 	public static final int SEBZODES_TORP_INDEX = 2;
-	public static final int SEBZODES_TUNDE_INEDX = 3;
+	public static final int SEBZODES_TUNDE_INDEX = 3;
 
 	/**
-	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ cellákon van-e valaki és ha van akkor a legközelebbi ellenséget
-	 * meglövi.
+	 * Amikor ez meghï¿½vï¿½dik akkor a torony megnï¿½zi hogy a hatï¿½sugarï¿½n belï¿½l lï¿½vï¿½ cellï¿½kon van-e valaki ï¿½s ha van akkor a legkï¿½zelebbi ellensï¿½get
+	 * meglï¿½vi.
 	 */
 	public void loves();
 
 	/**
-	 * Az ellenség lekéri a sebzést amit a torony rá lõ.
+	 * Az ellensï¿½g lekï¿½ri a sebzï¿½st amit a torony rï¿½ lï¿½.
 	 * 
 	 * @param idx
-	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
-	 * @return sebzés nagysága
+	 *            az ellensï¿½g indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
+	 * @return sebzï¿½s nagysï¿½ga
 	 */
 	public int getSebzes(int idx);
 
 	/**
-	 * Sebzés növelése bizonyos ellenségre.
+	 * Sebzï¿½s nï¿½velï¿½se bizonyos ellensï¿½gre.
 	 * 
 	 * @param idx
-	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
+	 *            az ellensï¿½g indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
 	 * @return
 	 */
 	public void setSebzes(int idx);
 
 	/**
-	 * Tüzelési gyakoriság növelése a toronyra
+	 * Tï¿½zelï¿½si gyakorisï¿½g nï¿½velï¿½se a toronyra
 	 * 
-	 * @return sikerült-e növeli a tüzelési gyakoriságot
+	 * @return sikerï¿½lt-e nï¿½veli a tï¿½zelï¿½si gyakorisï¿½got
 	 */
 	public boolean setTuzgyak();
 
 	/**
-	 * Megnöveli a torony hatótávolságát
+	 * Megnï¿½veli a torony hatï¿½tï¿½volsï¿½gï¿½t
 	 */
 	public void setHatotav();
 
