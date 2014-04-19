@@ -53,7 +53,7 @@ public class Torony implements ITorony {
 		final int miny = y - hatotav < 0 ? 0 : y - hatotav;
 		final int maxy = y + hatotav > Palya.PALYA_MAX_Y_INDEX ? Palya.PALYA_MAX_Y_INDEX
 				: y + hatotav;
-		
+
 		boolean lott = false;
 		for (int db = 0; db < tuzgyak; db++) {
 			lott = false;
@@ -65,25 +65,7 @@ public class Torony implements ITorony {
 						continue;
 					final int hp = ell.getHp();
 					if (ell != null) {
-						if (TUZELESI_TIPUS.equals("ketszerez")) {
-							// dupplázzuk az ellenséget
-							System.out.println("Torony ellenség kétszerezés.");
-							final IEllenseg uj = ell.clone();
-							final IEllenseg uj2 = ell.clone();
-							ell.meghal();
-							uj.setHp(hp / 2);
-							uj2.setHp(hp / 2);
-							palya.addEllenseg(
-									uj,
-									palya.getUtCella(ell.getUtIndex(),
-											ell.getCellaIndex()));
-							palya.addEllenseg(
-									uj2,
-									palya.getUtCella(ell.getUtIndex(),
-											ell.getCellaIndex()));
-						} else if (TUZELESI_TIPUS.equals("sebez")) {
-							ell.sebzodik(this);
-						} else {
+						if (TUZELESI_TIPUS == null) {
 							if (Veletlen.duplaLovedek()) {
 								// dupplázzuk az ellenséget
 								System.out
@@ -104,6 +86,25 @@ public class Torony implements ITorony {
 							} else {
 								ell.sebzodik(this);
 							}
+						}
+						else if (TUZELESI_TIPUS.equals("ketszerez")) {
+							// dupplázzuk az ellenséget
+							System.out.println("Torony ellenség kétszerezés.");
+							final IEllenseg uj = ell.clone();
+							final IEllenseg uj2 = ell.clone();
+							ell.meghal();
+							uj.setHp(hp / 2);
+							uj2.setHp(hp / 2);
+							palya.addEllenseg(
+									uj,
+									palya.getUtCella(ell.getUtIndex(),
+											ell.getCellaIndex()));
+							palya.addEllenseg(
+									uj2,
+									palya.getUtCella(ell.getUtIndex(),
+											ell.getCellaIndex()));
+						} else if (TUZELESI_TIPUS.equals("sebez")) {
+							ell.sebzodik(this);
 						}
 						lott = true;
 						break kulso;// ellenség keresés befejezése, külsõ ciklus
