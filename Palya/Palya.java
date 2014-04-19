@@ -27,10 +27,13 @@ public class Palya {
 
 	private int ellensegSzamlalo;
 
-	public void utemLep() {
-		leptet();
-		akadalyoz();
-		loves();
+	public boolean utemLep() {
+		boolean vege = leptet();
+		if (!vege) {
+			akadalyoz();
+			loves();
+		}
+		return vege;
 	}
 
 	public void motor() {
@@ -47,15 +50,22 @@ public class Palya {
 		ellensegSzamlalo++;
 		logPalya();
 	}
+	
+	public int getUtHossz(int utIndex) {
+		return this.ut[utIndex].length;
+	}
 
-	private void leptet() {
+	private boolean leptet() {
 		for (int i = 0; i < ellensegek.size(); i++) {
 			final IEllenseg e = ellensegek.get(i);
 			e.halad();
 			Cella c = ut[e.getUtIndex()][e.getCellaIndex()];
-			if (c == hegy)
+			if (c == hegy) {
 				lost();
+				return true;
+			}
 		}
+		return false;
 	}
 
 	private void akadalyoz() {

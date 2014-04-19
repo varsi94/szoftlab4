@@ -347,8 +347,9 @@ public class Bemenet {
 			}
 
 			else if (splitted[0].equals("utemleptetes")) {
-				for (int i = 0; i < Integer.parseInt(splitted[1]); i++) 
-					p.utemLep();
+				for (int i = 0; i < Integer.parseInt(splitted[1]); i++)
+					if (p.utemLep())
+						break;
 			} else
 				System.out.println("Ismeretlen bemenet!");
 		}
