@@ -1,25 +1,34 @@
 package Prototipus;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 
-import Akadaly.AAkadaly;
 import Akadaly.Ent;
 import Akadaly.IAkadaly;
 import Akadaly.Ork;
 import Akadaly.Pok;
-import Cella.Cella;
-import Ellenseg.*;
+import Ellenseg.Ember;
+import Ellenseg.Hobbit;
+import Ellenseg.IEllenseg;
+import Ellenseg.Torp;
+import Ellenseg.Tunde;
 import Palya.Palya;
 import Ranglista.Ranglista;
-import Torony.*;
-import Varazsko.*;
+import Torony.ITorony;
+import Torony.Torony;
+import Varazsko.FeherVarazsko;
+import Varazsko.FeketeVarazsko;
+import Varazsko.IAVarazsko;
+import Varazsko.ITVarazsko;
+import Varazsko.KekVarazsko;
+import Varazsko.LilaVarazsko;
+import Varazsko.PirosVarazsko;
+import Varazsko.SargaVarazsko;
+import Varazsko.ZoldVarazsko;
 
 public class Bemenet {
 
@@ -33,6 +42,8 @@ public class Bemenet {
 	public void Kezelo() throws IOException {
 
 		p = new Palya();
+		//hogy mindent sikerüljön lerakni
+		p.setVarazsero(Integer.MAX_VALUE);
 
 		while (true) {
 
@@ -52,11 +63,11 @@ public class Bemenet {
 					tipus = splitted[3];
 				try {
 					ITorony t = new Torony(p, p.getTerkepCella(
-							Integer.parseInt(splitted[1]),
-							Integer.parseInt(splitted[2])), tipus);
+							Integer.parseInt(splitted[2]),
+							Integer.parseInt(splitted[1])), tipus);
 					p.tornyotLerak(t, p.getTerkepCella(
-							Integer.parseInt(splitted[1]),
-							Integer.parseInt(splitted[2])));
+							Integer.parseInt(splitted[2]),
+							Integer.parseInt(splitted[1])));
 				} catch (NumberFormatException ex) {
 					System.out.println("Hibás bemenet!");
 
@@ -68,8 +79,8 @@ public class Bemenet {
 			else if (splitted[0].equals("ellenseg")) {
 				try {
 					int[] koords = new int[2];
-					koords = p.getUtCellaByKord(Integer.parseInt(splitted[2]),
-							Integer.parseInt(splitted[3]));
+					koords = p.getUtCellaByKord(Integer.parseInt(splitted[3]),
+							Integer.parseInt(splitted[2]));
 
 					if (koords != null) {
 
@@ -104,15 +115,15 @@ public class Bemenet {
 			else if (splitted[0].equals("akadaly")) {
 				try {
 					int[] koords = new int[2];
-					koords = p.getUtCellaByKord(Integer.parseInt(splitted[2]),
-							Integer.parseInt(splitted[3]));
+					koords = p.getUtCellaByKord(Integer.parseInt(splitted[3]),
+							Integer.parseInt(splitted[2]));
 
 					if (koords != null) {
 
 						if (splitted[1].equals("ork")) {
 							IAkadaly ork = new Ork(p.getUtCella(koords[0],
 									koords[1]));
-							if (p.getVarazsero() > ork.getKoltseg()) {
+							if (p.getVarazsero() >= ork.getKoltseg()) {
 								p.akadalytLerak(ork,
 										p.getUtCella(koords[0], koords[1]));
 								p.setVarazsero(p.getVarazsero()
@@ -122,7 +133,7 @@ public class Bemenet {
 						} else if (splitted[1].equals("ent")) {
 							IAkadaly ent = new Ent(p.getUtCella(koords[0],
 									koords[1]));
-							if (p.getVarazsero() > ent.getKoltseg()) {
+							if (p.getVarazsero() >= ent.getKoltseg()) {
 								p.akadalytLerak(ent,
 										p.getUtCella(koords[0], koords[1]));
 								p.setVarazsero(p.getVarazsero()
@@ -132,7 +143,7 @@ public class Bemenet {
 						} else if (splitted[1].equals("pok")) {
 							IAkadaly pok = new Pok(p.getUtCella(koords[0],
 									koords[1]));
-							if (p.getVarazsero() > pok.getKoltseg()) {
+							if (p.getVarazsero() >= pok.getKoltseg()) {
 								p.akadalytLerak(pok,
 										p.getUtCella(koords[0], koords[1]));
 								p.setVarazsero(p.getVarazsero()
@@ -155,162 +166,162 @@ public class Bemenet {
 					if (splitted[1].equals("fekete")) {
 						ITVarazsko fekete = new FeketeVarazsko();
 						int kolt = fekete.getKoltseg();
-						if (p.getVarazsero() > kolt) {
+						if (p.getVarazsero() < kolt) {
 							System.out.println("Nincs elég varázserõ!");
 						} else if (p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[3])).getTorony() == null) {
+								Integer.parseInt(splitted[3]),
+								Integer.parseInt(splitted[2])).getTorony() == null) {
 							System.out
 									.println("Sikertelen fejlesztés: rossz célpont.");
 						} else {
 							p.setVarazsero(p.getVarazsero() - kolt);
 							fekete.hat(p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[3])).getTorony());
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2])).getTorony());
 							System.out
 									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
 											+ p.getTerkepCella(
-													Integer.parseInt(splitted[2]),
-													Integer.parseInt(splitted[3]))
+													Integer.parseInt(splitted[3]),
+													Integer.parseInt(splitted[2]))
 													.getTorony().getSebzes(2));
 						}
 
 					} else if (splitted[1].equals("feher")) {
 						ITVarazsko feher = new FeherVarazsko();
 						int kolt = feher.getKoltseg();
-						if (p.getVarazsero() > kolt) {
+						if (p.getVarazsero() < kolt) {
 							System.out.println("Nincs elég varázserõ!");
 						} else if (p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[3])).getTorony() == null) {
+								Integer.parseInt(splitted[3]),
+								Integer.parseInt(splitted[2])).getTorony() == null) {
 							System.out
 									.println("Sikertelen fejlesztés: rossz célpont.");
 						} else {
 							p.setVarazsero(p.getVarazsero() - kolt);
 							feher.hat(p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[3])).getTorony());
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2])).getTorony());
 							System.out
 									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
 											+ p.getTerkepCella(
-													Integer.parseInt(splitted[2]),
-													Integer.parseInt(splitted[3]))
+													Integer.parseInt(splitted[3]),
+													Integer.parseInt(splitted[2]))
 													.getTorony().getSebzes(3));
 						}
 
 					} else if (splitted[1].equals("piros")) {
 						ITVarazsko piros = new PirosVarazsko();
 						int kolt = piros.getKoltseg();
-						if (p.getVarazsero() > kolt) {
+						if (p.getVarazsero() < kolt) {
 							System.out.println("Nincs elég varázserõ!");
 						} else if (p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[3])).getTorony() == null) {
+								Integer.parseInt(splitted[3]),
+								Integer.parseInt(splitted[2])).getTorony() == null) {
 							System.out
 									.println("Sikertelen fejlesztés: rossz célpont.");
 						} else {
 							p.setVarazsero(p.getVarazsero() - kolt);
 							piros.hat(p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[3])).getTorony());
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2])).getTorony());
 							System.out
 									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
 											+ p.getTerkepCella(
-													Integer.parseInt(splitted[2]),
-													Integer.parseInt(splitted[3]))
+													Integer.parseInt(splitted[3]),
+													Integer.parseInt(splitted[2]))
 													.getTorony().getHatotav());
 						}
 
 					} else if (splitted[1].equals("kek")) {
 						ITVarazsko kek = new KekVarazsko();
 						int kolt = kek.getKoltseg();
-						if (p.getVarazsero() > kolt) {
+						if (p.getVarazsero() < kolt) {
 							System.out.println("Nincs elég varázserõ!");
 						} else if (p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[3])).getTorony() == null) {
+								Integer.parseInt(splitted[3]),
+								Integer.parseInt(splitted[2])).getTorony() == null) {
 							System.out
 									.println("Sikertelen fejlesztés: rossz célpont.");
 						} else {
 							p.setVarazsero(p.getVarazsero() - kolt);
 							kek.hat(p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[3])).getTorony());
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2])).getTorony());
 							System.out
 									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
 											+ p.getTerkepCella(
-													Integer.parseInt(splitted[2]),
-													Integer.parseInt(splitted[3]))
+													Integer.parseInt(splitted[3]),
+													Integer.parseInt(splitted[2]))
 													.getTorony().getTuzgyak());
 						}
 
 					} else if (splitted[1].equals("zold")) {
 						ITVarazsko zold = new ZoldVarazsko();
 						int kolt = zold.getKoltseg();
-						if (p.getVarazsero() > kolt) {
+						if (p.getVarazsero() < kolt) {
 							System.out.println("Nincs elég varázserõ!");
 						} else if (p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[3])).getTorony() == null) {
+								Integer.parseInt(splitted[3]),
+								Integer.parseInt(splitted[2])).getTorony() == null) {
 							System.out
 									.println("Sikertelen fejlesztés: rossz célpont.");
 						} else {
 							p.setVarazsero(p.getVarazsero() - kolt);
 							zold.hat(p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[3])).getTorony());
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2])).getTorony());
 							System.out
 									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
 											+ p.getTerkepCella(
-													Integer.parseInt(splitted[2]),
-													Integer.parseInt(splitted[3]))
+													Integer.parseInt(splitted[3]),
+													Integer.parseInt(splitted[2]))
 													.getTorony().getSebzes(1));
 						}
 
 					} else if (splitted[1].equals("sarga")) {
 						ITVarazsko sarga = new SargaVarazsko();
 						int kolt = sarga.getKoltseg();
-						if (p.getVarazsero() > kolt) {
+						if (p.getVarazsero() < kolt) {
 							System.out.println("Nincs elég varázserõ!");
 						} else if (p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[3])).getTorony() == null) {
+								Integer.parseInt(splitted[3]),
+								Integer.parseInt(splitted[2])).getTorony() == null) {
 							System.out
 									.println("Sikertelen fejlesztés: rossz célpont.");
 						} else {
 							p.setVarazsero(p.getVarazsero() - kolt);
 							sarga.hat(p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[3])).getTorony());
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2])).getTorony());
 							System.out
 									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
 											+ p.getTerkepCella(
-													Integer.parseInt(splitted[2]),
-													Integer.parseInt(splitted[3]))
+													Integer.parseInt(splitted[3]),
+													Integer.parseInt(splitted[2]))
 													.getTorony().getSebzes(0));
 						}
 
 					} else if (splitted[1].equals("lila")) {
 						IAVarazsko lila = new LilaVarazsko();
 						int kolt = lila.getKoltseg();
-						if (p.getVarazsero() > kolt) {
+						if (p.getVarazsero() < kolt) {
 							System.out.println("Nincs elég varázserõ!");
 
 						} else if (p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[3])).getAkadaly() == null) {
+								Integer.parseInt(splitted[3]),
+								Integer.parseInt(splitted[2])).getAkadaly() == null) {
 							System.out
 									.println("Sikertelen fejlesztés: rossz célpont.");
 						} else {
 							p.setVarazsero(p.getVarazsero() - kolt);
 							lila.hat(p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[3])).getAkadaly());
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2])).getAkadaly());
 							System.out
 									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
 											+ p.getTerkepCella(
-													Integer.parseInt(splitted[2]),
-													Integer.parseInt(splitted[3]))
+													Integer.parseInt(splitted[3]),
+													Integer.parseInt(splitted[2]))
 													.getAkadaly().getHatas());
 						}
 					}
@@ -323,10 +334,10 @@ public class Bemenet {
 
 			else if (splitted[0].equals("kod")) {
 				try {
-					if (p.getTerkepCella(Integer.parseInt(splitted[1]),
-							Integer.parseInt(splitted[2])).getTorony() != null)
-						p.getTerkepCella(Integer.parseInt(splitted[1]),
-								Integer.parseInt(splitted[2])).getTorony()
+					if (p.getTerkepCella(Integer.parseInt(splitted[2]),
+							Integer.parseInt(splitted[1])).getTorony() != null)
+						p.getTerkepCella(Integer.parseInt(splitted[2]),
+								Integer.parseInt(splitted[1])).getTorony()
 								.setKod(true);
 					else
 						System.out.println("Sikertelen, helytelen cella!");
@@ -336,8 +347,8 @@ public class Bemenet {
 			}
 
 			else if (splitted[0].equals("utemleptetes")) {
-				for (int i = 0; i < Integer.parseInt(splitted[1]); i++)
-					p.leptet();
+				for (int i = 0; i < Integer.parseInt(splitted[1]); i++) 
+					p.utemLep();
 			} else
 				System.out.println("Ismeretlen bemenet!");
 		}

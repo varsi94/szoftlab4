@@ -17,13 +17,18 @@ public class Ent extends AAkadaly {
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
+		System.out.println("Ent aktiválódott: " + this.getCella().getY() + "," + this.getCella().getX());
 		e.meghal();
 		return --hatas > 0;
 	}
 
 	@Override
 	public void fejleszt() {
-		hatas += 3;
+		hatas++;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "ent";
+	}
 }

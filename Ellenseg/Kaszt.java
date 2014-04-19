@@ -1,6 +1,5 @@
 package Ellenseg;
 
-import Akadaly.IAkadaly;
 import Cella.Cella;
 import Palya.Palya;
 import Torony.ITorony;
@@ -42,7 +41,7 @@ public abstract class Kaszt implements IEllenseg {
 	public final void sebzodik(ITorony t) {
 		hp -= getSebzodes(t);
 
-		System.out.println("Hit: " + this + " dmg: " + getSebzodes(t) + " hp: " + hp);
+		System.out.println("Torony sebzés. Megmaradt életpont: " + hp);
 
 		if (hp <= 0) {
 			meghal();
@@ -54,6 +53,8 @@ public abstract class Kaszt implements IEllenseg {
 	@Override
 	public final void megall(int kor) {
 		kimarad += kor;
+		Cella c = palya.getUtCella(utIndex, cellaIndex);
+		System.out.println("Ellenség lelassult: " + c.getY() + "," + c.getX());
 	}
 
 	@Override
@@ -68,21 +69,13 @@ public abstract class Kaszt implements IEllenseg {
 		final Cella uj = palya.getUtCella(utIndex, ++cellaIndex);
 		regi.kivesz(this);
 		uj.hozzaad(this);
-		final IAkadaly akadaly = uj.getAkadaly();
-		if (akadaly != null) {
-			final boolean letezik = akadaly.akadalyoz(this);
-			if (!letezik) {
-				uj.setAkadaly(null);
-				palya.meghaltam(akadaly);
-			}
-		}
-		// System.out.println("Move: " + this + " from: " + regi + " to " + uj);
+		System.out.println(this + " lépett, új koordinátája: " + uj.getY() + "," + uj.getX());
 	}
 
 	@Override
 	public final void meghal() {
-		System.out.println("Dead: " + this);
 		final Cella cella = palya.getUtCella(utIndex, cellaIndex);
+		System.out.println(this + " elpusztult: " + cella.getY() + "," + cella.getX());
 		cella.kivesz(this);
 		palya.meghaltam(this);
 	}
@@ -129,10 +122,5 @@ public abstract class Kaszt implements IEllenseg {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	@Override
-	public String toString() {
-		return "[" + getClass().getSimpleName() + " ut: " + utIndex + " cella: " + cellaIndex + "]";
 	}
 }

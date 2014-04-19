@@ -3,7 +3,8 @@ package Varazsko;
 import Torony.ITorony;
 
 /**
- * Fekete varázskõ a torony fejlesztésére. Megnöveli a torony sebzését a törpökkel szemben.
+ * Fekete varázskõ a torony fejlesztésére. Megnöveli a torony sebzését a
+ * törpökkel szemben.
  * 
  * @author Varsi
  * 
@@ -30,5 +31,6 @@ public class FeketeVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public FeketeVarazsko() {
+		koltseg = 0;
 	}
 }

@@ -3,7 +3,8 @@ package Varazsko;
 import Akadaly.IAkadaly;
 
 /**
- * Varázskõ, mely egy akadályt fejleszt, annak megfelelõen, hogy mi a feladata.Csak akadályra lehet ráhelyezni.
+ * Varázskõ, mely egy akadályt fejleszt, annak megfelelõen, hogy mi a
+ * feladata.Csak akadályra lehet ráhelyezni.
  * 
  * @author Varsi
  * 
@@ -29,5 +30,6 @@ public class LilaVarazsko implements IAVarazsko {
 	 * Konstruktor
 	 */
 	public LilaVarazsko() {
+		koltseg = 0;
 	}
 }

@@ -8,7 +8,7 @@ import Ellenseg.IEllenseg;
  */
 public class Pok extends AAkadaly {
 	private static final int POK_KOLTSEG = 10;
-	private static final int POK_HATAS = 2;
+	private static final int POK_HATAS = 1;
 
 	public Pok(Cella c) {
 		super(POK_KOLTSEG, POK_HATAS, c);
@@ -16,13 +16,18 @@ public class Pok extends AAkadaly {
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		e.megall(this.hatas);
+		System.out.println("Pók aktiválódott: " + this.getCella().getY() + "," + this.getCella().getX());
+		e.megall(2);
 		return --hatas > 0;
 	}
 
 	@Override
 	public void fejleszt() {
-		hatas += 3;
+		hatas++;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "pók";
+	}
 }

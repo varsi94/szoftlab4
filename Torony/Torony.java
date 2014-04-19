@@ -17,7 +17,7 @@ public class Torony implements ITorony {
 	public static final int KOD_OSZTO_SZAMLALO = 3;
 	public static final int KOD_OSZTO_NEVEZO = 5;
 	private static final int START_HATOTAV = 2;
-	private static final int START_TUZGYAK = 4;
+	private static final int START_TUZGYAK = 1;
 	private String TUZELESI_TIPUS;
 
 	private Palya palya;
@@ -35,8 +35,6 @@ public class Torony implements ITorony {
 	 */
 	private int tuzgyak;
 
-	private int korVar;
-
 	private boolean kod;
 
 	/**
@@ -45,11 +43,6 @@ public class Torony implements ITorony {
 	 */
 	@Override
 	public void loves() {
-		if (--korVar > 0) {
-			// nem lövünk
-			return;
-		}
-		korVar = tuzgyak;
 		final int hatotav = kod ? this.hatotav * KOD_OSZTO_SZAMLALO
 				/ KOD_OSZTO_NEVEZO : this.hatotav;
 		final int x = cella.getX();
@@ -60,39 +53,24 @@ public class Torony implements ITorony {
 		final int miny = y - hatotav < 0 ? 0 : y - hatotav;
 		final int maxy = y + hatotav > Palya.PALYA_MAX_Y_INDEX ? Palya.PALYA_MAX_Y_INDEX
 				: y + hatotav;
-
+		
 		boolean lott = false;
-
-		kulso: for (int i = minx; i <= maxx; i++) {
-			for (int j = miny; j <= maxy; j++) {
-				final Cella c = palya.getTerkepCella(i, j);
-				final IEllenseg ell = c.getRandomEllenseg();
-				if (ell == null)
-					continue;
-				final int hp = ell.getHp();
-				if (ell != null) {
-					if (TUZELESI_TIPUS.equals("ketszerez")) {
-						// dupplázzuk az ellenséget
-						final IEllenseg uj = ell.clone();
-						final IEllenseg uj2 = ell.clone();
-						uj.setHp(hp / 2);
-						uj2.setHp(hp / 2);
-						palya.addEllenseg(
-								uj,
-								palya.getUtCella(ell.getUtIndex(),
-										ell.getCellaIndex()));
-						palya.addEllenseg(
-								uj2,
-								palya.getUtCella(ell.getUtIndex(),
-										ell.getCellaIndex()));
-						ell.meghal();
-					} else if (TUZELESI_TIPUS.equals("sima lovedek")) {
-						ell.sebzodik(this);
-					} else {
-						if (Veletlen.duplaLovedek()) {
+		for (int db = 0; db < tuzgyak; db++) {
+			lott = false;
+			kulso: for (int i = minx; i <= maxx; i++) {
+				for (int j = miny; j <= maxy; j++) {
+					final Cella c = palya.getTerkepCella(i, j);
+					final IEllenseg ell = c.getRandomEllenseg();
+					if (ell == null)
+						continue;
+					final int hp = ell.getHp();
+					if (ell != null) {
+						if (TUZELESI_TIPUS.equals("ketszerez")) {
 							// dupplázzuk az ellenséget
+							System.out.println("Torony ellenség kétszerezés.");
 							final IEllenseg uj = ell.clone();
 							final IEllenseg uj2 = ell.clone();
+							ell.meghal();
 							uj.setHp(hp / 2);
 							uj2.setHp(hp / 2);
 							palya.addEllenseg(
@@ -103,19 +81,38 @@ public class Torony implements ITorony {
 									uj2,
 									palya.getUtCella(ell.getUtIndex(),
 											ell.getCellaIndex()));
-							ell.meghal();
-						} else {
+						} else if (TUZELESI_TIPUS.equals("sebez")) {
 							ell.sebzodik(this);
+						} else {
+							if (Veletlen.duplaLovedek()) {
+								// dupplázzuk az ellenséget
+								System.out
+										.println("Torony ellenség kétszerezés.");
+								final IEllenseg uj = ell.clone();
+								final IEllenseg uj2 = ell.clone();
+								uj.setHp(hp / 2);
+								uj2.setHp(hp / 2);
+								palya.addEllenseg(
+										uj,
+										palya.getUtCella(ell.getUtIndex(),
+												ell.getCellaIndex()));
+								palya.addEllenseg(
+										uj2,
+										palya.getUtCella(ell.getUtIndex(),
+												ell.getCellaIndex()));
+								ell.meghal();
+							} else {
+								ell.sebzodik(this);
+							}
 						}
+						lott = true;
+						break kulso;// ellenség keresés befejezése, külsõ ciklus
+									// break
 					}
-					lott = true;
-					break kulso;// ellenség keresés befejezése, külsõ ciklus
-								// break
 				}
 			}
-		}
-		if (!lott) {
-			korVar = 1;
+			if (!lott)
+				break;
 		}
 	}
 
@@ -126,7 +123,7 @@ public class Torony implements ITorony {
 
 	@Override
 	public void setSebzes(int idx) {
-		sebzes[idx]++;
+		sebzes[idx] += 10;
 	}
 
 	/**
@@ -136,12 +133,9 @@ public class Torony implements ITorony {
 		this.palya = palya;
 		this.cella = cella;
 		this.TUZELESI_TIPUS = tipus;
-		sebzes = new int[] { 1, 1, 1, 1 };
+		sebzes = new int[] { 30, 30, 30, 30 };
 		hatotav = START_HATOTAV;
 		tuzgyak = START_TUZGYAK;
-		korVar = tuzgyak;
-		System.out.println("Sikeres torony lerakás: "
-				+ cella.getX() + "," + cella.getY());
 	}
 
 	@Override
@@ -152,7 +146,8 @@ public class Torony implements ITorony {
 	@Override
 	public final void setKod(boolean kod) {
 		this.kod = kod;
-		System.out.println("Köd ezen a tornyon:" + this.cella.getX() + "," + this.cella.getY());
+		System.out.println("Köd ezen a tornyon:" + this.cella.getY() + ","
+				+ this.cella.getX());
 	}
 
 	@Override
@@ -162,10 +157,7 @@ public class Torony implements ITorony {
 
 	@Override
 	public boolean setTuzgyak() {
-		if (--tuzgyak == 0) {
-			tuzgyak = 0;
-			return false;
-		}
+		tuzgyak++;
 		return true;
 	}
 
@@ -173,21 +165,20 @@ public class Torony implements ITorony {
 	public void setHatotav() {
 		hatotav++;
 	}
-	
+
 	@Override
-	public int getTuzgyak(){
+	public int getTuzgyak() {
 		return tuzgyak;
 	}
-	
+
 	@Override
-	public int getHatotav(){
+	public int getHatotav() {
 		return hatotav;
 	}
-	
+
 	@Override
-	public int getKoltseg(){
+	public int getKoltseg() {
 		return KOLTSEG;
 	}
-
 
 }

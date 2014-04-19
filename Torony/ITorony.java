@@ -1,7 +1,7 @@
 package Torony;
 
 /**
- * ITorony interfï¿½sz a torony ï¿½ltal elvï¿½rt metï¿½dusok definiï¿½lï¿½sï¿½ra.
+ * ITorony interfész a torony által elvárt metódusok definiálására.
  * 
  * @author Varsi
  * 
@@ -14,38 +14,38 @@ public interface ITorony {
 	public static final int SEBZODES_TUNDE_INDEX = 3;
 
 	/**
-	 * Amikor ez meghï¿½vï¿½dik akkor a torony megnï¿½zi hogy a hatï¿½sugarï¿½n belï¿½l lï¿½vï¿½ cellï¿½kon van-e valaki ï¿½s ha van akkor a legkï¿½zelebbi ellensï¿½get
-	 * meglï¿½vi.
+	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ cellákon van-e valaki és ha van akkor a legközelebbi ellenséget
+	 * meglövi.
 	 */
 	public void loves();
 
 	/**
-	 * Az ellensï¿½g lekï¿½ri a sebzï¿½st amit a torony rï¿½ lï¿½.
+	 * Az ellenség lekéri a sebzést amit a torony rá lõ.
 	 * 
 	 * @param idx
-	 *            az ellensï¿½g indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
-	 * @return sebzï¿½s nagysï¿½ga
+	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
+	 * @return sebzés nagysága
 	 */
 	public int getSebzes(int idx);
 
 	/**
-	 * Sebzï¿½s nï¿½velï¿½se bizonyos ellensï¿½gre.
+	 * Sebzés növelése bizonyos ellenségre.
 	 * 
 	 * @param idx
-	 *            az ellensï¿½g indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
+	 *            az ellenség indexe. ABC sorrendben: 0: ember, 1: hobbit, 2: torp, 3: tunde
 	 * @return
 	 */
 	public void setSebzes(int idx);
 
 	/**
-	 * Tï¿½zelï¿½si gyakorisï¿½g nï¿½velï¿½se a toronyra
+	 * Tüzelési gyakoriság növelése a toronyra
 	 * 
-	 * @return sikerï¿½lt-e nï¿½veli a tï¿½zelï¿½si gyakorisï¿½got
+	 * @return sikerült-e növeli a tüzelési gyakoriságot
 	 */
 	public boolean setTuzgyak();
 
 	/**
-	 * Megnï¿½veli a torony hatï¿½tï¿½volsï¿½gï¿½t
+	 * Megnöveli a torony hatótávolságát
 	 */
 	public void setHatotav();
 

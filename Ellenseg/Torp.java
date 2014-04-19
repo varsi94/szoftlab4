@@ -4,9 +4,8 @@ import Palya.Palya;
 import Torony.ITorony;
 
 public class Torp extends Kaszt {
-
-	private static final int TORP_START_HP = 20;
-	private static final int TORP_START_SPEED = 5;
+	private static final int TORP_START_HP = 100;
+	private static final int TORP_START_SPEED = 1;
 
 	/**
 	 * Konstruktor az út elejérõl való induláshoz
@@ -43,6 +42,11 @@ public class Torp extends Kaszt {
 	public char getMarkChar() {
 		// Dwarf
 		return 'd';
+	}
+
+	@Override
+	public String toString() {
+		return "törp";
 	}
 
 }

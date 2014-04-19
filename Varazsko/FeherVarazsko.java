@@ -3,7 +3,7 @@ package Varazsko;
 import Torony.ITorony;
 
 /**
- * Varï¿½zskï¿½, mely a torony sebzï¿½sï¿½t megnï¿½veli a tï¿½ndï¿½kkel szemben. Csak toronyra lehet rï¿½helyezni.
+ * Varázskõ, mely a torony sebzését megnöveli a tündékkel szemben. Csak toronyra lehet ráhelyezni.
  * 
  * @author Varsi
  * 
@@ -11,7 +11,7 @@ import Torony.ITorony;
 public class FeherVarazsko implements ITVarazsko {
 
 	/**
-	 * Azt tï¿½rolja, hogy mennyi varï¿½zserï¿½be kerï¿½l a hasznï¿½lata.
+	 * Azt tárolja, hogy mennyi varázserõbe kerül a használata.
 	 */
 	private int koltseg;
 
@@ -30,6 +30,7 @@ public class FeherVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public FeherVarazsko() {
+		koltseg = 0;
 	}
 
 }

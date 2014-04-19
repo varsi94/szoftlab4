@@ -5,8 +5,8 @@ import Torony.ITorony;
 
 public class Ember extends Kaszt {
 
-	private static final int EMBER_START_HP = 6;
-	private static final int EMBER_START_SPEED = 3;
+	private static final int EMBER_START_HP = 80;
+	private static final int EMBER_START_SPEED = 1;
 
 	/**
 	 * Konstruktor az út elejérõl való induláshoz
@@ -42,6 +42,11 @@ public class Ember extends Kaszt {
 	@Override
 	public char getMarkChar() {
 		return 'e';
+	}
+	
+	@Override
+	public String toString() {
+		return "ember";
 	}
 
 }

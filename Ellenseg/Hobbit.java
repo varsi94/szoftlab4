@@ -5,7 +5,7 @@ import Torony.ITorony;
 
 public class Hobbit extends Kaszt {
 
-	private static final int HOBBIT_START_HP = 3;
+	private static final int HOBBIT_START_HP = 60;
 	private static final int HOBBIT_START_SPEED = 1;
 
 	/**
@@ -44,4 +44,9 @@ public class Hobbit extends Kaszt {
 		return 'h';
 	}
 
+	@Override
+	public String toString() {
+		return "hobbit";
+	}
+	
 }

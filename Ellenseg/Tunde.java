@@ -5,26 +5,26 @@ import Torony.ITorony;
 
 public class Tunde extends Kaszt {
 
-	private static final int TUNDE_START_HP = 8;
-	private static final int TUNDE_START_SPEED = 2;
+	private static final int TUNDE_START_HP = 90;
+	private static final int TUNDE_START_SPEED = 1;
 
 	/**
-	 * Konstruktor az ï¿½t elejï¿½rï¿½l valï¿½ indulï¿½shoz
+	 * Konstruktor az út elejérõl való induláshoz
 	 * 
 	 * @param palya
-	 *            a pï¿½lya
+	 *            a pálya
 	 * @param utIndex
-	 *            az ï¿½t indexe
+	 *            az út indexe
 	 */
 	public Tunde(Palya palya, int utIndex) {
 		this(palya, utIndex, 0);
 	}
 
 	/**
-	 * Konstruktor ellensï¿½g torony lï¿½vï¿½s duplikï¿½ciï¿½hoz
+	 * Konstruktor ellenség torony lövés duplikációhoz
 	 * 
 	 * @param palya
-	 *            a pï¿½lya
+	 *            a pálya
 	 * @param utIndex
 	 *            az ut indexe
 	 * @param cellaIndex
@@ -44,4 +44,8 @@ public class Tunde extends Kaszt {
 		return 't';
 	}
 
+	@Override
+	public String toString() {
+		return "tünde";
+	}
 }
