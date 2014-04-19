@@ -140,6 +140,8 @@ public class Torony implements ITorony {
 		hatotav = START_HATOTAV;
 		tuzgyak = START_TUZGYAK;
 		korVar = tuzgyak;
+		System.out.println("Sikeres torony lerakás: "
+				+ cella.getX() + "," + cella.getY());
 	}
 
 	@Override

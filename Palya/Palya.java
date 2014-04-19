@@ -121,6 +121,7 @@ public class Palya {
 
 	public void setKor(int x){
 		this.kor = x;
+		System.out.println("Aktuális kör:" + kor);
 	}
 	
 	/**

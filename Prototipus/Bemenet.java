@@ -3,6 +3,7 @@ package Prototipus;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -53,19 +54,9 @@ public class Bemenet {
 					ITorony t = new Torony(p, p.getTerkepCella(
 							Integer.parseInt(splitted[1]),
 							Integer.parseInt(splitted[2])), tipus);
-					int kolt = t.getKoltseg();
-					if (p.getVarazsero() > kolt) {
-						boolean res = p.tornyotLerak(t, p.getTerkepCella(
-								Integer.parseInt(splitted[1]),
-								Integer.parseInt(splitted[2])));
-						if (res) {
-							p.setVarazsero(p.getVarazsero() - kolt);
-							System.out.println("Sikeres torony lerakás: "
-									+ splitted[1] + "," + splitted[2]);
-						} else
-							System.out.println("Sikertelen helytelen cella.");
-					} else
-						System.out.println("Nincs elég varázserõ.");
+					p.tornyotLerak(t, p.getTerkepCella(
+							Integer.parseInt(splitted[1]),
+							Integer.parseInt(splitted[2])));
 				} catch (NumberFormatException ex) {
 					System.out.println("Hibás bemenet!");
 
@@ -353,7 +344,6 @@ public class Bemenet {
 	}
 
 	public void betolt() {
-		p = new Palya();
 		String line;
 		BufferedReader reader;
 
@@ -361,11 +351,14 @@ public class Bemenet {
 			reader = new BufferedReader(new FileReader("mentes.txt"));
 			line = reader.readLine();
 			String[] splittedline = line.split("\\s+");
+			p = new Palya();
 			p.setKor(Integer.parseInt(splittedline[0]));
 			p.setPontszam(Integer.parseInt(splittedline[1]));
 			reader.close();
 		} catch (IOException e) {
 			System.out.println("Nincs betöltendõ játék!");
+		} catch (NumberFormatException ex) {
+			System.out.println("Hibás fájl!");
 		}
 
 	}
@@ -381,10 +374,8 @@ public class Bemenet {
 			fileIn.close();
 		} catch (IOException i) {
 			System.out.println("Nem sikerült a beolvasás!");
-			i.printStackTrace();
 		} catch (ClassNotFoundException c) {
 			System.out.println("Nem található mentés!");
-			c.printStackTrace();
 		}
 
 		r.kiir();
