@@ -2,6 +2,7 @@ package Akadaly;
 
 import Cella.Cella;
 import Ellenseg.IEllenseg;
+import Prototipus.Kimenet;
 
 /**
  * Orkot reprezentáló osztály
@@ -17,7 +18,7 @@ public class Ork extends AAkadaly {
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		System.out.println("Ork aktiválódott: " + this.getCella().getY() + "," + this.getCella().getX());
+		Kimenet.akadalyAktivalodik(this);
 		e.meghal();
 		return --hatas > 0;
 	}
@@ -29,6 +30,6 @@ public class Ork extends AAkadaly {
 	
 	@Override
 	public String toString() {
-		return "ork";
+		return "Ork";
 	}
 }

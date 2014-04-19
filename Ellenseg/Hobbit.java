@@ -46,7 +46,7 @@ public class Hobbit extends Kaszt {
 
 	@Override
 	public String toString() {
-		return "hobbit";
+		return "Hobbit";
 	}
 	
 }

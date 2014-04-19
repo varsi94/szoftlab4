@@ -42,7 +42,7 @@ public class Bemenet {
 	public void Kezelo() throws IOException {
 
 		p = new Palya();
-		//hogy mindent sikerüljön lerakni
+		// hogy mindent sikerüljön lerakni
 		p.setVarazsero(Integer.MAX_VALUE);
 
 		while (true) {
@@ -178,12 +178,11 @@ public class Bemenet {
 							fekete.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							System.out
-									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
-											+ p.getTerkepCella(
-													Integer.parseInt(splitted[3]),
-													Integer.parseInt(splitted[2]))
-													.getTorony().getSebzes(2));
+							Kimenet.fejlesztes(p
+									.getTerkepCella(
+											Integer.parseInt(splitted[3]),
+											Integer.parseInt(splitted[2]))
+									.getTorony().getSebzes(2));
 						}
 
 					} else if (splitted[1].equals("feher")) {
@@ -201,12 +200,11 @@ public class Bemenet {
 							feher.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							System.out
-									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
-											+ p.getTerkepCella(
-													Integer.parseInt(splitted[3]),
-													Integer.parseInt(splitted[2]))
-													.getTorony().getSebzes(3));
+							Kimenet.fejlesztes(p
+									.getTerkepCella(
+											Integer.parseInt(splitted[3]),
+											Integer.parseInt(splitted[2]))
+									.getTorony().getSebzes(3));
 						}
 
 					} else if (splitted[1].equals("piros")) {
@@ -224,12 +222,10 @@ public class Bemenet {
 							piros.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							System.out
-									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
-											+ p.getTerkepCella(
-													Integer.parseInt(splitted[3]),
-													Integer.parseInt(splitted[2]))
-													.getTorony().getHatotav());
+							Kimenet.fejlesztes(p.getTerkepCella(
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2]))
+									.getTorony().getHatotav());
 						}
 
 					} else if (splitted[1].equals("kek")) {
@@ -247,12 +243,10 @@ public class Bemenet {
 							kek.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							System.out
-									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
-											+ p.getTerkepCella(
-													Integer.parseInt(splitted[3]),
-													Integer.parseInt(splitted[2]))
-													.getTorony().getTuzgyak());
+							Kimenet.fejlesztes(p.getTerkepCella(
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2]))
+									.getTorony().getTuzgyak());
 						}
 
 					} else if (splitted[1].equals("zold")) {
@@ -270,12 +264,10 @@ public class Bemenet {
 							zold.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							System.out
-									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
-											+ p.getTerkepCella(
-													Integer.parseInt(splitted[3]),
-													Integer.parseInt(splitted[2]))
-													.getTorony().getSebzes(1));
+							Kimenet.fejlesztes(p.getTerkepCella(
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2]))
+									.getTorony().getSebzes(1));
 						}
 
 					} else if (splitted[1].equals("sarga")) {
@@ -293,12 +285,10 @@ public class Bemenet {
 							sarga.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getTorony());
-							System.out
-									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
-											+ p.getTerkepCella(
-													Integer.parseInt(splitted[3]),
-													Integer.parseInt(splitted[2]))
-													.getTorony().getSebzes(0));
+							Kimenet.fejlesztes(p.getTerkepCella(
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2]))
+									.getTorony().getSebzes(0));
 						}
 
 					} else if (splitted[1].equals("lila")) {
@@ -317,12 +307,10 @@ public class Bemenet {
 							lila.hat(p.getTerkepCella(
 									Integer.parseInt(splitted[3]),
 									Integer.parseInt(splitted[2])).getAkadaly());
-							System.out
-									.println("Sikeres fejlesztés. Fejlesztett képesség új értéke: "
-											+ p.getTerkepCella(
-													Integer.parseInt(splitted[3]),
-													Integer.parseInt(splitted[2]))
-													.getAkadaly().getHatas());
+							Kimenet.fejlesztes(p.getTerkepCella(
+									Integer.parseInt(splitted[3]),
+									Integer.parseInt(splitted[2]))
+									.getAkadaly().getHatas());
 						}
 					}
 				} catch (NumberFormatException ex) {

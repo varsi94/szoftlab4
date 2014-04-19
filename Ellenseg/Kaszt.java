@@ -2,6 +2,7 @@ package Ellenseg;
 
 import Cella.Cella;
 import Palya.Palya;
+import Prototipus.Kimenet;
 import Torony.ITorony;
 
 public abstract class Kaszt implements IEllenseg {
@@ -41,7 +42,7 @@ public abstract class Kaszt implements IEllenseg {
 	public final void sebzodik(ITorony t) {
 		hp -= getSebzodes(t);
 
-		System.out.println("Torony sebzés. Megmaradt életpont: " + hp);
+		Kimenet.toronySebez(t, hp);
 
 		if (hp <= 0) {
 			meghal();
@@ -54,7 +55,7 @@ public abstract class Kaszt implements IEllenseg {
 	public final void megall(int kor) {
 		kimarad += kor;
 		Cella c = palya.getUtCella(utIndex, cellaIndex);
-		System.out.println("Ellenség lelassult: " + c.getY() + "," + c.getX());
+		Kimenet.ellensegLelassul(this, c);
 	}
 
 	@Override
@@ -69,13 +70,13 @@ public abstract class Kaszt implements IEllenseg {
 		final Cella uj = palya.getUtCella(utIndex, ++cellaIndex);
 		regi.kivesz(this);
 		uj.hozzaad(this);
-		System.out.println(this + " lépett, új koordinátája: " + uj.getY() + "," + uj.getX());
+		Kimenet.ellensegLep(this, uj);
 	}
 
 	@Override
 	public final void meghal() {
 		final Cella cella = palya.getUtCella(utIndex, cellaIndex);
-		System.out.println(this + " elpusztult: " + cella.getY() + "," + cella.getX());
+		Kimenet.ellensegElpusztul(this, cella);
 		cella.kivesz(this);
 		palya.meghaltam(this);
 	}

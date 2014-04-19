@@ -46,7 +46,7 @@ public class Torp extends Kaszt {
 
 	@Override
 	public String toString() {
-		return "törp";
+		return "Törp";
 	}
 
 }

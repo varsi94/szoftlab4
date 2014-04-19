@@ -132,7 +132,7 @@ public class Cella implements Iterable<IEllenseg> {
 
 	@Override
 	public String toString() {
-		return "[Cella " + x + " " + y + "]";
+		return y + "," + x;
 	}
 
 	public final int getX() {

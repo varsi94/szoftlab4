@@ -46,7 +46,7 @@ public class Ember extends Kaszt {
 	
 	@Override
 	public String toString() {
-		return "ember";
+		return "Ember";
 	}
 
 }

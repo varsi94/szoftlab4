@@ -6,6 +6,7 @@ package Torony;
 import Cella.Cella;
 import Ellenseg.IEllenseg;
 import Palya.Palya;
+import Prototipus.Kimenet;
 import Prototipus.Veletlen;
 
 /**
@@ -68,8 +69,7 @@ public class Torony implements ITorony {
 						if (TUZELESI_TIPUS == null) {
 							if (Veletlen.duplaLovedek()) {
 								// dupplázzuk az ellenséget
-								System.out
-										.println("Torony ellenség kétszerezés.");
+								Kimenet.toronyKetszerez();
 								final IEllenseg uj = ell.clone();
 								final IEllenseg uj2 = ell.clone();
 								uj.setHp(hp / 2);
@@ -147,8 +147,7 @@ public class Torony implements ITorony {
 	@Override
 	public final void setKod(boolean kod) {
 		this.kod = kod;
-		System.out.println("Köd ezen a tornyon:" + this.cella.getY() + ","
-				+ this.cella.getX());
+		Kimenet.kodTorony(cella);
 	}
 
 	@Override

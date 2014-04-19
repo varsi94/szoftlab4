@@ -2,6 +2,7 @@ package Akadaly;
 
 import Cella.Cella;
 import Ellenseg.IEllenseg;
+import Prototipus.Kimenet;
 
 /**
  * Pokot reprezentáló osztály
@@ -16,7 +17,7 @@ public class Pok extends AAkadaly {
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		System.out.println("Pók aktiválódott: " + this.getCella().getY() + "," + this.getCella().getX());
+		Kimenet.akadalyAktivalodik(this);
 		e.megall(2);
 		return --hatas > 0;
 	}
@@ -28,6 +29,6 @@ public class Pok extends AAkadaly {
 	
 	@Override
 	public String toString() {
-		return "pók";
+		return "Pók";
 	}
 }

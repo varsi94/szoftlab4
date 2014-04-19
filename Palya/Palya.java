@@ -6,6 +6,7 @@ import java.util.List;
 import Akadaly.IAkadaly;
 import Cella.Cella;
 import Ellenseg.IEllenseg;
+import Prototipus.Kimenet;
 import Prototipus.Veletlen;
 import Torony.ITorony;
 
@@ -50,10 +51,6 @@ public class Palya {
 		ellensegSzamlalo++;
 		logPalya();
 	}
-	
-	public int getUtHossz(int utIndex) {
-		return this.ut[utIndex].length;
-	}
 
 	private boolean leptet() {
 		for (int i = 0; i < ellensegek.size(); i++) {
@@ -97,30 +94,26 @@ public class Palya {
 		final boolean result = hova.setTorony(t);
 		if (result) {
 			tornyok.add(t);
-			System.out.println("Sikeres torony lerakás: " + hova.getY() + ","
-					+ hova.getX());
+			Kimenet.ujTorony(hova);
 		}
-		else {
-			System.out.println("Sikertelen: helytelen cella");
-		}
+		else 
+			Kimenet.sikertelenTorony();
 		return result;
 	}
 
 	public void addEllenseg(IEllenseg ell, Cella hova) {
 		hova.hozzaad(ell);
 		ellensegek.add(ell);
-		System.out
-				.println("Új " + ell + ": " + hova.getY() + "," + hova.getX());
+		Kimenet.ujEllenseg(ell, hova);
 	}
 
 	public boolean akadalytLerak(IAkadaly akadaly, Cella hova) {
 		final boolean result = hova.setAkadaly(akadaly);
 		if (result) {
-			System.out.println("Sikeres " + akadaly + " lerakás: "
-					+ hova.getY() + "," + hova.getX());
 			akadalyok.add(akadaly);
+			Kimenet.ujAkadaly(akadaly);
 		} else
-			System.out.println("Sikertelen: helytelen cella");
+			Kimenet.sikertelenTorony();  				//ugyanazt írja ki, így meghívható
 		return result;
 	}
 
@@ -130,8 +123,7 @@ public class Palya {
 
 	public void meghaltam(IAkadaly a) {
 		akadalyok.remove(a);
-		System.out.println(a + " elpusztult: " + a.getCella().getY() + ","
-				+ a.getCella().getX());
+		Kimenet.akadalyElpusztul(a);
 	}
 
 	/**
@@ -153,7 +145,7 @@ public class Palya {
 	 * Vége a játéknak.
 	 */
 	public void lost() {
-		System.out.println("Játék vége.");
+		Kimenet.jatekVege();
 	}
 
 	/**

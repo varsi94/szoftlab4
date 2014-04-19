@@ -46,6 +46,6 @@ public class Tunde extends Kaszt {
 
 	@Override
 	public String toString() {
-		return "tünde";
+		return "Tünde";
 	}
 }
