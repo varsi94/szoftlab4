@@ -9,22 +9,22 @@ public class Tunde extends Kaszt {
 	private static final int TUNDE_START_SPEED = 2;
 
 	/**
-	 * Konstruktor az út elejérõl való induláshoz
+	 * Konstruktor az ï¿½t elejï¿½rï¿½l valï¿½ indulï¿½shoz
 	 * 
 	 * @param palya
-	 *            a pálya
+	 *            a pï¿½lya
 	 * @param utIndex
-	 *            az út indexe
+	 *            az ï¿½t indexe
 	 */
 	public Tunde(Palya palya, int utIndex) {
 		this(palya, utIndex, 0);
 	}
 
 	/**
-	 * Konstruktor ellenség torony lövés duplikációhoz
+	 * Konstruktor ellensï¿½g torony lï¿½vï¿½s duplikï¿½ciï¿½hoz
 	 * 
 	 * @param palya
-	 *            a pálya
+	 *            a pï¿½lya
 	 * @param utIndex
 	 *            az ut indexe
 	 * @param cellaIndex
@@ -36,7 +36,7 @@ public class Tunde extends Kaszt {
 
 	@Override
 	protected int getSebzodes(ITorony t) {
-		return t.getSebzes(ITorony.SEBZODES_TUNDE_INEDX);
+		return t.getSebzes(ITorony.SEBZODES_TUNDE_INDEX);
 	}
 
 	@Override
