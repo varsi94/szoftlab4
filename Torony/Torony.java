@@ -181,6 +181,11 @@ public class Torony implements ITorony {
 	public int getHatotav(){
 		return hatotav;
 	}
+	
+	@Override
+	public int getKoltseg(){
+		return KOLTSEG;
+	}
 
 
 }

@@ -56,5 +56,6 @@ public interface ITorony {
 	public int getTuzgyak();
 	
 	public int getHatotav();
-
+	
+	public int getKoltseg();
 }
