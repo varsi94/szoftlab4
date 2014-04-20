@@ -1,9 +1,13 @@
 package Palya;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,10 +19,10 @@ import Ellenseg.IEllenseg;
 import Prototipus.Bemenet;
 import Prototipus.Kimenet;
 import Prototipus.Veletlen;
+import Ranglista.Ranglista;
 import Torony.ITorony;
 
 public class Palya {
-	public static final int MAX_ELLENSEGEK_SZAMA = 10;
 	private static final int UTAK_SZAMA = 3;
 	public static final int PALYA_MAX_X_INDEX = 15;
 	public static final int PALYA_MAX_Y_INDEX = 15;
@@ -165,6 +169,24 @@ public class Palya {
 	 */
 	public void lost() {
 		Kimenet.jatekVege();
+		Ranglista r = new Ranglista();
+		String name;
+
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			name = br.readLine();
+			FileInputStream fileIn = new FileInputStream("ranglista.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			r = (Ranglista) in.readObject();
+			in.close();
+			fileIn.close();
+			r.frissit(name, pontszam);
+			r.szerializalas();
+		} catch (IOException i) {
+			System.out.println("Nem sikerült a beolvasás!");
+		} catch (ClassNotFoundException c) {
+			System.out.println("Nem található mentés!");
+		}
 	}
 
 	/**
@@ -172,6 +194,28 @@ public class Palya {
 	 */
 	public void win() {
 		System.out.println("Gyõzelem");
+		Ranglista r = new Ranglista();
+		String name;
+
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			name = br.readLine();
+			String path = System.getProperty("user.dir") + "\\";
+			File f1 = new File(path + "ranglista.ser");
+			if(!f1.exists()) r.szerializalas();
+			FileInputStream fileIn = new FileInputStream("ranglista.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			r = (Ranglista) in.readObject();
+			in.close();
+			fileIn.close();
+			r.frissit(name, pontszam);
+			r.szerializalas();
+		} catch (IOException i) {
+			System.out.println("Nem sikerült a beolvasás!");
+		} catch (ClassNotFoundException c) {
+			System.out.println("Nem található mentés!");
+		}
+		
 	}
 
 	public void setKor(int x) {

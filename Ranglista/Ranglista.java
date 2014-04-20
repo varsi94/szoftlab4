@@ -30,8 +30,8 @@ public class Ranglista implements Serializable {
 	 * @param ido
 	 *            játék ideje
 	 */
-	public void frissit(String name, int ido) {
-		lista.put(name, ido);
+	public void frissit(String name, int pontszam) {
+		lista.put(name, pontszam);
 	}
 
 	/**
@@ -52,9 +52,9 @@ public class Ranglista implements Serializable {
 	public void szerializalas(){
 		try {
 			String path = System.getProperty("user.dir") + "\\";
-			File f1 = new File(path + "mittomen.ser");
+			File f1 = new File(path + "ranglista.ser");
 			f1.delete();
-			FileOutputStream fileOut = new FileOutputStream("resources/ment.ser");
+			FileOutputStream fileOut = new FileOutputStream("ranglista.ser");
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(this);
 			out.close();

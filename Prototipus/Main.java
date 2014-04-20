@@ -33,6 +33,7 @@ public class Main {
 					break;
 				case 2:
 					Palya pj = new Palya();
+					pj.win();
 					pj.motor();
 					break;
 				case 3:
