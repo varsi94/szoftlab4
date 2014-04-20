@@ -92,6 +92,7 @@ public class Torony implements ITorony {
 							System.out.println("Torony ellenség kétszerezés.");
 							final IEllenseg uj = ell.clone();
 							final IEllenseg uj2 = ell.clone();
+							palya.incMaxellen();
 							ell.meghal();
 							uj.setHp(hp / 2);
 							uj2.setHp(hp / 2);

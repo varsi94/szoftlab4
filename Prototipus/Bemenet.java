@@ -42,7 +42,6 @@ public class Bemenet {
 	}
 
 	public void Kezelo(Palya p, String teszt) throws IOException {
-
 		// hogy mindent sikerüljön lerakni
 		p.setVarazsero(Integer.MAX_VALUE);
 
@@ -65,7 +64,7 @@ public class Bemenet {
 					index = beolv.size();
 					reader.close();
 				} catch (IOException e) {
-					System.out.println("Nincs betöltendõ játék!");
+					System.out.println("Nincs ilyen teszt!");
 					return;
 				}
 			}

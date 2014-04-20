@@ -66,7 +66,7 @@ public class Palya implements Serializable {
 			}
 
 			Bemenet b = new Bemenet();
-			while (maxellen > 0 && !jatekvege) {
+			while (maxellen != 0 && !jatekvege) {
 				try {
 					b.Kezelo(this, null);
 					jatekvege = utemLep();
@@ -251,6 +251,11 @@ public class Palya implements Serializable {
 		this.ment();
 	}
 
+	// Ha kétszerezés történik akkor növelni kell eggyel az ellenségek számát!
+	public void incMaxellen(){
+		maxellen++;
+	}
+	
 	/*
 	 * Játék mentése. Csak a körök végén.
 	 */
