@@ -56,13 +56,18 @@ public class Bemenet {
 				unsplitted = in.readLine();
 				index = 1;
 			} else {
-				BufferedReader reader = new BufferedReader(
-						new FileReader(teszt + ".txt"));
-				while ((unsplitted = reader.readLine()) != null) {
-					beolv.add(unsplitted);
+				try {
+					BufferedReader reader = new BufferedReader(new FileReader(
+							teszt + ".txt"));
+					while ((unsplitted = reader.readLine()) != null) {
+						beolv.add(unsplitted);
+					}
+					index = beolv.size();
+					reader.close();
+				} catch (IOException e) {
+					System.out.println("Nincs betöltendõ játék!");
+					return;
 				}
-				index = beolv.size();
-				reader.close();
 			}
 
 			for (int i = 0; i < index; i++) {
@@ -71,7 +76,7 @@ public class Bemenet {
 					splitted = unsplitted.split("\\s+");
 				else
 					splitted = beolv.get(i).split("\\s+");
-					
+
 				if (splitted[0].equals("kilepes")) {
 					return;
 				}
@@ -126,7 +131,7 @@ public class Bemenet {
 										koords[1]);
 								p.addEllenseg(hobbit,
 										p.getUtCella(koords[0], koords[1]));
-							}else
+							} else
 								System.out.println("Hibás bemenet!");
 						} else
 							System.out.println("Sikertelen, helytelen cella.");
@@ -386,7 +391,8 @@ public class Bemenet {
 				} else
 					System.out.println("Ismeretlen bemenet!");
 			}
-			if(teszt != null) return;
+			if (teszt != null)
+				return;
 		}
 	}
 

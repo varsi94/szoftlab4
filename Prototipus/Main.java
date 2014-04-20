@@ -33,7 +33,7 @@ public class Main {
 					break;
 				case 2:
 					Palya pj = new Palya();
-					b.Kezelo(pj,null);
+					pj.motor();
 					break;
 				case 3:
 					b.betolt();

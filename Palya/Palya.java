@@ -1,11 +1,13 @@
 package Palya;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import Akadaly.IAkadaly;
 import Cella.Cella;
 import Ellenseg.IEllenseg;
+import Prototipus.Bemenet;
 import Prototipus.Kimenet;
 import Prototipus.Veletlen;
 import Torony.ITorony;
@@ -26,7 +28,9 @@ public class Palya {
 	private List<ITorony> tornyok;
 	private List<IAkadaly> akadalyok;
 
+	private int maxellen = 3;
 	private int ellensegSzamlalo;
+	private int aktellen = 0;
 
 	public boolean utemLep() {
 		boolean vege = leptet();
@@ -38,18 +42,37 @@ public class Palya {
 	}
 
 	public void motor() {
-		// System.out.println("Palya.motor() " + ellensegSzamlalo);
-		utemLep();
+		/*
+		 * // System.out.println("Palya.motor() " + ellensegSzamlalo);
+		 * utemLep();
+		 * 
+		 * if (ellensegSzamlalo / 3 < MAX_ELLENSEGEK_SZAMA && ellensegSzamlalo %
+		 * 3 == 0) { // hozzáadunk ellenséget final int utindex =
+		 * Veletlen.nextInt(UTAK_SZAMA); final IEllenseg ell =
+		 * Veletlen.csinaljEllenseget(this, utindex); addEllenseg(ell,
+		 * ut[utindex][0]); } ellensegSzamlalo++; logPalya();
+		 */
 
-		if (ellensegSzamlalo / 3 < MAX_ELLENSEGEK_SZAMA
-				&& ellensegSzamlalo % 3 == 0) {
-			// hozzáadunk ellenséget
-			final int utindex = Veletlen.nextInt(UTAK_SZAMA);
-			final IEllenseg ell = Veletlen.csinaljEllenseget(this, utindex);
-			addEllenseg(ell, ut[utindex][0]);
+		while (kor < 16) {
+			for (; aktellen < maxellen; aktellen++) {
+				final int utindex = Veletlen.nextInt(UTAK_SZAMA);
+				final IEllenseg ell = Veletlen.csinaljEllenseget(this, utindex);
+				addEllenseg(ell, ut[utindex][0]);
+			}
+
+			boolean korvege = false;
+			Bemenet b = new Bemenet();
+			while (!korvege) {
+				try {
+					b.Kezelo(this, null);
+					korvege = utemLep();
+				} catch (IOException e) {
+					System.out.println("Hiba!");
+				}
+				logPalya();
+			}
 		}
-		ellensegSzamlalo++;
-		logPalya();
+
 	}
 
 	private boolean leptet() {
@@ -95,8 +118,7 @@ public class Palya {
 		if (result) {
 			tornyok.add(t);
 			Kimenet.ujTorony(hova);
-		}
-		else 
+		} else
 			Kimenet.sikertelenTorony();
 		return result;
 	}
@@ -113,7 +135,7 @@ public class Palya {
 			akadalyok.add(akadaly);
 			Kimenet.ujAkadaly(akadaly);
 		} else
-			Kimenet.sikertelenTorony();  				//ugyanazt írja ki, így meghívható
+			Kimenet.sikertelenTorony(); // ugyanazt írja ki, így meghívható
 		return result;
 	}
 
@@ -165,6 +187,8 @@ public class Palya {
 	 */
 	private void korNovel() {
 		this.kor++;
+		maxellen += 3;
+		aktellen = 0;
 		this.ment();
 	}
 
@@ -190,14 +214,6 @@ public class Palya {
 		akadalyok = new ArrayList<IAkadaly>();
 		System.out.println("Palya meret: 16*16");
 		System.out.println("Utak száma: 3");
-		/*
-		 * tornyotLerak(new Torony(this, terkep[8][3]), terkep[8][3]);
-		 * tornyotLerak(new Torony(this, terkep[8][4]), terkep[8][4]);
-		 * tornyotLerak(new Torony(this, terkep[7][3]), terkep[7][3]);
-		 * tornyotLerak(new Torony(this, terkep[7][4]), terkep[7][4]);
-		 * 
-		 * akadalytLerak(new Ent(ut[0][8]), ut[0][8]);
-		 */
 	}
 
 	public Cella getUtCella(int utindex, int cellaindex) {
