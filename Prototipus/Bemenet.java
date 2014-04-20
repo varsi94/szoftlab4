@@ -388,6 +388,8 @@ public class Bemenet {
 					} catch (ArrayIndexOutOfBoundsException ex) {
 						System.out.println("Hibás bemenet!");
 					}
+				} else if (splitted[0].equals("log")) {
+					p.logPalya();
 				} else
 					System.out.println("Ismeretlen bemenet!");
 			}
