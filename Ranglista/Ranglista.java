@@ -60,7 +60,6 @@ public class Ranglista implements Serializable {
 			out.close();
 			fileOut.close();
 		} catch (IOException i) {
-			i.printStackTrace();
 			System.out.println("Nem sikerült a mentés!");
 		}
 	}

@@ -1,12 +1,14 @@
 package Torony;
 
+import java.io.Serializable;
+
 /**
  * ITorony interfész a torony által elvárt metódusok definiálására.
  * 
  * @author Varsi
  * 
  */
-public interface ITorony {
+public interface ITorony extends Serializable {
 	public static final int KOLTSEG = 100;
 	public static final int SEBZODES_EMBER_INDEX = 0;
 	public static final int SEBZODES_HOBBIT_INDEX = 1;

@@ -1,5 +1,6 @@
 package Cella;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import Ellenseg.IEllenseg;
 import Prototipus.Veletlen;
 import Torony.ITorony;
 
-public class Cella implements Iterable<IEllenseg> {
+public class Cella implements Iterable<IEllenseg>, Serializable{
 	/**
 	 * Az x koordinátája a pontnak.
 	 */

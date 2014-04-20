@@ -1,5 +1,7 @@
 package Ellenseg;
 
+import java.io.Serializable;
+
 import Torony.ITorony;
 
 /**
@@ -7,7 +9,7 @@ import Torony.ITorony;
  * 
  * 
  */
-public interface IEllenseg extends Cloneable {
+public interface IEllenseg extends Cloneable, Serializable {
 	/**
 	 * Ez a függvény van meghívva amikor találat éri az objektumot. Õ lekéri sebzés nagyságát a toronytól.
 	 * 

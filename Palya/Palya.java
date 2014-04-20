@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,11 @@ import Prototipus.Veletlen;
 import Ranglista.Ranglista;
 import Torony.ITorony;
 
-public class Palya {
+public class Palya implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final int UTAK_SZAMA = 3;
 	public static final int PALYA_MAX_X_INDEX = 15;
 	public static final int PALYA_MAX_Y_INDEX = 15;
@@ -72,6 +77,7 @@ public class Palya {
 			if (!jatekvege)
 				korNovel();
 		}
+		if(kor == 16 && !jatekvege) win();
 
 	}
 
@@ -174,7 +180,11 @@ public class Palya {
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Adjon meg egy nevet: ");
 			name = br.readLine();
+			String path = System.getProperty("user.dir") + "\\";
+			File f1 = new File(path + "ranglista.ser");
+			if(!f1.exists()) r.szerializalas();
 			FileInputStream fileIn = new FileInputStream("ranglista.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			r = (Ranglista) in.readObject();
@@ -199,6 +209,7 @@ public class Palya {
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			System.out.println("Adjon meg egy nevet: ");
 			name = br.readLine();
 			String path = System.getProperty("user.dir") + "\\";
 			File f1 = new File(path + "ranglista.ser");
@@ -237,21 +248,21 @@ public class Palya {
 	 * Játék mentése. Csak a körök végén.
 	 */
 
-	private void ment() {
+	public void ment() {
 		System.out.println("Mentés.");
 		try {
 			String path = System.getProperty("user.dir") + "\\";
-			File f1 = new File(path + "mentes.txt");
-			f1.delete();
-			f1.createNewFile();
-			PrintWriter pw = new PrintWriter(
-					new FileWriter(path + "mentes.txt"));
-			pw.println(kor + " " + pontszam);
-			pw.close();
+			File f1 = new File(path + "mentes.ser");
+			if(f1.exists())f1.delete();
+			FileOutputStream fileOut = new FileOutputStream("mentes.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(this);
+			out.close();
+			fileOut.close();
 		} catch (IOException i) {
 			System.out.println("Nem sikerült a mentés!");
 		}
-
+		
 	}
 
 	/**
