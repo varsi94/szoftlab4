@@ -58,6 +58,7 @@ public class Palya implements Serializable {
 		maxellen = kor * 3;
 		boolean jatekvege = false;
 		while (kor < 16 && !jatekvege) {
+			kodKiosztas();
 			for (int i = 0; i < maxellen; i++) {
 				final int utindex = Veletlen.nextInt(UTAK_SZAMA);
 				final IEllenseg ell = Veletlen.csinaljEllenseget(this, utindex);
@@ -65,7 +66,7 @@ public class Palya implements Serializable {
 			}
 
 			Bemenet b = new Bemenet();
-			while (maxellen != 0 && !jatekvege) {
+			while (maxellen > 0 && !jatekvege) {
 				try {
 					b.Kezelo(this, null);
 					jatekvege = utemLep();
@@ -127,6 +128,12 @@ public class Palya implements Serializable {
 		} else
 			Kimenet.sikertelenTorony();
 		return result;
+	}
+	
+	private void kodKiosztas(){
+		for(int i = 0; i < tornyok.size(); i++){
+			tornyok.get(i).setKod(Veletlen.kod());
+		}
 	}
 
 	public void addEllenseg(IEllenseg ell, Cella hova) {
@@ -248,7 +255,7 @@ public class Palya implements Serializable {
 	 * Játék mentése. Csak a körök végén.
 	 */
 
-	public void ment() {
+	private void ment() {
 		System.out.println("Mentés.");
 		try {
 			String path = System.getProperty("user.dir") + "\\";

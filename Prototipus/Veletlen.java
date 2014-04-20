@@ -36,6 +36,10 @@ public class Veletlen {
 	public static boolean duplaLovedek() {
 		return nextInt(20) == 0;
 	}
+	
+	public static boolean kod(){
+		return nextInt(30) == 0;
+	}
 
 	public static IEllenseg csinaljEllenseget(Palya palya, int utindex) {
 		switch (nextInt(4)) {
