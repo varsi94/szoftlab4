@@ -12,12 +12,13 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		in = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("1. Új játék");
-		System.out.println("2. Betöltés");
-		System.out.println("3. Ranglista");
-		System.out.println("4. Kilépés");
 		
 		while (true) {
+			System.out.println("1. Új teszt játék");
+			System.out.println("2. Új játék");
+			System.out.println("3. Betöltés");
+			System.out.println("4. Ranglista");
+			System.out.println("5. Kilépés");
 			int be;
 			try{
 				be = Integer.parseInt(in.readLine());
@@ -26,15 +27,21 @@ public class Main {
 				switch (be) {
 				case 1:
 					Palya p = new Palya();
-					b.Kezelo(p);
+					System.out.println("Teszt név:");
+					String teszt = in.readLine();
+					b.Kezelo(p,teszt);
 					break;
 				case 2:
-					b.betolt();
+					Palya pj = new Palya();
+					b.Kezelo(pj,null);
 					break;
 				case 3:
-					b.ranglista();
+					b.betolt();
 					break;
 				case 4:
+					b.ranglista();
+					break;
+				case 5:
 					System.exit(0);
 					break;
 				default: 
