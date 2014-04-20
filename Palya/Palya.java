@@ -1,6 +1,11 @@
 package Palya;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +34,6 @@ public class Palya {
 	private List<IAkadaly> akadalyok;
 
 	private int maxellen = 3;
-	private int ellensegSzamlalo;
-	private int aktellen = 0;
 
 	public boolean utemLep() {
 		boolean vege = leptet();
@@ -42,35 +45,28 @@ public class Palya {
 	}
 
 	public void motor() {
-		/*
-		 * // System.out.println("Palya.motor() " + ellensegSzamlalo);
-		 * utemLep();
-		 * 
-		 * if (ellensegSzamlalo / 3 < MAX_ELLENSEGEK_SZAMA && ellensegSzamlalo %
-		 * 3 == 0) { // hozzáadunk ellenséget final int utindex =
-		 * Veletlen.nextInt(UTAK_SZAMA); final IEllenseg ell =
-		 * Veletlen.csinaljEllenseget(this, utindex); addEllenseg(ell,
-		 * ut[utindex][0]); } ellensegSzamlalo++; logPalya();
-		 */
 
-		while (kor < 16) {
-			for (; aktellen < maxellen; aktellen++) {
+		maxellen = kor * 3;
+		boolean jatekvege = false;
+		while (kor < 16 && !jatekvege) {
+			for (int i = 0; i < maxellen; i++) {
 				final int utindex = Veletlen.nextInt(UTAK_SZAMA);
 				final IEllenseg ell = Veletlen.csinaljEllenseget(this, utindex);
 				addEllenseg(ell, ut[utindex][0]);
 			}
 
-			boolean korvege = false;
 			Bemenet b = new Bemenet();
-			while (!korvege) {
+			while (maxellen != 0 && !jatekvege) {
 				try {
 					b.Kezelo(this, null);
-					korvege = utemLep();
+					jatekvege = utemLep();
 				} catch (IOException e) {
 					System.out.println("Hiba!");
 				}
 				logPalya();
 			}
+			if (!jatekvege)
+				korNovel();
 		}
 
 	}
@@ -141,6 +137,7 @@ public class Palya {
 
 	public void meghaltam(IEllenseg ell) {
 		ellensegek.remove(ell);
+		maxellen--;
 	}
 
 	public void meghaltam(IAkadaly a) {
@@ -186,9 +183,9 @@ public class Palya {
 	 * Kör növelése
 	 */
 	private void korNovel() {
+		System.out.println("Új kör.");
 		this.kor++;
-		maxellen += 3;
-		aktellen = 0;
+		maxellen = kor * 3;
 		this.ment();
 	}
 
@@ -197,6 +194,19 @@ public class Palya {
 	 */
 
 	private void ment() {
+		System.out.println("Mentés.");
+		try {
+			String path = System.getProperty("user.dir") + "\\";
+			File f1 = new File(path + "mentes.txt");
+			f1.delete();
+			f1.createNewFile();
+			PrintWriter pw = new PrintWriter(
+					new FileWriter(path + "mentes.txt"));
+			pw.println(kor + " " + pontszam);
+			pw.close();
+		} catch (IOException i) {
+			System.out.println("Nem sikerült a mentés!");
+		}
 
 	}
 

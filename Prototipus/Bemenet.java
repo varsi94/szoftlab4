@@ -409,6 +409,7 @@ public class Bemenet {
 			p = new Palya();
 			p.setKor(Integer.parseInt(splittedline[0]));
 			p.setPontszam(Integer.parseInt(splittedline[1]));
+			p.motor();
 			reader.close();
 		} catch (IOException e) {
 			System.out.println("Nincs betöltendõ játék!");
@@ -422,7 +423,7 @@ public class Bemenet {
 		Ranglista r = new Ranglista();
 
 		try {
-			FileInputStream fileIn = new FileInputStream("mittomen.ser");
+			FileInputStream fileIn = new FileInputStream("ranglista.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			r = (Ranglista) in.readObject();
 			in.close();
