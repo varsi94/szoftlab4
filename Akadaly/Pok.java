@@ -17,16 +17,20 @@ public class Pok extends AAkadaly {
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		Kimenet.akadalyAktivalodik(this);
-		e.megall(2);
-		return --hatas > 0;
+		if (e.getKimarad() != 1)
+			return true;
+		else {
+			Kimenet.akadalyAktivalodik(this);
+			e.megall(2);
+			return --hatas > 0;
+		}
 	}
 
 	@Override
 	public void fejleszt() {
 		hatas++;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Pók";
