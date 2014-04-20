@@ -87,12 +87,16 @@ public class Bemenet {
 					else
 						tipus = splitted[3];
 					try {
-						ITorony t = new Torony(p, p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[1])), tipus);
-						p.tornyotLerak(t, p.getTerkepCella(
-								Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[1])));
+						if (p.getTerkepCella(Integer.parseInt(splitted[2]),
+								Integer.parseInt(splitted[1])).getTorony() == null) {
+							ITorony t = new Torony(p, p.getTerkepCella(
+									Integer.parseInt(splitted[2]),
+									Integer.parseInt(splitted[1])), tipus);
+							p.tornyotLerak(t, p.getTerkepCella(
+									Integer.parseInt(splitted[2]),
+									Integer.parseInt(splitted[1])));
+						} else
+							System.out.println("Foglalt cella!");
 					} catch (NumberFormatException ex) {
 						System.out.println("Hibás bemenet!");
 
@@ -149,7 +153,11 @@ public class Bemenet {
 								Integer.parseInt(splitted[3]),
 								Integer.parseInt(splitted[2]));
 
-						if (koords != null) {
+						if (koords != null
+								&& p.getTerkepCella(
+										Integer.parseInt(splitted[3]),
+										Integer.parseInt(splitted[2]))
+										.getAkadaly() == null) {
 
 							if (splitted[1].equals("ork")) {
 								IAkadaly ork = new Ork(p.getUtCella(koords[0],
@@ -411,7 +419,7 @@ public class Bemenet {
 		} catch (ClassNotFoundException c) {
 			System.out.println("Nem található mentés!");
 		}
-		
+
 	}
 
 	public void ranglista() {

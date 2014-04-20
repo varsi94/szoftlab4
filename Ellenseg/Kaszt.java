@@ -52,8 +52,8 @@ public abstract class Kaszt implements IEllenseg {
 	protected abstract int getSebzodes(ITorony t);
 
 	@Override
-	public final void megall(int kor) {
-		kimarad += kor;
+	public final void megall(int utem) {
+		kimarad += utem;
 		Cella c = palya.getUtCella(utIndex, cellaIndex);
 		Kimenet.ellensegLelassul(this, c);
 	}

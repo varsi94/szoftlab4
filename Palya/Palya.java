@@ -79,7 +79,6 @@ public class Palya implements Serializable {
 				korNovel();
 		}
 		if(kor == 16 && !jatekvege) win();
-
 	}
 
 	private boolean leptet() {
@@ -155,6 +154,7 @@ public class Palya implements Serializable {
 	public void meghaltam(IEllenseg ell) {
 		ellensegek.remove(ell);
 		maxellen--;
+		pontszam += 50;
 	}
 
 	public void meghaltam(IAkadaly a) {
