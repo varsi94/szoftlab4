@@ -8,8 +8,13 @@ import Torony.ITorony;
  *
  */
 public class Hobbit extends Kaszt {
+
 	private static final long serialVersionUID = 4968626822423497401L;
 
+	/**
+	 * A hobbitért kapott varázserõ.
+	 */
+	private static final int HOBBIT_JUTALOM = 25;
 	/**
 	 * Hobbit kezdeti életpontja.
 	 */
@@ -44,6 +49,7 @@ public class Hobbit extends Kaszt {
 	 */
 	public Hobbit(Palya palya, int utIndex, int cellaIndex) {
 		super(palya, HOBBIT_START_SPEED, HOBBIT_START_HP, utIndex, cellaIndex);
+		jutalom = HOBBIT_JUTALOM;
 	}
 
 	/**

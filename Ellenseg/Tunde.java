@@ -9,7 +9,13 @@ import Torony.ITorony;
  *
  */
 public class Tunde extends Kaszt {
+
 	private static final long serialVersionUID = -5760690146179778224L;
+
+	/**
+	 * Tünde megöléséért járó jutalom varázserõ.
+	 */
+	private static final int TUNDE_JUTALOM = 50;
 	
 	/**
 	 * Tünde kezdeti életpontja
@@ -45,6 +51,7 @@ public class Tunde extends Kaszt {
 	 */
 	public Tunde(Palya palya, int utIndex, int cellaIndex) {
 		super(palya, TUNDE_START_SPEED, TUNDE_START_HP, utIndex, cellaIndex);
+		jutalom = TUNDE_JUTALOM;
 	}
 
 	/**

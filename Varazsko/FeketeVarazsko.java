@@ -40,6 +40,6 @@ public class FeketeVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public FeketeVarazsko() {
-		koltseg = 0;
+		koltseg = 50;
 	}
 }

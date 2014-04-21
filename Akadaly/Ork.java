@@ -13,7 +13,7 @@ public class Ork extends AAkadaly {
 	/**
 	 * Ork költsége.
 	 */
-	private static final int ORK_KOLTSEG = 20;
+	private static final int ORK_KOLTSEG = 120;
 	
 	/**
 	 * Ork hány ellenséget tud megölni.

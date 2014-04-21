@@ -26,8 +26,14 @@ import Torony.ITorony;
  * @author Varsi
  */
 public class Palya implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Kezdeti varázserõ 
+	 */
+	private static final int KEZDO_VARAZSERO = 300;
+
 	/**
 	 * Utak száma
 	 */
@@ -120,6 +126,7 @@ public class Palya implements Serializable {
 		maxellen = kor * 3;
 		while (kor < 16 && !jatekvege) {
 			kodKiosztas();
+			pontszam += 20 * kor;
 			for (int i = 0; i < maxellen; i++) {
 				final int utindex = Veletlen.nextInt(UTAK_SZAMA);
 				final IEllenseg ell = Veletlen.csinaljEllenseget(this, utindex);
@@ -134,6 +141,7 @@ public class Palya implements Serializable {
 				} catch (IOException e) {
 					System.out.println("Hiba!");
 				}
+				pontszam -= 10;
 				logPalya();
 			}
 			if (!jatekvege)
@@ -206,6 +214,8 @@ public class Palya implements Serializable {
 		if (result) {
 			tornyok.add(t);
 			Kimenet.ujTorony(hova);
+			varazsero -= t.getKoltseg();
+			pontszam -= 15;
 		} else
 			Kimenet.sikertelenTorony();
 		return result;
@@ -216,7 +226,10 @@ public class Palya implements Serializable {
 	 */
 	private void kodKiosztas(){
 		for(int i = 0; i < tornyok.size(); i++){
-			tornyok.get(i).setKod(Veletlen.kod());
+			boolean kod = Veletlen.kod();
+			tornyok.get(i).setKod(kod);
+			if (kod)
+				pontszam += 25;
 		}
 	}
 
@@ -246,6 +259,8 @@ public class Palya implements Serializable {
 		if (result) {
 			akadalyok.add(akadaly);
 			Kimenet.ujAkadaly(akadaly);
+			varazsero -= akadaly.getKoltseg();
+			pontszam += 15;
 		} else
 			Kimenet.sikertelenTorony(); // ugyanazt írja ki, így meghívható
 		return result;
@@ -259,7 +274,7 @@ public class Palya implements Serializable {
 	public void meghaltam(IEllenseg ell) {
 		ellensegek.remove(ell);
 		maxellen--;
-		pontszam += 50;
+		pontszam += ell.getJutalom() - 10;
 	}
 	
 	/**
@@ -324,6 +339,8 @@ public class Palya implements Serializable {
 		Ranglista r = new Ranglista();
 		String name;
 		jatekvege = true;
+		
+		pontszam += 1.25 * varazsero;
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -370,7 +387,7 @@ public class Palya implements Serializable {
 	 * Ha kétszerezés történik akkor növelni kell eggyel az ellenségek számát!
 	 */
 	public void incMaxellen(){
-		maxellen++;
+		maxellen += 2;
 	}
 	
 	/**
@@ -397,7 +414,7 @@ public class Palya implements Serializable {
 	 * Konstruktor
 	 */
 	public Palya() {
-		varazsero = 0;
+		varazsero = KEZDO_VARAZSERO;
 		kor = 1;
 		terkep = csinaljTerkepet();
 		ut = csinaljUtat(terkep);
@@ -795,7 +812,7 @@ public class Palya implements Serializable {
 		ut[0][19] = terkep[7][13];
 		ut[0][20] = terkep[7][12];
 		ut[0][21] = terkep[8][12];
-		ut[0][22] = terkep[8][11];
+		ut[0][22] = terkep[9][12];
 		ut[0][23] = terkep[9][11];
 		ut[0][24] = terkep[10][11];
 		ut[0][25] = terkep[11][11];

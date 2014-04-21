@@ -39,6 +39,6 @@ public class SargaVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public SargaVarazsko() {
-		koltseg = 0;
+		koltseg = 50;
 	}
 }

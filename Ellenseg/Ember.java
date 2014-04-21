@@ -9,7 +9,13 @@ import Torony.ITorony;
  *
  */
 public class Ember extends Kaszt {
+
 	private static final long serialVersionUID = 3355684723009919840L;
+
+	/**
+	 * Az ember megöléésért járó varázserõ
+	 */
+	private static final int EMBER_JUTALOM = 40;
 	
 	/**
 	 * Ember kezdeti életpontja.
@@ -45,6 +51,7 @@ public class Ember extends Kaszt {
 	 */
 	public Ember(Palya palya, int utIndex, int cellaIndex) {
 		super(palya, EMBER_START_SPEED, EMBER_START_HP, utIndex, cellaIndex);
+		jutalom = EMBER_JUTALOM;
 	}
 	
 	/**

@@ -39,6 +39,6 @@ public class LilaVarazsko implements IAVarazsko {
 	 * Konstruktor
 	 */
 	public LilaVarazsko() {
-		koltseg = 0;
+		koltseg = 80;
 	}
 }

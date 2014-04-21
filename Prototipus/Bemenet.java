@@ -34,7 +34,7 @@ import Varazsko.ZoldVarazsko;
 public class Bemenet {
 
 	private static BufferedReader in;
-	//private Palya p;
+	// private Palya p;
 	private String tipus;
 
 	public Bemenet() {
@@ -42,7 +42,7 @@ public class Bemenet {
 
 	public void Kezelo(Palya p, String teszt) throws IOException {
 		// hogy mindent sikerüljön lerakni
-		p.setVarazsero(Integer.MAX_VALUE);
+		// p.setVarazsero(Integer.MAX_VALUE);
 
 		while (true) {
 			String unsplitted;
@@ -85,15 +85,18 @@ public class Bemenet {
 						tipus = null;
 					else
 						tipus = splitted[3];
+
+					int x, y;
+					x = Integer.parseInt(splitted[2]);
+					y = Integer.parseInt(splitted[1]);
 					try {
-						if (p.getTerkepCella(Integer.parseInt(splitted[2]),
-								Integer.parseInt(splitted[1])).getTorony() == null) {
-							ITorony t = new Torony(p, p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[1])), tipus);
-							p.tornyotLerak(t, p.getTerkepCella(
-									Integer.parseInt(splitted[2]),
-									Integer.parseInt(splitted[1])));
+						if (p.getTerkepCella(x, y).getTorony() == null) {
+							ITorony t = new Torony(p, p.getTerkepCella(x, y),
+									tipus);
+							if (t.getKoltseg() > p.getVarazsero())
+								System.out.println("Nincs elég varázserõ!");
+							else
+								p.tornyotLerak(t, p.getTerkepCella(x, y));
 						} else
 							System.out.println("Foglalt cella!");
 					} catch (NumberFormatException ex) {
@@ -164,8 +167,6 @@ public class Bemenet {
 								if (p.getVarazsero() >= ork.getKoltseg()) {
 									p.akadalytLerak(ork,
 											p.getUtCella(koords[0], koords[1]));
-									p.setVarazsero(p.getVarazsero()
-											- ork.getKoltseg());
 								} else
 									System.out.println("Nincs elég varázserõ!");
 							} else if (splitted[1].equals("ent")) {
@@ -174,8 +175,6 @@ public class Bemenet {
 								if (p.getVarazsero() >= ent.getKoltseg()) {
 									p.akadalytLerak(ent,
 											p.getUtCella(koords[0], koords[1]));
-									p.setVarazsero(p.getVarazsero()
-											- ent.getKoltseg());
 								} else
 									System.out.println("Nincs elég varázserõ!");
 							} else if (splitted[1].equals("pok")) {
@@ -184,8 +183,6 @@ public class Bemenet {
 								if (p.getVarazsero() >= pok.getKoltseg()) {
 									p.akadalytLerak(pok,
 											p.getUtCella(koords[0], koords[1]));
-									p.setVarazsero(p.getVarazsero()
-											- pok.getKoltseg());
 								} else
 									System.out.println("Nincs elég varázserõ!");
 							}
@@ -356,6 +353,7 @@ public class Bemenet {
 										Integer.parseInt(splitted[3]),
 										Integer.parseInt(splitted[2]))
 										.getAkadaly());
+								p.setPontszam(35);
 								Kimenet.fejlesztes(p
 										.getTerkepCella(
 												Integer.parseInt(splitted[3]),

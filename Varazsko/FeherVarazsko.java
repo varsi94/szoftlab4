@@ -39,7 +39,7 @@ public class FeherVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public FeherVarazsko() {
-		koltseg = 0;
+		koltseg = 50;
 	}
 
 }

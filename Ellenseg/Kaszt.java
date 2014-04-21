@@ -44,6 +44,11 @@ public abstract class Kaszt implements IEllenseg {
 	 * bele megint az akadályba.
 	 */
 	private boolean lassitott;
+	
+	/**
+	 * Megadja, hogy a kaszt megöléséért mennyi varázserõ jár.
+	 */
+	protected int jutalom;
 
 	/**
 	 * Konstruktor
@@ -123,6 +128,7 @@ public abstract class Kaszt implements IEllenseg {
 		final Cella cella = palya.getUtCella(utIndex, cellaIndex);
 		Kimenet.ellensegElpusztul(this, cella);
 		cella.kivesz(this);
+		palya.setVarazsero(palya.getVarazsero() + jutalom);
 		palya.meghaltam(this);
 	}
 
@@ -204,5 +210,14 @@ public abstract class Kaszt implements IEllenseg {
 	 */
 	public boolean isLassitott() {
 		return lassitott;
+	}
+	
+	/**
+	 * Visszaadja a jutalmat, amit kap a játékos a megölésért.
+	 * @return a jutalom varázserõben mérve
+	 */
+	@Override
+	public int getJutalom() {
+		return jutalom;
 	}
 }

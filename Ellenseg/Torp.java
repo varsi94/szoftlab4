@@ -12,6 +12,11 @@ public class Torp extends Kaszt {
 	private static final long serialVersionUID = -2795645610917810135L;
 	
 	/**
+	 * A törpért kapott jutalom varázserõ.
+	 */
+	private static final int TORP_JUTALOM = 60;
+	
+	/**
 	 * Törp kezdeti életpontja
 	 */
 	private static final int TORP_START_HP = 100;
@@ -45,6 +50,7 @@ public class Torp extends Kaszt {
 	 */
 	public Torp(Palya palya, int utIndex, int cellaIndex) {
 		super(palya, TORP_START_SPEED, TORP_START_HP, utIndex, cellaIndex);
+		jutalom = TORP_JUTALOM;
 	}
 
 	/**

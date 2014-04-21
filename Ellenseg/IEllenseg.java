@@ -95,4 +95,11 @@ public interface IEllenseg extends Cloneable, Serializable {
 	 * @return igaz vagy hamis
 	 */
 	public boolean isLassitott();
+	
+	/**
+	 * Visszaadja, hogy mennyi varázserõt kap a játékos a megölésért.
+	 * @return a jutalom varázserõben mérve.
+	 */
+	public int getJutalom();
+	
 }

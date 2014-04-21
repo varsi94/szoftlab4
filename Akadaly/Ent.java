@@ -13,7 +13,7 @@ public class Ent extends AAkadaly {
 	/**
 	 * Az ent költsége.
 	 */
-	private static final int ENT_KOLTSEG = 30;
+	private static final int ENT_KOLTSEG = 220;
 	
 	/**
 	 * Hány ellenségre tud hatni az ent.

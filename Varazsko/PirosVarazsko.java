@@ -39,7 +39,7 @@ public class PirosVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public PirosVarazsko() {
-		koltseg = 0;
+		koltseg = 220;
 	}
 
 }

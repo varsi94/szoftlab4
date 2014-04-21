@@ -109,6 +109,10 @@ public class Torony implements ITorony {
 										palya.getUtCella(ell.getUtIndex(),
 												ell.getCellaIndex()));
 								ell.meghal();
+								palya.incMaxellen();
+								// a meghalás miatt kapunk plusz varázserõt, ezt levonjuk
+								palya.setVarazsero(palya.getVarazsero() - ell.getJutalom());
+								palya.setPontszam(50);
 							} else {
 								ell.sebzodik(this);
 							}
@@ -130,6 +134,9 @@ public class Torony implements ITorony {
 									uj2,
 									palya.getUtCella(ell.getUtIndex(),
 											ell.getCellaIndex()));
+							// a meghalás miatt kapunk plusz varázserõt, ezt levonjuk
+							palya.setVarazsero(palya.getVarazsero() - ell.getJutalom());
+							palya.setPontszam(50);
 						} else if (TUZELESI_TIPUS.equals("sebez")) {
 							ell.sebzodik(this);
 						}
@@ -160,6 +167,7 @@ public class Torony implements ITorony {
 	 */
 	@Override
 	public void setSebzes(int idx) {
+		palya.setPontszam(35);
 		sebzes[idx] += 10;
 	}
 	
@@ -208,6 +216,7 @@ public class Torony implements ITorony {
 
 	@Override
 	public boolean setTuzgyak() {
+		palya.setPontszam(35);
 		tuzgyak++;
 		return true;
 	}
@@ -217,6 +226,7 @@ public class Torony implements ITorony {
 	 */
 	@Override
 	public void setHatotav() {
+		palya.setPontszam(35);
 		hatotav++;
 	}
 

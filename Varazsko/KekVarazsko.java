@@ -38,7 +38,7 @@ public class KekVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public KekVarazsko() {
-		koltseg = 0;
+		koltseg = 150;
 	}
 
 }

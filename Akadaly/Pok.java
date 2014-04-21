@@ -13,7 +13,7 @@ public class Pok extends AAkadaly {
 	/**
 	 * Pók költsége
 	 */
-	private static final int POK_KOLTSEG = 10;
+	private static final int POK_KOLTSEG = 50;
 	
 	/**
 	 * Pók default hatása

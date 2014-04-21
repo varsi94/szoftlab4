@@ -37,6 +37,6 @@ public class ZoldVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public ZoldVarazsko() {
-		koltseg = 0;
+		koltseg = 50;
 	}
 }
