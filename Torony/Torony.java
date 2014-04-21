@@ -202,7 +202,7 @@ public class Torony implements ITorony {
 	@Override
 	public final void setKod(boolean kod) {
 		this.kod = kod;
-		Kimenet.kodTorony(cella);
+		if(kod) Kimenet.kodTorony(cella);
 	}
 
 	/**

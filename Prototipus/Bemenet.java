@@ -31,24 +31,42 @@ import Varazsko.PirosVarazsko;
 import Varazsko.SargaVarazsko;
 import Varazsko.ZoldVarazsko;
 
+/**
+ * 
+ * @author Hanicz Bemenet kezelésére.
+ */
 public class Bemenet {
 
 	private static BufferedReader in;
 	// private Palya p;
 	private String tipus;
 
+	/**
+	 * ctor
+	 */
 	public Bemenet() {
 	}
 
+	/**
+	 * 
+	 * @param p
+	 *            referencia a apályáról
+	 * @param teszt
+	 *            null ha nem teszt, txt név ha teszt.
+	 * @throws IOException
+	 */
 	public void Kezelo(Palya p, String teszt) throws IOException {
-		// hogy mindent sikerüljön lerakni
-		// p.setVarazsero(Integer.MAX_VALUE);
 
 		while (true) {
 			String unsplitted;
 			String[] splitted;
 			int index;
+			// txtbõlbeolvasott parancsok tárolására
 			ArrayList<String> beolv = new ArrayList<String>();
+
+			// Ha a teszt null akkor nem tesztet futtatunk ilyenkor mindig
+			// beolvasunk a bemenetrõl
+			// ha teszt akkor a txtbõl olvassuk a parancsokat.
 			if (teszt == null) {
 				in = new BufferedReader(new InputStreamReader(System.in));
 				unsplitted = in.readLine();
@@ -68,17 +86,30 @@ public class Bemenet {
 				}
 			}
 
+			/**
+			 * A parancsok mennyisége alapján futtatja le a bemenet kezelo
+			 * else-ifet
+			 */
 			for (int i = 0; i < index; i++) {
 
+				/**
+				 * Vagy a bemenetet vagy a txt tartalmat spliteli.
+				 */
 				if (teszt == null)
 					splitted = unsplitted.split("\\s+");
 				else
 					splitted = beolv.get(i).split("\\s+");
 
+				/**
+				 * Amennyiben kilepes a bemenet.
+				 */
 				if (splitted[0].equals("kilepes")) {
 					return;
 				}
 
+				/**
+				 * torony bemenet esetén
+				 */
 				else if (splitted[0].equals("torony")) {
 
 					if (splitted.length < 4)
@@ -107,6 +138,9 @@ public class Bemenet {
 					}
 				}
 
+				/**
+				 * ellenség bemenet esetén
+				 */
 				else if (splitted[0].equals("ellenseg")) {
 					try {
 						int[] koords = new int[2];
@@ -148,6 +182,9 @@ public class Bemenet {
 
 				}
 
+				/**
+				 * akadály bemenet esetén
+				 */
 				else if (splitted[0].equals("akadaly")) {
 					try {
 						int[] koords = new int[2];
@@ -196,6 +233,9 @@ public class Bemenet {
 
 				}
 
+				/**
+				 * varazsko bemenet esetén
+				 */
 				else if (splitted[0].equals("varazsko")) {
 					try {
 						if (splitted[1].equals("fekete")) {
@@ -368,6 +408,9 @@ public class Bemenet {
 					}
 				}
 
+				/**
+				 * köd bemenet esetén
+				 */
 				else if (splitted[0].equals("kod")) {
 					try {
 						if (p.getTerkepCella(Integer.parseInt(splitted[2]),
@@ -382,6 +425,9 @@ public class Bemenet {
 					}
 				}
 
+				/**
+				 * ütemléptetés bemenet esetén
+				 */
 				else if (splitted[0].equals("utemleptetes")) {
 					try {
 						for (int j = 0; j < Integer.parseInt(splitted[1]); j++)
@@ -392,16 +438,29 @@ public class Bemenet {
 					} catch (ArrayIndexOutOfBoundsException ex) {
 						System.out.println("Hibás bemenet!");
 					}
+				/**
+				 * log bemenet esetén
+				*/
 				} else if (splitted[0].equals("log")) {
 					p.logPalya();
+				/**
+				 * kezeletlen bemenet esetén
+				 */
 				} else
 					System.out.println("Ismeretlen bemenet!");
 			}
+			
+			/**
+			 * Ha tesz és kilépünk a for ciklusból akkor visszatérünk a fõmenübe.
+			 */
 			if (teszt != null)
 				return;
 		}
 	}
 
+	/**
+	 * Játékállás betöltése
+	 */
 	public void betolt() {
 		try {
 			FileInputStream fileIn = new FileInputStream("mentes.ser");
@@ -419,6 +478,9 @@ public class Bemenet {
 
 	}
 
+	/**
+	 * Ranglista betöltése és kiiratása
+	 */
 	public void ranglista() {
 		Ranglista r = new Ranglista();
 
