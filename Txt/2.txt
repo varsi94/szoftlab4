@@ -1,0 +1,5 @@
+ellenseg tunde 5 11
+torony 5 12 sebez
+ellenseg torp 13 2
+torony 13 3 ketszerez
+utemleptetes 1

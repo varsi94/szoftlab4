@@ -1,0 +1,8 @@
+Palya meret: 16*16
+Utak száma: 3
+Új Tünde: 14,7
+Sikeres torony lerakás: 13,9
+Tünde lépett, új koordinátája: 13,7
+Torony sebzés. Megmaradt életpont: 60
+Köd ezen a tornyon: 13,9
+Tünde lépett, új koordinátája: 12,7

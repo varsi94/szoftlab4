@@ -1,0 +1,8 @@
+Palya meret: 16*16
+Utak száma: 3
+Új Tünde: 14,4
+Sikeres Ork lerakás: 14,5
+Tünde lépett, új koordinátája: 14,5
+Ork aktiválódott: 14,5
+Tünde elpusztult: 14,5
+Ork elpuszult: 14,5

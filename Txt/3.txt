@@ -1,0 +1,11 @@
+ellenseg tunde 5 11
+torony 5 12 sebez
+ellenseg torp 13 2
+torony 13 3 sebez
+ellenseg ember 14 7
+torony 12 10 sebez
+utemleptetes 1
+varazsko feher 5 12
+varazsko kek 13 3
+varazsko piros 12 10
+utemleptetes 1

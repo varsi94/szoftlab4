@@ -1,0 +1,3 @@
+ellenseg tunde 14 4
+akadaly ork 14 5
+utemleptetes 1

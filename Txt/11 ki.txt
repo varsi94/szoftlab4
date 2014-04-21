@@ -1,0 +1,6 @@
+Palya meret: 16*16
+Utak száma: 3
+Sikeres torony lerakás: 6,4
+Sikeres torony lerakás: 6,5
+Sikeres torony lerakás: 6,6
+Nincs elég varázserõ!

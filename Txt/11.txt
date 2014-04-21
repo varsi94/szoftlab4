@@ -1,0 +1,4 @@
+torony 6 4 
+torony 6 5 
+torony 6 6 
+torony 6 7

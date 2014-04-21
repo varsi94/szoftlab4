@@ -1,0 +1,3 @@
+Palya meret: 16*16
+Utak száma: 3
+Sikertelen, helytelen cella.

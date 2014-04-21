@@ -1,0 +1,11 @@
+Palya meret: 16*16
+Utak száma: 3
+Új Tünde: 6,13
+Új Hobbit: 5,9
+Sikeres torony lerakás: 5,12
+Tünde lépett, új koordinátája: 7,13
+Hobbit lépett, új koordinátája: 6,9
+Torony sebzés. Megmaradt életpont: 60
+Tünde lépett, új koordinátája: 8,13
+Hobbit lépett, új koordinátája: 6,10
+Torony sebzés. Megmaradt életpont: 30

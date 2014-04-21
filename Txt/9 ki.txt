@@ -1,0 +1,30 @@
+Palya meret: 16*16
+Utak száma: 3
+Új Tünde: 0,7
+Tünde lépett, új koordinátája: 1,7
+Tünde lépett, új koordinátája: 2,7
+Tünde lépett, új koordinátája: 2,8
+Tünde lépett, új koordinátája: 2,9
+Tünde lépett, új koordinátája: 3,9
+Tünde lépett, új koordinátája: 4,9
+Tünde lépett, új koordinátája: 5,9
+Tünde lépett, új koordinátája: 6,9
+Tünde lépett, új koordinátája: 6,10
+Tünde lépett, új koordinátája: 6,11
+Tünde lépett, új koordinátája: 5,11
+Tünde lépett, új koordinátája: 4,11
+Tünde lépett, új koordinátája: 4,12
+Tünde lépett, új koordinátája: 4,13
+Tünde lépett, új koordinátája: 5,13
+Tünde lépett, új koordinátája: 6,13
+Tünde lépett, új koordinátája: 7,13
+Tünde lépett, új koordinátája: 8,13
+Tünde lépett, új koordinátája: 8,14
+Tünde lépett, új koordinátája: 9,14
+Tünde lépett, új koordinátája: 10,14
+Tünde lépett, új koordinátája: 11,14
+Tünde lépett, új koordinátája: 12,14
+Tünde lépett, új koordinátája: 13,14
+Tünde lépett, új koordinátája: 14,14
+Játék vége
+Adjon meg egy nevet:

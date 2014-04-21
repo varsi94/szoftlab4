@@ -1,0 +1,3 @@
+ellenseg tunde 6 3
+torony 5 4 sebez  
+utemleptetes 3

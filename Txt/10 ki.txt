@@ -1,0 +1,10 @@
+Utak száma: 3
+Új Tünde: 6,3
+Sikeres torony lerakás: 5,4
+Tünde lépett, új koordinátája: 5,3
+Torony sebzés. Megmaradt életpont: 60
+Tünde lépett, új koordinátája: 4,3
+Torony sebzés. Megmaradt életpont: 30
+Tünde lépett, új koordinátája: 4,4
+Torony sebzés. Megmaradt életpont: 0
+Tünde elpusztult: 4,4
