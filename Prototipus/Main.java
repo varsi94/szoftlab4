@@ -6,10 +6,20 @@ import java.io.InputStreamReader;
 
 import Palya.Palya;
 
+/**
+ * Fõprogram
+ * @author Hanicz
+ *
+ */
 public class Main {
 
 	private static BufferedReader in;
 
+	/**
+	 * Main metódus, a menüt írja ki.
+	 * @param args parancssori argumentumok
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		in = new BufferedReader(new InputStreamReader(System.in));
 		

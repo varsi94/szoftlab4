@@ -21,29 +21,87 @@ import Prototipus.Veletlen;
 import Ranglista.Ranglista;
 import Torony.ITorony;
 
+/**
+ * Pályát reprezentáló osztály
+ * @author Varsi
+ */
 public class Palya implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Utak száma
+	 */
 	private static final int UTAK_SZAMA = 3;
+	
+	/**
+	 * Maximális index szélességben
+	 */
 	public static final int PALYA_MAX_X_INDEX = 15;
+	
+	/**
+	 * Maximális index magasságban
+	 */
 	public static final int PALYA_MAX_Y_INDEX = 15;
+	
+	/**
+	 * A játékos pontszáma
+	 */
 	private int pontszam = 0;
 
+	/**
+	 * A hegyhez tartozó cella
+	 */
 	private Cella hegy;
+	
+	/**
+	 * Térkép
+	 */
 	private Cella[][] terkep;
+	
+	/**
+	 * Aktuális varázserõ
+	 */
 	private int varazsero;
+	
+	/**
+	 * Utak tömbje.
+	 */
 	private Cella[][] ut;
+	
+	/**
+	 * Aktuális körszám
+	 */
 	private int kor;
+	
+	/**
+	 * Ellenségek listája
+	 */
 	private List<IEllenseg> ellensegek;
+	
+	/**
+	 * Tornyok listája
+	 */
 	private List<ITorony> tornyok;
+	
+	/**
+	 * Akadályok listája
+	 */
 	private List<IAkadaly> akadalyok;
 	
-	boolean jatekvege = false;
+	/**
+	 * Vége van-e a játéknak
+	 */
+	private boolean jatekvege = false;
 
+	/**
+	 * Ellenségek száma az adott körben
+	 */
 	private int maxellen = 3;
 
+	/**
+	 * Tesztekhez az ütem léptetése. Azért van külön, hogy ne generálódjanak új ellenségek
+	 * @return Vége van-e a játéknak
+	 */
 	public boolean utemLep() {
 		boolean vege = leptet();
 		if (!vege) {
@@ -53,6 +111,10 @@ public class Palya implements Serializable {
 		return vege;
 	}
 
+	/**
+	 * Ütemet lejátszó metódus. Példányosít egy Bemenet objektumot, így mielõtt léptetne, megkérdezi
+	 * a felhasználót, hogy akar-e valamilyen interakciót végrehajtani.
+	 */
 	public void motor() {
 
 		maxellen = kor * 3;
@@ -80,6 +142,11 @@ public class Palya implements Serializable {
 		if(kor == 16 && !jatekvege) win();
 	}
 
+	/**
+	 * Léptetjük az összes ellenséget. Ha elérte valamelyik a hegyet, akkor meghívjuk a lost()
+	 * metódust
+	 * @return vége-e a játéknak
+	 */
 	private boolean leptet() {
 		for (int i = 0; i < ellensegek.size(); i++) {
 			final IEllenseg e = ellensegek.get(i);
@@ -93,6 +160,9 @@ public class Palya implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Akadályoztatunk az összes akadállyal.
+	 */
 	private void akadalyoz() {
 		List<IAkadaly> meghaltak = new ArrayList<IAkadaly>();
 		for (IAkadaly akadaly : akadalyok) {
@@ -112,13 +182,26 @@ public class Palya implements Serializable {
 		}
 	}
 
+	/**
+	 * Lövünk az összes toronnyal.
+	 */
 	private void loves() {
 		for (ITorony t : tornyok) {
 			t.loves();
 		}
 	}
 
+	/**
+	 * Torony lerakását végzõ metódus. Ha van már ott torony, akkor nem rakjuk le.
+	 * @param t Toronyra mutató referencia
+	 * @param hova Cella, ahova le szeretnénk rakni
+	 * @return Sikerült-e a torony lerakás
+	 */
 	public boolean tornyotLerak(ITorony t, Cella hova) {
+		if (hova.getTorony() != null) {
+			Kimenet.sikertelenTorony();
+			return false;
+		}
 		final boolean result = hova.setTorony(t);
 		if (result) {
 			tornyok.add(t);
@@ -128,19 +211,37 @@ public class Palya implements Serializable {
 		return result;
 	}
 	
+	/**
+	 * Ködöt eresztünk néhány toronyra.
+	 */
 	private void kodKiosztas(){
 		for(int i = 0; i < tornyok.size(); i++){
 			tornyok.get(i).setKod(Veletlen.kod());
 		}
 	}
 
+	/**
+	 * Ellenséget hozzáadó metódus
+	 * @param ell Ellenségre mutató referencia
+	 * @param hova Az ellenség cellája
+	 */
 	public void addEllenseg(IEllenseg ell, Cella hova) {
 		hova.hozzaad(ell);
 		ellensegek.add(ell);
 		Kimenet.ujEllenseg(ell, hova);
 	}
 
+	/**
+	 * Akadályt hozzáadó metódus, ellenõrizzük azt is, hogy van-e akadály a cellán.
+	 * @param akadaly Akadályra mutató referencia
+ 	 * @param hova Az akadály cellája
+	 * @return False, ha nem sikerült az akadály lerakása
+	 */
 	public boolean akadalytLerak(IAkadaly akadaly, Cella hova) {
+		if (hova.getAkadaly() != null) {
+			Kimenet.sikertelenTorony();
+			return false;
+		}
 		final boolean result = hova.setAkadaly(akadaly);
 		if (result) {
 			akadalyok.add(akadaly);
@@ -150,12 +251,21 @@ public class Palya implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Ellenségek hívják meg, hogyha meghaltak. Pontszámot növelünk, és kivesszük az 
+	 * ellenségek listájából
+	 * @param ell A meghalt ellenség
+	 */
 	public void meghaltam(IEllenseg ell) {
 		ellensegek.remove(ell);
 		maxellen--;
 		pontszam += 50;
 	}
-
+	
+	/**
+	 * Akadályok hívják meg, hogyha meghaltak. Kivesszük az akadályok listájából
+	 * @param a A meghalt akadály
+	 */
 	public void meghaltam(IAkadaly a) {
 		akadalyok.remove(a);
 		Kimenet.akadalyElpusztul(a);
@@ -237,6 +347,10 @@ public class Palya implements Serializable {
 		
 	}
 
+	/**
+	 * Aktuális kör módosítása
+	 * @param x az új kör sorszáma
+	 */
 	public void setKor(int x) {
 		this.kor = x;
 		System.out.println("Aktuális kör:" + kor);
@@ -252,15 +366,16 @@ public class Palya implements Serializable {
 		this.ment();
 	}
 
-	// Ha kétszerezés történik akkor növelni kell eggyel az ellenségek számát!
+	/**
+	 * Ha kétszerezés történik akkor növelni kell eggyel az ellenségek számát!
+	 */
 	public void incMaxellen(){
 		maxellen++;
 	}
 	
-	/*
+	/**
 	 * Játék mentése. Csak a körök végén.
 	 */
-
 	private void ment() {
 		System.out.println("Mentés.");
 		try {
@@ -294,10 +409,23 @@ public class Palya implements Serializable {
 		System.out.println("Utak száma: 3");
 	}
 
+	/**
+	 * Egy útnak az egyik celláját lekérdezõ metódus
+	 * @param utindex út indexe
+	 * @param cellaindex az úton belül a cella indexe
+	 * @return a Cella
+	 */
 	public Cella getUtCella(int utindex, int cellaindex) {
 		return ut[utindex][cellaindex];
 	}
 
+	/**
+	 * Lekérjük x és y koordináták alapján egy út celláját. Ha ez nem tartozik egyik úthoz sem, akkor
+	 * null-lal térünk vissza.
+	 * @param x x koordináta
+	 * @param y y koordináta
+	 * @return { utIndex, cellaIndex } kétdimenziós tömb
+	 */
 	public int[] getUtCellaByKord(int x, int y) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < ut[i].length; j++) {
@@ -312,14 +440,28 @@ public class Palya implements Serializable {
 		return null;
 	}
 
+	/**
+	 * A térkép egy celláját adja vissza az x és y koordináták alapján.
+	 * @param x x koordináta
+	 * @param y y koordináta
+	 * @return a cella
+	 */
 	public Cella getTerkepCella(int x, int y) {
 		return terkep[x][y];
 	}
 
+	/**
+	 * Megadja, hogy egy cella a hegy-e.
+	 * @param c Cella
+	 * @return True, ha a hegy, False, ha nem
+	 */
 	public boolean isHegyCella(Cella c) {
 		return hegy == c;
 	}
-
+	
+	/**
+	 * Pálya kiíratása vizuálisan.
+	 */
 	public void logPalya() {
 		for (int i = 0; i < terkep.length; i++) {
 			for (int j = 0; j < terkep[i].length; j++) {
@@ -340,10 +482,18 @@ public class Palya implements Serializable {
 		}
 	}
 
+	/**
+	 * Pontszám módosítása
+	 * @param x az új pontszám
+	 */
 	public void setPontszam(int x) {
 		pontszam += x;
 	}
 
+	/**
+	 * Térképet létrehozó metódus.
+	 * @return A térkép kétdimenziós tömbje.
+	 */
 	public static Cella[][] csinaljTerkepet() {
 		Cella[][] terkep = new Cella[16][16];
 		terkep[0][0] = new Cella(0, 0, false);
@@ -606,10 +756,20 @@ public class Palya implements Serializable {
 		return terkep;
 	}
 
+	/**
+	 * Hegyet visszaadó metódus
+	 * @param terkep Térkép
+	 * @return Cella, ami a hegy lesz
+	 */
 	public static Cella adjHegyet(Cella[][] terkep) {
 		return terkep[14][14];
 	}
 
+	/**
+	 * Utak létrehozása
+	 * @param terkep Térkép
+	 * @return Az utak kétdimenziós tömbje
+	 */
 	public static Cella[][] csinaljUtat(Cella[][] terkep) {
 		Cella[][] ut = new Cella[3][];
 		ut[0] = new Cella[32];

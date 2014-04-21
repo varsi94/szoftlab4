@@ -15,11 +15,20 @@ public class LilaVarazsko implements IAVarazsko {
 	 */
 	private int koltseg;
 
+	/**
+	 * Költség lekérdezése
+	 * @return a költség
+	 */
 	@Override
 	public int getKoltseg() {
 		return koltseg;
 	}
 
+	/**
+	 * Hatás kifejtése
+	 * @param a célakadály
+	 * @return sikerült-e
+	 */
 	@Override
 	public boolean hat(IAkadaly a) {
 		a.fejleszt();

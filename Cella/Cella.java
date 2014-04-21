@@ -9,7 +9,12 @@ import Ellenseg.IEllenseg;
 import Prototipus.Veletlen;
 import Torony.ITorony;
 
-public class Cella implements Iterable<IEllenseg>, Serializable {
+/**
+ * Cellát reprezentáló osztály.
+ * @author Sipka
+ *
+ */
+public class Cella implements Serializable {
 	private static final long serialVersionUID = 7004825596826728002L;
 	/**
 	 * Az x koordinátája a pontnak.
@@ -36,6 +41,12 @@ public class Cella implements Iterable<IEllenseg>, Serializable {
 	 */
 	private ITorony torony;
 
+	/**
+	 * Konstruktor
+	 * @param x A cella x koordinátája
+	 * @param y A cella y koordinátája
+	 * @param uteleme True, ha út, False, ha nem 
+	 */
 	public Cella(int x, int y, boolean uteleme) {
 		this.x = x;
 		this.y = y;
@@ -117,30 +128,45 @@ public class Cella implements Iterable<IEllenseg>, Serializable {
 	public List<IEllenseg> getEllensegek() {
 		return ellensegek;
 	}
-
+	
+	/**
+	 * Út-e
+	 * @return True, ha igen, False, ha nem.
+	 */
 	public final boolean isUteleme() {
 		return uteleme;
 	}
 
-	@Override
-	public java.util.Iterator<IEllenseg> iterator() {
-		return ellensegek.iterator();
-	}
-
+	/**
+	 * A cellán tartózkodó ellenségek közül visszaad egyet.
+	 * @return Az ellenség
+	 */
 	public IEllenseg getRandomEllenseg() {
 		final int size = ellensegek.size();
 		return size == 0 ? null : ellensegek.get(Veletlen.nextInt(size));
 	}
 
+	/**
+	 * Kiíráshoz
+	 * @return y koordináta, x koordináta
+	 */
 	@Override
 	public String toString() {
 		return y + "," + x;
 	}
 
+	/**
+	 * X koordinátát adja vissza
+	 * @return x koordináta
+	 */
 	public final int getX() {
 		return x;
 	}
 
+	/**
+	 * Y koordinátát adja vissza
+	 * @return y koordináta
+	 */
 	public final int getY() {
 		return y;
 	}

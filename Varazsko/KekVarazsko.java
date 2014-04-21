@@ -15,11 +15,20 @@ public class KekVarazsko implements ITVarazsko {
 	 */
 	private int koltseg;
 
+	/**
+	 * Költség lekérdezése
+	 * @return a költség
+	 */
 	@Override
 	public int getKoltseg() {
 		return koltseg;
 	}
 
+	/**
+	 * Hatás kifejtése
+	 * @param t A Céltorony
+	 * @return Sikerült-e
+	 */
 	@Override
 	public boolean hat(ITorony t) {
 		return t.setTuzgyak();

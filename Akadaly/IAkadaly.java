@@ -30,10 +30,16 @@ public interface IAkadaly extends Serializable {
 	 * @return a költség
 	 */
 	public int getKoltseg();
-
+	
+	/**
+	 * Cellát lekérdezõ metódus.
+	 * @return A cella, amin az akadály áll.
+	 */
 	public Cella getCella();
 	
+	/**
+	 * Hatást lekérdezõ metódus.
+	 * @return Még hány ellenségre képes hatni az akadály.
+	 */
 	public int getHatas();
-	
-
 }

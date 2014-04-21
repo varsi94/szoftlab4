@@ -9,7 +9,13 @@ import java.io.Serializable;
  * 
  */
 public interface ITorony extends Serializable {
+	/**
+	 * Torony építéséhez szükséges varázserõ
+	 */
 	public static final int KOLTSEG = 100;
+	/**
+	 * Az egyes kasztokhoz tartozó indexek konstansai.
+	 */
 	public static final int SEBZODES_EMBER_INDEX = 0;
 	public static final int SEBZODES_HOBBIT_INDEX = 1;
 	public static final int SEBZODES_TORP_INDEX = 2;
@@ -51,13 +57,33 @@ public interface ITorony extends Serializable {
 	 */
 	public void setHatotav();
 
+	/**
+	 * Köd lekérdezése
+	 * @return True, ha van köd, False, ha nincs
+	 */
 	public boolean isKod();
 
+	/**
+	 * Köd beállítása
+	 * @param kod legyen vagy ne
+	 */
 	public void setKod(boolean kod);
 	
+	/**
+	 * Tüzelései gyakoriság lekérdezése
+	 * @return tüzelési gyakoriság
+	 */
 	public int getTuzgyak();
 	
+	/**
+	 * Hatótávolság lekérdezése
+	 * @return hatótávolság
+	 */
 	public int getHatotav();
 	
+	/**
+	 * Költség lekérdezése
+	 * @return költség
+	 */
 	public int getKoltseg();
 }

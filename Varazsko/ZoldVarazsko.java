@@ -13,11 +13,20 @@ public class ZoldVarazsko implements ITVarazsko {
 	 */
 	private int koltseg;
 
+	/**
+	 * Költség lekérdezése
+	 * @return költség
+	 */
 	@Override
 	public int getKoltseg() {
 		return koltseg;
 	}
 
+	/**
+	 * Hatás kifejtése
+	 * @param t céltorony
+	 * @return sikerült-e
+	 */
 	@Override
 	public boolean hat(ITorony t) {
 		t.setSebzes(ITorony.SEBZODES_HOBBIT_INDEX);

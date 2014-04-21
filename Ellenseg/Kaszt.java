@@ -5,8 +5,17 @@ import Palya.Palya;
 import Prototipus.Kimenet;
 import Torony.ITorony;
 
+/**
+ * Ellenségekhez tartozó absztrakt õsosztály
+ * @author Sipka
+ *
+ */
 public abstract class Kaszt implements IEllenseg {
 	private static final long serialVersionUID = -1245802203646608322L;
+	
+	/**
+	 * Pályára mutató referencia
+	 */
 	private Palya palya;
 	/**
 	 * Az objektum sebességét tartja számon. Ez egy egész típusú érték.
@@ -36,6 +45,14 @@ public abstract class Kaszt implements IEllenseg {
 	 */
 	private boolean lassitott;
 
+	/**
+	 * Konstruktor
+	 * @param palya pálya referencia
+	 * @param speed sebesség
+	 * @param hp életpont
+	 * @param utIndex út azonosítója
+	 * @param cellaIndex cella azonosítója
+	 */
 	public Kaszt(Palya palya, int speed, int hp, int utIndex, int cellaIndex) {
 		this.palya = palya;
 		this.speed = speed;
@@ -45,6 +62,10 @@ public abstract class Kaszt implements IEllenseg {
 		this.cellaIndex = cellaIndex;
 	}
 
+	/**
+	 * HP beállíta a sebzõdés során
+	 * @param t A torony, amelyik lõ
+	 */
 	@Override
 	public final void sebzodik(ITorony t) {
 		hp -= getSebzodes(t);
@@ -56,8 +77,17 @@ public abstract class Kaszt implements IEllenseg {
 		}
 	}
 
+	/**
+	 * Sebzõdés lekérdezése
+	 * @param t Torony, amelyik lõ
+	 * @return Sebzõdés mértéke
+	 */
 	protected abstract int getSebzodes(ITorony t);
 
+	/**
+	 * Megállító metódus
+	 * @param utem hány ütemre maradjunk ki.
+	 */
 	@Override
 	public final void megall(int utem) {
 		lassitott = true;
@@ -66,6 +96,9 @@ public abstract class Kaszt implements IEllenseg {
 		Kimenet.ellensegLelassul(this, c);
 	}
 
+	/**
+	 * Metódus, ami az ellenség lépését teszi lehetõvé.
+	 */
 	@Override
 	public final void halad() {
 		if (--kimarad > 0) {
@@ -81,6 +114,10 @@ public abstract class Kaszt implements IEllenseg {
 		Kimenet.ellensegLep(this, uj);
 	}
 
+	/**
+	 * Akkor hívódik meg, hogyha meghal az ellenség.
+	 * Kiveszi a celláról magát, és értesíti a pályát, hogy meghalt.
+	 */
 	@Override
 	public final void meghal() {
 		final Cella cella = palya.getUtCella(utIndex, cellaIndex);
@@ -89,21 +126,37 @@ public abstract class Kaszt implements IEllenseg {
 		palya.meghaltam(this);
 	}
 
+	/**
+	 * Sebességet visszaadó metódus
+	 * @return sebesség
+	 */
 	@Override
 	public final int getSpeed() {
 		return speed;
 	}
 
+	/**
+	 * Visszaadja, hogy hány kör múlva jövünk megint
+	 * @return következõ lépés hány kör múlva lesz
+	 */
 	@Override
 	public final int getKimarad() {
 		return kimarad;
 	}
 
+	/**
+	 * Életpont lekérdezése
+	 * @return életpont
+	 */
 	@Override
 	public final int getHp() {
 		return hp;
 	}
 
+	/**
+	 * Életpont beállítása
+	 * @param hp az új életpont
+	 */
 	@Override
 	public final void setHp(int hp) {
 		this.hp = hp;
@@ -112,16 +165,28 @@ public abstract class Kaszt implements IEllenseg {
 		}
 	}
 
+	/**
+	 * Útindex lekérdezése
+	 * @return út indexe
+	 */
 	@Override
 	public final int getUtIndex() {
 		return utIndex;
 	}
 
+	/**
+	 * Cella index lekérdezése az úton belül
+	 * @return Cella indexe
+	 */
 	@Override
 	public final int getCellaIndex() {
 		return cellaIndex;
 	}
 
+	/**
+	 * Másoló metódus
+	 * @return másolat
+	 */
 	@Override
 	public IEllenseg clone() {
 		// shallow copy
@@ -134,7 +199,8 @@ public abstract class Kaszt implements IEllenseg {
 	}
 
 	/**
-	 * @return the akadalyozott
+	 * Lassítás lekérdezése
+	 * @return lassítva van-e
 	 */
 	public boolean isLassitott() {
 		return lassitott;

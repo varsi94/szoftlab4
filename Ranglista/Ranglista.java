@@ -49,6 +49,9 @@ public class Ranglista implements Serializable {
 	public Ranglista() {
 	}
 	
+	/**
+	 * Ranglista mentése
+	 */
 	public void szerializalas(){
 		try {
 			String path = System.getProperty("user.dir") + "\\";

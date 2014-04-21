@@ -3,9 +3,22 @@ package Ellenseg;
 import Palya.Palya;
 import Torony.ITorony;
 
+/**
+ * Törpöt reprezentáló osztály
+ * @author Sipka
+ *
+ */
 public class Torp extends Kaszt {
 	private static final long serialVersionUID = -2795645610917810135L;
+	
+	/**
+	 * Törp kezdeti életpontja
+	 */
 	private static final int TORP_START_HP = 100;
+	
+	/**
+	 * Törp kezdeti sebessége, hány körönként lép.
+	 */
 	private static final int TORP_START_SPEED = 1;
 
 	/**
@@ -34,17 +47,30 @@ public class Torp extends Kaszt {
 		super(palya, TORP_START_SPEED, TORP_START_HP, utIndex, cellaIndex);
 	}
 
+	/**
+	 * Sebzõdés lekérdezése
+	 * @param t A torony, amelyik lõ
+	 * @return a sebzõdés mértéke
+	 */
 	@Override
 	protected int getSebzodes(ITorony t) {
 		return t.getSebzes(ITorony.SEBZODES_TORP_INDEX);
 	}
 
+	/**
+	 * Pálya kiíratáshoz a jelölõ 
+	 * @return 'd', a T már foglalt a toronynak és a tündének
+	 */
 	@Override
 	public char getMarkChar() {
 		// Dwarf
 		return 'd';
 	}
 
+	/**
+	 * Kimeneti nyelvhez.
+	 * @return Törp
+	 */
 	@Override
 	public String toString() {
 		return "Törp";

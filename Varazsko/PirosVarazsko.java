@@ -15,11 +15,20 @@ public class PirosVarazsko implements ITVarazsko {
 	 */
 	private int koltseg;
 
+	/**
+	 * Költség lekérdezése
+	 * @return költség
+	 */
 	@Override
 	public int getKoltseg() {
 		return koltseg;
 	}
 
+	/**
+	 * Hatás kifejtése
+	 * @param t a céltorony
+	 * @return Sikerült-e
+	 */
 	@Override
 	public boolean hat(ITorony t) {
 		t.setHatotav();

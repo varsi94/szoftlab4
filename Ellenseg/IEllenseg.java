@@ -71,8 +71,16 @@ public interface IEllenseg extends Cloneable, Serializable {
 	 */
 	public int getCellaIndex();
 
+	/**
+	 * HP felülírása
+	 * @param hp új hp
+	 */
 	public void setHp(int hp);
 
+	/**
+	 * Ellenség kétszerezéséhez a clone metódus
+	 * @return másolat
+	 */
 	public IEllenseg clone();
 
 	/**
