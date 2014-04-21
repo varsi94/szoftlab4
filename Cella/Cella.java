@@ -9,7 +9,8 @@ import Ellenseg.IEllenseg;
 import Prototipus.Veletlen;
 import Torony.ITorony;
 
-public class Cella implements Iterable<IEllenseg>, Serializable{
+public class Cella implements Iterable<IEllenseg>, Serializable {
+	private static final long serialVersionUID = 7004825596826728002L;
 	/**
 	 * Az x koordinátája a pontnak.
 	 */

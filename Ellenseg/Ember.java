@@ -4,7 +4,7 @@ import Palya.Palya;
 import Torony.ITorony;
 
 public class Ember extends Kaszt {
-
+	private static final long serialVersionUID = 3355684723009919840L;
 	private static final int EMBER_START_HP = 80;
 	private static final int EMBER_START_SPEED = 1;
 

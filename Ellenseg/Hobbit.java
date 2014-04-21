@@ -4,7 +4,7 @@ import Palya.Palya;
 import Torony.ITorony;
 
 public class Hobbit extends Kaszt {
-
+	private static final long serialVersionUID = 4968626822423497401L;
 	private static final int HOBBIT_START_HP = 60;
 	private static final int HOBBIT_START_SPEED = 1;
 

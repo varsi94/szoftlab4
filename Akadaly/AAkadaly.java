@@ -9,6 +9,10 @@ import Ellenseg.IEllenseg;
  */
 public abstract class AAkadaly implements IAkadaly {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1390074678693050108L;
+	/**
 	 * Azt tárolja hogy mennyi varázserõbe kerül a megépítése.
 	 */
 	protected int koltseg;

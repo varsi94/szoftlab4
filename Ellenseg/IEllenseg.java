@@ -81,4 +81,10 @@ public interface IEllenseg extends Cloneable, Serializable {
 	 * @return a karakter
 	 */
 	public char getMarkChar();
+	
+	/**
+	 * Visszaadja, hogy éppen lassítva van-e az ellenség.
+	 * @return igaz vagy hamis
+	 */
+	public boolean isLassitott();
 }

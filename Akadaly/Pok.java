@@ -8,6 +8,7 @@ import Prototipus.Kimenet;
  * Pokot reprezentáló osztály
  */
 public class Pok extends AAkadaly {
+	private static final long serialVersionUID = -3619434867885153060L;
 	private static final int POK_KOLTSEG = 10;
 	private static final int POK_HATAS = 1;
 
@@ -17,7 +18,7 @@ public class Pok extends AAkadaly {
 
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		if (e.getKimarad() != 1)
+		if (e.getKimarad() != 1 || e.isLassitott())
 			return true;
 		else {
 			Kimenet.akadalyAktivalodik(this);

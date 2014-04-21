@@ -8,7 +8,7 @@ import Prototipus.Kimenet;
  * Orkot reprezentáló osztály
  */
 public class Ork extends AAkadaly {
-
+	private static final long serialVersionUID = -8789176812576475815L;
 	private static final int ORK_KOLTSEG = 20;
 	private static final int ORK_HATAS = 1;
 

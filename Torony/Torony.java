@@ -15,6 +15,7 @@ import Prototipus.Veletlen;
  * 
  */
 public class Torony implements ITorony {
+	private static final long serialVersionUID = 2733022368247174757L;
 	public static final int KOD_OSZTO_SZAMLALO = 3;
 	public static final int KOD_OSZTO_NEVEZO = 5;
 	private static final int START_HATOTAV = 2;

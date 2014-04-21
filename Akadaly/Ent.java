@@ -8,7 +8,7 @@ import Prototipus.Kimenet;
  * Entet reprezentáló osztály
  */
 public class Ent extends AAkadaly {
-
+	private static final long serialVersionUID = 2061085673027741014L;
 	private static final int ENT_KOLTSEG = 30;
 	private static final int ENT_HATAS = 3;
 

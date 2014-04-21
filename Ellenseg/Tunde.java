@@ -4,7 +4,7 @@ import Palya.Palya;
 import Torony.ITorony;
 
 public class Tunde extends Kaszt {
-
+	private static final long serialVersionUID = -5760690146179778224L;
 	private static final int TUNDE_START_HP = 90;
 	private static final int TUNDE_START_SPEED = 1;
 

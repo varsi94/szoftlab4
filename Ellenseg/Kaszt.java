@@ -6,6 +6,7 @@ import Prototipus.Kimenet;
 import Torony.ITorony;
 
 public abstract class Kaszt implements IEllenseg {
+	private static final long serialVersionUID = -1245802203646608322L;
 	private Palya palya;
 	/**
 	 * Az objektum sebességét tartja számon. Ez egy egész típusú érték.
@@ -28,6 +29,12 @@ public abstract class Kaszt implements IEllenseg {
 	 * A cella indexét tárolja. Egész típus.
 	 */
 	private int cellaIndex;
+	
+	/**
+	 * Megadja, hogy akadályozva volt-e az ellenség. A játék szerint ha igen, akkor tovább kell lépnie, nem szaladhat
+	 * bele megint az akadályba.
+	 */
+	private boolean lassitott;
 
 	public Kaszt(Palya palya, int speed, int hp, int utIndex, int cellaIndex) {
 		this.palya = palya;
@@ -53,6 +60,7 @@ public abstract class Kaszt implements IEllenseg {
 
 	@Override
 	public final void megall(int utem) {
+		lassitott = true;
 		kimarad += utem;
 		Cella c = palya.getUtCella(utIndex, cellaIndex);
 		Kimenet.ellensegLelassul(this, c);
@@ -64,7 +72,7 @@ public abstract class Kaszt implements IEllenseg {
 			// kimaradunk
 			return;
 		}
-
+		lassitott = false;
 		kimarad = speed;
 		final Cella regi = palya.getUtCella(utIndex, cellaIndex);
 		final Cella uj = palya.getUtCella(utIndex, ++cellaIndex);
@@ -123,5 +131,12 @@ public abstract class Kaszt implements IEllenseg {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * @return the akadalyozott
+	 */
+	public boolean isLassitott() {
+		return lassitott;
 	}
 }

@@ -4,6 +4,7 @@ import Palya.Palya;
 import Torony.ITorony;
 
 public class Torp extends Kaszt {
+	private static final long serialVersionUID = -2795645610917810135L;
 	private static final int TORP_START_HP = 100;
 	private static final int TORP_START_SPEED = 1;
 

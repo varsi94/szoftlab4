@@ -1,6 +1,5 @@
 package Prototipus;
 
-import java.awt.List;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -35,7 +34,7 @@ import Varazsko.ZoldVarazsko;
 public class Bemenet {
 
 	private static BufferedReader in;
-	private Palya p;
+	//private Palya p;
 	private String tipus;
 
 	public Bemenet() {
