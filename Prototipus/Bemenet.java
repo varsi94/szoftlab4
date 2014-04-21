@@ -80,6 +80,10 @@ public class Bemenet {
 					}
 					index = beolv.size();
 					reader.close();
+					if (Integer.parseInt(teszt) == 11) {
+						p.setVarazsero(300);
+					} else
+						p.setVarazsero(Integer.MAX_VALUE);
 				} catch (IOException e) {
 					System.out.println("Nincs ilyen teszt!");
 					return;
@@ -438,20 +442,21 @@ public class Bemenet {
 					} catch (ArrayIndexOutOfBoundsException ex) {
 						System.out.println("Hibás bemenet!");
 					}
-				/**
-				 * log bemenet esetén
-				*/
+					/**
+					 * log bemenet esetén
+					 */
 				} else if (splitted[0].equals("log")) {
 					p.logPalya();
-				/**
-				 * kezeletlen bemenet esetén
-				 */
+					/**
+					 * kezeletlen bemenet esetén
+					 */
 				} else
 					System.out.println("Ismeretlen bemenet!");
 			}
-			
+
 			/**
-			 * Ha tesz és kilépünk a for ciklusból akkor visszatérünk a fõmenübe.
+			 * Ha tesz és kilépünk a for ciklusból akkor visszatérünk a
+			 * fõmenübe.
 			 */
 			if (teszt != null)
 				return;

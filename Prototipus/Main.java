@@ -36,9 +36,9 @@ public class Main {
 
 				switch (be) {
 				case 1:
-					Palya p = new Palya();
 					System.out.println("Teszt név:");
 					String teszt = in.readLine();
+					Palya p = new Palya();
 					b.Kezelo(p,teszt);
 					break;
 				case 2:
