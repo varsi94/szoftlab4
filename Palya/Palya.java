@@ -41,6 +41,8 @@ public class Palya implements Serializable {
 	private List<IEllenseg> ellensegek;
 	private List<ITorony> tornyok;
 	private List<IAkadaly> akadalyok;
+	
+	boolean jatekvege = false;
 
 	private int maxellen = 3;
 
@@ -56,7 +58,6 @@ public class Palya implements Serializable {
 	public void motor() {
 
 		maxellen = kor * 3;
-		boolean jatekvege = false;
 		while (kor < 16 && !jatekvege) {
 			kodKiosztas();
 			for (int i = 0; i < maxellen; i++) {
@@ -184,6 +185,7 @@ public class Palya implements Serializable {
 		Kimenet.jatekVege();
 		Ranglista r = new Ranglista();
 		String name;
+		jatekvege = true;
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -213,6 +215,7 @@ public class Palya implements Serializable {
 		System.out.println("Gyõzelem");
 		Ranglista r = new Ranglista();
 		String name;
+		jatekvege = true;
 
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
