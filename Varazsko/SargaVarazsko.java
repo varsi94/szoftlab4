@@ -9,36 +9,18 @@ import Torony.ITorony;
  * 
  */
 public class SargaVarazsko implements ITVarazsko {
-
-	/**
-	 * Azt tárolja hogy mennyi varázserõbe kerül a használata
-	 */
-	private int koltseg;
-
-	/**
-	 * Költség lekérdezése
-	 * @return költség 
-	 */
-	@Override
-	public int getKoltseg() {
-		return koltseg;
-	}
+	public static final int KOLTSEG = 50;
 
 	/**
 	 * Hatás kifejtése
-	 * @param t céltorony
+	 * 
+	 * @param t
+	 *            céltorony
 	 * @return sikerült-e
 	 */
 	@Override
 	public boolean hat(ITorony t) {
 		t.setSebzes(ITorony.SEBZODES_EMBER_INDEX);
 		return true;
-	}
-
-	/**
-	 * Konstruktor
-	 */
-	public SargaVarazsko() {
-		koltseg = 50;
 	}
 }

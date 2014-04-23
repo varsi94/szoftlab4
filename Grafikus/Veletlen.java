@@ -1,4 +1,4 @@
-package Prototipus;
+package Grafikus;
 
 import java.util.Random;
 
@@ -11,8 +11,9 @@ import Palya.Palya;
 
 /**
  * Saját véletlen osztály
+ * 
  * @author Sipka
- *
+ * 
  */
 public class Veletlen {
 	/**
@@ -34,6 +35,7 @@ public class Veletlen {
 
 	/**
 	 * Determinisztikusság lekérdezése
+	 * 
 	 * @return igen vagy nem
 	 */
 	public static final boolean isDeterminisztikus() {
@@ -42,15 +44,19 @@ public class Veletlen {
 
 	/**
 	 * Determinisztikusság állítása
-	 * @param determinisztikus az új érték
+	 * 
+	 * @param determinisztikus
+	 *            az új érték
 	 */
 	public static final void setDeterminisztikus(boolean determinisztikus) {
 		Veletlen.determinisztikus = determinisztikus;
 	}
 
 	/**
-	 * Egy 0...n-1 közötti véletlenszám lekérdezése 
-	 * @param n felsõ határ - 1
+	 * Egy 0...n-1 közötti véletlenszám lekérdezése
+	 * 
+	 * @param n
+	 *            felsõ határ - 1
 	 * @return véletlen szám
 	 */
 	public static int nextInt(int n) {
@@ -62,24 +68,29 @@ public class Veletlen {
 
 	/**
 	 * Dupla lövedék lekérdezése. 1/20 az esély
+	 * 
 	 * @return True vagy False
 	 */
 	public static boolean duplaLovedek() {
 		return nextInt(20) == 0;
 	}
-	
+
 	/**
 	 * Köd lekérdezése. 1/30 az esély
+	 * 
 	 * @return True vagy False
 	 */
-	public static boolean kod(){
+	public static boolean kod() {
 		return nextInt(30) == 0;
 	}
 
 	/**
 	 * Random ellenség generálása
-	 * @param palya Pálya referencia
-	 * @param utindex út indexe
+	 * 
+	 * @param palya
+	 *            Pálya referencia
+	 * @param utindex
+	 *            út indexe
 	 * @return az új ellenség
 	 */
 	public static IEllenseg csinaljEllenseget(Palya palya, int utindex) {

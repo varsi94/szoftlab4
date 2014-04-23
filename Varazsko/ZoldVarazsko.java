@@ -8,23 +8,13 @@ import Torony.ITorony;
  * @author Varsi
  */
 public class ZoldVarazsko implements ITVarazsko {
-	/**
-	 * Azt tárolja, hogy mennyibe kerül a varázskõ használata.
-	 */
-	private int koltseg;
-
-	/**
-	 * Költség lekérdezése
-	 * @return költség
-	 */
-	@Override
-	public int getKoltseg() {
-		return koltseg;
-	}
+	public static final int KOLTSEG = 50;
 
 	/**
 	 * Hatás kifejtése
-	 * @param t céltorony
+	 * 
+	 * @param t
+	 *            céltorony
 	 * @return sikerült-e
 	 */
 	@Override
@@ -33,10 +23,4 @@ public class ZoldVarazsko implements ITVarazsko {
 		return true;
 	}
 
-	/**
-	 * Konstruktor
-	 */
-	public ZoldVarazsko() {
-		koltseg = 50;
-	}
 }

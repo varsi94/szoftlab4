@@ -1,4 +1,0 @@
-Palya meret: 16*16
-Utak száma: 3
-Sikeres torony lerakás: 6,6
-Sikertelen fejlesztés: rossz célpont.

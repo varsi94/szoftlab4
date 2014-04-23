@@ -4,12 +4,13 @@ import java.io.Serializable;
 
 import Cella.Cella;
 import Ellenseg.IEllenseg;
+import Grafikus.IRajzolhato;
 
 /**
  * Az interfész felelõssége hogy elõre deklarálja a késõbbi metódusokat illetve hogy képet adjon az objektum viselkedésérõl.
  * 
  */
-public interface IAkadaly extends Serializable {
+public interface IAkadaly extends Serializable, IRajzolhato {
 	/**
 	 * Ez a függvény mondja meg hogy mit tud az akadály csinálni az ellenféllel. Akkor van meghívva ha egy ellenség ráfut az akadályra.
 	 * 
@@ -30,15 +31,17 @@ public interface IAkadaly extends Serializable {
 	 * @return a költség
 	 */
 	public int getKoltseg();
-	
+
 	/**
 	 * Cellát lekérdezõ metódus.
+	 * 
 	 * @return A cella, amin az akadály áll.
 	 */
 	public Cella getCella();
-	
+
 	/**
 	 * Hatást lekérdezõ metódus.
+	 * 
 	 * @return Még hány ellenségre képes hatni az akadály.
 	 */
 	public int getHatas();

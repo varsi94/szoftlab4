@@ -9,24 +9,13 @@ import Torony.ITorony;
  * 
  */
 public class FeherVarazsko implements ITVarazsko {
-
-	/**
-	 * Azt tárolja, hogy mennyi varázserõbe kerül a használata.
-	 */
-	private int koltseg;
-
-	/**
-	 * Költség lekérdezése
-	 * @return költség
-	 */
-	@Override
-	public int getKoltseg() {
-		return koltseg;
-	}
+	public static final int KOLTSEG = 50;
 
 	/**
 	 * Hatás kifejtése
-	 * @param t Céltorony
+	 * 
+	 * @param t
+	 *            Céltorony
 	 * @return Sikerült-e
 	 */
 	@Override
@@ -39,7 +28,6 @@ public class FeherVarazsko implements ITVarazsko {
 	 * Konstruktor
 	 */
 	public FeherVarazsko() {
-		koltseg = 50;
 	}
 
 }

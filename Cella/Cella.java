@@ -1,20 +1,24 @@
 package Cella;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import Akadaly.IAkadaly;
 import Ellenseg.IEllenseg;
-import Prototipus.Veletlen;
+import Grafikus.IRajzolhato;
+import Grafikus.Veletlen;
 import Torony.ITorony;
 
 /**
  * Cellát reprezentáló osztály.
+ * 
  * @author Sipka
- *
+ * 
  */
-public class Cella implements Serializable {
+public class Cella implements Serializable, IRajzolhato {
 	private static final long serialVersionUID = 7004825596826728002L;
 	/**
 	 * Az x koordinátája a pontnak.
@@ -43,9 +47,13 @@ public class Cella implements Serializable {
 
 	/**
 	 * Konstruktor
-	 * @param x A cella x koordinátája
-	 * @param y A cella y koordinátája
-	 * @param uteleme True, ha út, False, ha nem 
+	 * 
+	 * @param x
+	 *            A cella x koordinátája
+	 * @param y
+	 *            A cella y koordinátája
+	 * @param uteleme
+	 *            True, ha út, False, ha nem
 	 */
 	public Cella(int x, int y, boolean uteleme) {
 		this.x = x;
@@ -89,7 +97,7 @@ public class Cella implements Serializable {
 	 * @return sikerült-e lerakni az akadályt
 	 */
 	public boolean setAkadaly(IAkadaly akadaly) {
-		if (uteleme) {
+		if (uteleme && this.akadaly == null) {
 			this.akadaly = akadaly;
 			return true;
 		}
@@ -128,9 +136,10 @@ public class Cella implements Serializable {
 	public List<IEllenseg> getEllensegek() {
 		return ellensegek;
 	}
-	
+
 	/**
 	 * Út-e
+	 * 
 	 * @return True, ha igen, False, ha nem.
 	 */
 	public final boolean isUteleme() {
@@ -139,6 +148,7 @@ public class Cella implements Serializable {
 
 	/**
 	 * A cellán tartózkodó ellenségek közül visszaad egyet.
+	 * 
 	 * @return Az ellenség
 	 */
 	public IEllenseg getRandomEllenseg() {
@@ -148,6 +158,7 @@ public class Cella implements Serializable {
 
 	/**
 	 * Kiíráshoz
+	 * 
 	 * @return y koordináta, x koordináta
 	 */
 	@Override
@@ -157,6 +168,7 @@ public class Cella implements Serializable {
 
 	/**
 	 * X koordinátát adja vissza
+	 * 
 	 * @return x koordináta
 	 */
 	public final int getX() {
@@ -165,9 +177,40 @@ public class Cella implements Serializable {
 
 	/**
 	 * Y koordinátát adja vissza
+	 * 
 	 * @return y koordináta
 	 */
 	public final int getY() {
 		return y;
 	}
+
+	@Override
+	public void rajzol(Graphics g, int pixelX, int pixelY, int pixelW, int pixelH) {
+		if (uteleme) {
+			g.setColor(new Color(238, 213, 183));
+			g.fillRect(pixelX, pixelY, pixelW, pixelH);
+			if (akadaly != null) {
+				akadaly.rajzol(g, pixelX, pixelY, pixelW, pixelH);
+			}
+			for (IEllenseg ell : ellensegek) {
+				ell.rajzol(g, pixelX, pixelY, pixelW, pixelH);
+			}
+		} else {
+			g.setColor(new Color(160, 160, 160));
+			g.fillRect(pixelX, pixelY, pixelW, pixelH);
+			if (torony != null) {
+				torony.rajzol(g, pixelX, pixelY, pixelW, pixelH);
+			}
+		}
+	}
+
+	public void akadalyoz(IEllenseg ell) {
+		if (akadaly != null) {
+			final boolean letezik = akadaly.akadalyoz(ell);
+			if (!letezik) {
+				akadaly = null;
+			}
+		}
+	}
+
 }

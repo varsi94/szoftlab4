@@ -1,20 +1,21 @@
 package Akadaly;
 
+import java.awt.Color;
+
 import Cella.Cella;
 import Ellenseg.IEllenseg;
-import Prototipus.Kimenet;
 
 /**
  * Pokot reprezentáló osztály
  */
 public class Pok extends AAkadaly {
 	private static final long serialVersionUID = -3619434867885153060L;
-	
+
 	/**
 	 * Pók költsége
 	 */
-	private static final int POK_KOLTSEG = 50;
-	
+	public static final int KOLTSEG = 50;
+
 	/**
 	 * Pók default hatása
 	 */
@@ -22,32 +23,27 @@ public class Pok extends AAkadaly {
 
 	/**
 	 * Konstrukor
-	 * @param c A cella, ahol a pók áll.
+	 * 
+	 * @param c
+	 *            A cella, ahol a pók áll.
 	 */
 	public Pok(Cella c) {
-		super(POK_KOLTSEG, POK_HATAS, c);
+		super(POK_HATAS, c);
 	}
 
 	/**
 	 * Akadályozó metódus
-	 * @param e	akadályozandó ellenség
+	 * 
+	 * @param e
+	 *            akadályozandó ellenség
 	 * @return true, ha még él az akadály, false, ha nem
 	 */
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
-		/**
-		 * Ha olyan ellenséget kaptunk, amelyik éppen lassítva van, vagy ebben a körben kezdene haladni,
-		 * akkor nem akadályozzuk.
-		 */
-		if (e.getKimarad() != 1 || e.isLassitott())			
-			return true;
-		else {
-			Kimenet.akadalyAktivalodik(this);
-			e.megall(2);
-			return --hatas > 0;
-		}
+		e.megall(2);
+		return --hatas > 0;
 	}
-	
+
 	/**
 	 * Fejlesztõ metódus.
 	 */
@@ -58,10 +54,21 @@ public class Pok extends AAkadaly {
 
 	/**
 	 * Kiíratáshoz
+	 * 
 	 * @return "Pók"
 	 */
 	@Override
 	public String toString() {
 		return "Pók";
+	}
+
+	@Override
+	protected Color getAkadalyColor() {
+		return new Color(64, 64, 64);
+	}
+
+	@Override
+	public int getKoltseg() {
+		return KOLTSEG;
 	}
 }

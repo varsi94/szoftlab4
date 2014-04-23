@@ -3,30 +3,19 @@ package Varazsko;
 import Akadaly.IAkadaly;
 
 /**
- * Varázskõ, mely egy akadályt fejleszt, annak megfelelõen, hogy mi a
- * feladata.Csak akadályra lehet ráhelyezni.
+ * Varázskõ, mely egy akadályt fejleszt, annak megfelelõen, hogy mi a feladata.Csak akadályra lehet ráhelyezni.
  * 
  * @author Varsi
  * 
  */
 public class LilaVarazsko implements IAVarazsko {
-	/**
-	 * Azt tárolja hogy mennyi varázserõbe kerül a használata
-	 */
-	private int koltseg;
-
-	/**
-	 * Költség lekérdezése
-	 * @return a költség
-	 */
-	@Override
-	public int getKoltseg() {
-		return koltseg;
-	}
+	public static final int KOLTSEG = 80;
 
 	/**
 	 * Hatás kifejtése
-	 * @param a célakadály
+	 * 
+	 * @param a
+	 *            célakadály
 	 * @return sikerült-e
 	 */
 	@Override
@@ -39,6 +28,5 @@ public class LilaVarazsko implements IAVarazsko {
 	 * Konstruktor
 	 */
 	public LilaVarazsko() {
-		koltseg = 80;
 	}
 }

@@ -1,26 +1,29 @@
 package Ellenseg;
 
+import java.awt.Color;
+
 import Palya.Palya;
 import Torony.ITorony;
 
 /**
  * Törpöt reprezentáló osztály
+ * 
  * @author Sipka
- *
+ * 
  */
 public class Torp extends Kaszt {
 	private static final long serialVersionUID = -2795645610917810135L;
-	
+
 	/**
 	 * A törpért kapott jutalom varázserõ.
 	 */
 	private static final int TORP_JUTALOM = 60;
-	
+
 	/**
 	 * Törp kezdeti életpontja
 	 */
 	private static final int TORP_START_HP = 100;
-	
+
 	/**
 	 * Törp kezdeti sebessége, hány körönként lép.
 	 */
@@ -55,7 +58,9 @@ public class Torp extends Kaszt {
 
 	/**
 	 * Sebzõdés lekérdezése
-	 * @param t A torony, amelyik lõ
+	 * 
+	 * @param t
+	 *            A torony, amelyik lõ
 	 * @return a sebzõdés mértéke
 	 */
 	@Override
@@ -64,22 +69,18 @@ public class Torp extends Kaszt {
 	}
 
 	/**
-	 * Pálya kiíratáshoz a jelölõ 
-	 * @return 'd', a T már foglalt a toronynak és a tündének
-	 */
-	@Override
-	public char getMarkChar() {
-		// Dwarf
-		return 'd';
-	}
-
-	/**
 	 * Kimeneti nyelvhez.
+	 * 
 	 * @return Törp
 	 */
 	@Override
 	public String toString() {
 		return "Törp";
+	}
+
+	@Override
+	protected Color getKasztSzin() {
+		return Color.BLACK;
 	}
 
 }

@@ -1,12 +1,15 @@
 package Ellenseg;
 
+import java.awt.Color;
+
 import Palya.Palya;
 import Torony.ITorony;
 
 /**
  * Embert reprezentáló osztály
+ * 
  * @author Sipka
- *
+ * 
  */
 public class Ember extends Kaszt {
 
@@ -16,12 +19,12 @@ public class Ember extends Kaszt {
 	 * Az ember megöléésért járó varázserõ
 	 */
 	private static final int EMBER_JUTALOM = 40;
-	
+
 	/**
 	 * Ember kezdeti életpontja.
 	 */
 	private static final int EMBER_START_HP = 80;
-	
+
 	/**
 	 * Ember sebessége: minden körben lép
 	 */
@@ -53,10 +56,12 @@ public class Ember extends Kaszt {
 		super(palya, EMBER_START_SPEED, EMBER_START_HP, utIndex, cellaIndex);
 		jutalom = EMBER_JUTALOM;
 	}
-	
+
 	/**
 	 * Sebzõdés lekérése
-	 * @param t A torony, ami lõ ránk.
+	 * 
+	 * @param t
+	 *            A torony, ami lõ ránk.
 	 * @return A sebzés mértéke
 	 */
 	@Override
@@ -65,21 +70,18 @@ public class Ember extends Kaszt {
 	}
 
 	/**
-	 * Pálya kiíratásához a jelölõ.
-	 * @return "e"
-	 */
-	@Override
-	public char getMarkChar() {
-		return 'e';
-	}
-	
-	/**
 	 * Kiíráshoz.
+	 * 
 	 * @return "Ember"
 	 */
 	@Override
 	public String toString() {
 		return "Ember";
+	}
+
+	@Override
+	protected Color getKasztSzin() {
+		return Color.YELLOW;
 	}
 
 }

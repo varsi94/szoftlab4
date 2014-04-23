@@ -3,14 +3,19 @@
  */
 package Torony;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
+
 import Cella.Cella;
 import Ellenseg.IEllenseg;
+import Grafikus.Veletlen;
 import Palya.Palya;
-import Prototipus.Kimenet;
-import Prototipus.Veletlen;
 
 /**
  * Tornyot reprezentáló osztály
+ * 
  * @author Varsi
  * 
  */
@@ -21,27 +26,22 @@ public class Torony implements ITorony {
 	 */
 	public static final int KOD_OSZTO_SZAMLALO = 3;
 	public static final int KOD_OSZTO_NEVEZO = 5;
-	
+
 	/**
 	 * Alap hatótávolság: így 5x5-ös négyzet
 	 */
 	private static final int START_HATOTAV = 2;
-	
+
 	/**
 	 * Alap tüzelési gyakoriság: így minden körben egyszer lõ
 	 */
 	private static final int START_TUZGYAK = 1;
-	
-	/**
-	 * Tüzelési típus beállítása
-	 */
-	private String TUZELESI_TIPUS;
 
 	/**
 	 * Pályára mutató referencia
 	 */
 	private Palya palya;
-	
+
 	/**
 	 * A cellára mutató referencia.
 	 */
@@ -64,96 +64,70 @@ public class Torony implements ITorony {
 	 */
 	private boolean kod;
 
+	private List<Cella> utolsoLovesek = new ArrayList<Cella>();
+
 	/**
-	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ
-	 * cellákon van-e valaki és ha van akkor a legközelebbi ellenséget meglövi.
+	 * Amikor ez meghívódik akkor a torony megnézi hogy a hatósugarán belül lévõ cellákon van-e valaki és ha van akkor a legközelebbi ellenséget
+	 * meglövi.
 	 */
 	@Override
 	public void loves() {
-		final int hatotav = kod ? this.hatotav * KOD_OSZTO_SZAMLALO
-				/ KOD_OSZTO_NEVEZO : this.hatotav;
+		utolsoLovesek.clear();
+		final int hatotav = getHatotav();
 		final int x = cella.getX();
 		final int y = cella.getY();
 		final int minx = x - hatotav < 0 ? 0 : x - hatotav;
-		final int maxx = x + hatotav > Palya.PALYA_MAX_X_INDEX ? Palya.PALYA_MAX_X_INDEX
-				: x + hatotav;
+		final int maxx = x + hatotav > Palya.PALYA_MAX_X_INDEX ? Palya.PALYA_MAX_X_INDEX : x + hatotav;
 		final int miny = y - hatotav < 0 ? 0 : y - hatotav;
-		final int maxy = y + hatotav > Palya.PALYA_MAX_Y_INDEX ? Palya.PALYA_MAX_Y_INDEX
-				: y + hatotav;
+		final int maxy = y + hatotav > Palya.PALYA_MAX_Y_INDEX ? Palya.PALYA_MAX_Y_INDEX : y + hatotav;
 
-		boolean lott = false;
-		for (int db = 0; db < tuzgyak; db++) {
-			lott = false;
-			kulso: for (int i = minx; i <= maxx; i++) {
-				for (int j = miny; j <= maxy; j++) {
-					final Cella c = palya.getTerkepCella(i, j);
-					final IEllenseg ell = c.getRandomEllenseg();
-					if (ell == null)
-						continue;
-					final int hp = ell.getHp();
-					if (ell != null) {
-						if (TUZELESI_TIPUS == null) {
-							if (Veletlen.duplaLovedek()) {
-								// dupplázzuk az ellenséget
-								Kimenet.toronyKetszerez();
-								final IEllenseg uj = ell.clone();
-								final IEllenseg uj2 = ell.clone();
-								uj.setHp(hp / 2);
-								uj2.setHp(hp / 2);
-								palya.addEllenseg(
-										uj,
-										palya.getUtCella(ell.getUtIndex(),
-												ell.getCellaIndex()));
-								palya.addEllenseg(
-										uj2,
-										palya.getUtCella(ell.getUtIndex(),
-												ell.getCellaIndex()));
-								ell.meghal();
-								palya.incMaxellen();
-								// a meghalás miatt kapunk plusz varázserõt, ezt levonjuk
-								palya.setVarazsero(palya.getVarazsero() - ell.getJutalom());
-								palya.setPontszam(50);
-							} else {
-								ell.sebzodik(this);
-							}
-						}
-						else if (TUZELESI_TIPUS.equals("ketszerez")) {
-							// dupplázzuk az ellenséget
-							System.out.println("Torony ellenség kétszerezés.");
-							final IEllenseg uj = ell.clone();
-							final IEllenseg uj2 = ell.clone();
-							palya.incMaxellen();
-							ell.meghal();
-							uj.setHp(hp / 2);
-							uj2.setHp(hp / 2);
-							palya.addEllenseg(
-									uj,
-									palya.getUtCella(ell.getUtIndex(),
-											ell.getCellaIndex()));
-							palya.addEllenseg(
-									uj2,
-									palya.getUtCella(ell.getUtIndex(),
-											ell.getCellaIndex()));
-							// a meghalás miatt kapunk plusz varázserõt, ezt levonjuk
-							palya.setVarazsero(palya.getVarazsero() - ell.getJutalom());
+		int db = tuzgyak;
+		kulso: for (int i = minx; i <= maxx; i++) {
+			for (int j = miny; j <= maxy; j++) {
+				final Cella c = palya.getTerkepCella(i, j);
+				final List<IEllenseg> ellensegek = c.getEllensegek();
+
+				int lastindex = ellensegek.size() - 1;
+				if (lastindex >= 0) {
+					utolsoLovesek.add(c);
+				}
+				// lastindex azért kell, hogy a duplázott ellenségek-et ne lõjük meg
+				for (int k = 0; k <= lastindex; k++) {
+					final IEllenseg ell = ellensegek.get(k);
+					if (Veletlen.duplaLovedek()) {
+						// dupplázzuk az ellenséget
+						final int hp = ell.getHp() / 2;
+						ell.setHp(hp);
+						if (hp > 0) {
+							final IEllenseg ujellenseg = ell.clone();
+							ujellenseg.setHp(hp);
+							palya.addEllenseg(ujellenseg, c);
 							palya.setPontszam(50);
-						} else if (TUZELESI_TIPUS.equals("sebez")) {
-							ell.sebzodik(this);
 						}
-						lott = true;
-						break kulso;// ellenség keresés befejezése, külsõ ciklus
-									// break
+					} else {
+						ell.sebzodik(this);
+					}
+					if (ell.getHp() <= 0) {
+						// meghalt ellenség
+						k--;
+						lastindex--;
+						// k-t csökkentjük hogy ne maradjon ki ellenség következõ iterációkor
+						// lastindex is csökken
+					}
+					if (--db <= 0) {
+						// ha lõttünk elégszer
+						break kulso;
 					}
 				}
 			}
-			if (!lott)
-				break;
 		}
 	}
 
 	/**
 	 * Sebzés visszaadása
-	 * @param idx ellenség indexe
+	 * 
+	 * @param idx
+	 *            ellenség indexe
 	 * @return sebzés mértéke
 	 */
 	@Override
@@ -163,24 +137,29 @@ public class Torony implements ITorony {
 
 	/**
 	 * Sebzés növelése, fejlesztés esetén
-	 * @param idx az ellenség indexe
+	 * 
+	 * @param idx
+	 *            az ellenség indexe
 	 */
 	@Override
 	public void setSebzes(int idx) {
 		palya.setPontszam(35);
 		sebzes[idx] += 10;
 	}
-	
+
 	/**
 	 * Konstruktor
-	 * @param palya Pályára mutató referencia
-	 * @param cella Cellára mutató referencia
-	 * @param tipus Milyen tüzelési típussal rendelkezzen a torony
+	 * 
+	 * @param palya
+	 *            Pályára mutató referencia
+	 * @param cella
+	 *            Cellára mutató referencia
+	 * @param tipus
+	 *            Milyen tüzelési típussal rendelkezzen a torony
 	 */
-	public Torony(Palya palya, Cella cella, String tipus) {
+	public Torony(Palya palya, Cella cella) {
 		this.palya = palya;
 		this.cella = cella;
-		this.TUZELESI_TIPUS = tipus;
 		sebzes = new int[] { 30, 30, 30, 30 };
 		hatotav = START_HATOTAV;
 		tuzgyak = START_TUZGYAK;
@@ -188,7 +167,8 @@ public class Torony implements ITorony {
 
 	/**
 	 * köd lekérdezése
-	 * @return True, ha van köd, False, ha nincs 
+	 * 
+	 * @return True, ha van köd, False, ha nincs
 	 */
 	@Override
 	public final boolean isKod() {
@@ -197,16 +177,18 @@ public class Torony implements ITorony {
 
 	/**
 	 * Köd módosítása
-	 * @param kod legyen vagy ne
+	 * 
+	 * @param kod
+	 *            legyen vagy ne
 	 */
 	@Override
 	public final void setKod(boolean kod) {
 		this.kod = kod;
-		if(kod) Kimenet.kodTorony(cella);
 	}
 
 	/**
 	 * Torony toString metódusa - igazából nincs használva, debughoz kellett
+	 * 
 	 * @return [Torony x y]
 	 */
 	@Override
@@ -232,6 +214,7 @@ public class Torony implements ITorony {
 
 	/**
 	 * Tüzelési gyakoriság lekérdezése
+	 * 
 	 * @return tüzelési gyakoriság
 	 */
 	@Override
@@ -241,20 +224,29 @@ public class Torony implements ITorony {
 
 	/**
 	 * Hatótáv lekérdezése
+	 * 
 	 * @return hatótáv
 	 */
 	@Override
 	public int getHatotav() {
-		return hatotav;
+		return kod ? this.hatotav * KOD_OSZTO_SZAMLALO / KOD_OSZTO_NEVEZO : this.hatotav;
+	}
+
+	@Override
+	public void rajzol(Graphics g, int pixelX, int pixelY, int pixelW, int pixelH) {
+		if (kod) {
+			g.setColor(Color.WHITE);
+		} else {
+			g.setColor(Color.BLACK);
+		}
+		g.fillRect(pixelX + pixelW / 3, pixelY, pixelW / 3, pixelH);
 	}
 
 	/**
-	 * Költség lekérdezése
-	 * @return költség
+	 * @return the utolsoLovesek
 	 */
 	@Override
-	public int getKoltseg() {
-		return KOLTSEG;
+	public List<Cella> getUtolsoLovesek() {
+		return utolsoLovesek;
 	}
-
 }

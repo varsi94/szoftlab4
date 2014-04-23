@@ -1,5 +1,0 @@
-ellenseg tunde 14 7
-torony 13 9 sebez  
-utemleptetes 1
-kod 13 9
-utemleptetes 1

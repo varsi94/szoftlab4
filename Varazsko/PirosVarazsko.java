@@ -9,37 +9,19 @@ import Torony.ITorony;
  * 
  */
 public class PirosVarazsko implements ITVarazsko {
+	public static final int KOLTSEG = 220;
 
 	/**
-	 * Azt tárolja hogy mennyi varázserõbe kerül a használata
-	 */
-	private int koltseg;
-
-	/**
-	 * Költség lekérdezése
-	 * @return költség
-	 */
-	@Override
-	public int getKoltseg() {
-		return koltseg;
-	}
-
-	/**
-	 * Hatás kifejtése
-	 * @param t a céltorony
+	 * /** Hatás kifejtése
+	 * 
+	 * @param t
+	 *            a céltorony
 	 * @return Sikerült-e
 	 */
 	@Override
 	public boolean hat(ITorony t) {
 		t.setHatotav();
 		return true;
-	}
-
-	/**
-	 * Konstruktor
-	 */
-	public PirosVarazsko() {
-		koltseg = 220;
 	}
 
 }

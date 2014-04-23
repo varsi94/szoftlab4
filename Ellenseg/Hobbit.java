@@ -1,11 +1,15 @@
 package Ellenseg;
 
+import java.awt.Color;
+
 import Palya.Palya;
 import Torony.ITorony;
+
 /**
  * Hobbitot reprezentáló osztály.
+ * 
  * @author Sipka
- *
+ * 
  */
 public class Hobbit extends Kaszt {
 
@@ -19,7 +23,7 @@ public class Hobbit extends Kaszt {
 	 * Hobbit kezdeti életpontja.
 	 */
 	private static final int HOBBIT_START_HP = 60;
-	
+
 	/**
 	 * Hobbit kezdeti sebessége: minden körben lép.
 	 */
@@ -54,7 +58,9 @@ public class Hobbit extends Kaszt {
 
 	/**
 	 * Sebzõdés lekérdezése a toronytól.
-	 * @param t A torony, ami lõ a hobbitra
+	 * 
+	 * @param t
+	 *            A torony, ami lõ a hobbitra
 	 * @return sebzõdés mértéke
 	 */
 	@Override
@@ -63,21 +69,18 @@ public class Hobbit extends Kaszt {
 	}
 
 	/**
-	 * Pálya kiíratásához a jelölõ
-	 * @return "h"
-	 */
-	@Override
-	public char getMarkChar() {
-		return 'h';
-	}
-
-	/**
 	 * Kimeneti nyelvhez
+	 * 
 	 * @return "Hobbit"
 	 */
 	@Override
 	public String toString() {
 		return "Hobbit";
 	}
-	
+
+	@Override
+	protected Color getKasztSzin() {
+		return Color.GREEN;
+	}
+
 }

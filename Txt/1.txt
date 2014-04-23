@@ -1,4 +1,0 @@
-ellenseg tunde 6 13
-ellenseg hobbit 5 9
-torony 5 12 sebez
-utemleptetes 2

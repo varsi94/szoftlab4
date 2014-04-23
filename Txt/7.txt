@@ -1,5 +1,0 @@
-ellenseg tunde 14 4
-ellenseg ember 14 3 
-akadaly ork 14 5
-varazsko lila 14 5 
-utemleptetes 2

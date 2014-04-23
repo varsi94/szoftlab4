@@ -2,6 +2,7 @@ package Ellenseg;
 
 import java.io.Serializable;
 
+import Grafikus.IRajzolhato;
 import Torony.ITorony;
 
 /**
@@ -9,7 +10,7 @@ import Torony.ITorony;
  * 
  * 
  */
-public interface IEllenseg extends Cloneable, Serializable {
+public interface IEllenseg extends Cloneable, Serializable, IRajzolhato {
 	/**
 	 * Ez a függvény van meghívva amikor találat éri az objektumot. Õ lekéri sebzés nagyságát a toronytól.
 	 * 
@@ -73,33 +74,24 @@ public interface IEllenseg extends Cloneable, Serializable {
 
 	/**
 	 * HP felülírása
-	 * @param hp új hp
+	 * 
+	 * @param hp
+	 *            új hp
 	 */
 	public void setHp(int hp);
 
 	/**
 	 * Ellenség kétszerezéséhez a clone metódus
+	 * 
 	 * @return másolat
 	 */
 	public IEllenseg clone();
 
 	/**
-	 * Debug-ra visszaadja a térképen milyen karakterként jelenjen meg
-	 * 
-	 * @return a karakter
-	 */
-	public char getMarkChar();
-	
-	/**
-	 * Visszaadja, hogy éppen lassítva van-e az ellenség.
-	 * @return igaz vagy hamis
-	 */
-	public boolean isLassitott();
-	
-	/**
 	 * Visszaadja, hogy mennyi varázserõt kap a játékos a megölésért.
+	 * 
 	 * @return a jutalom varázserõben mérve.
 	 */
 	public int getJutalom();
-	
+
 }

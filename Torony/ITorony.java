@@ -1,6 +1,10 @@
 package Torony;
 
 import java.io.Serializable;
+import java.util.List;
+
+import Cella.Cella;
+import Grafikus.IRajzolhato;
 
 /**
  * ITorony interfész a torony által elvárt metódusok definiálására.
@@ -8,7 +12,7 @@ import java.io.Serializable;
  * @author Varsi
  * 
  */
-public interface ITorony extends Serializable {
+public interface ITorony extends Serializable, IRajzolhato {
 	/**
 	 * Torony építéséhez szükséges varázserõ
 	 */
@@ -59,31 +63,32 @@ public interface ITorony extends Serializable {
 
 	/**
 	 * Köd lekérdezése
+	 * 
 	 * @return True, ha van köd, False, ha nincs
 	 */
 	public boolean isKod();
 
 	/**
 	 * Köd beállítása
-	 * @param kod legyen vagy ne
+	 * 
+	 * @param kod
+	 *            legyen vagy ne
 	 */
 	public void setKod(boolean kod);
-	
+
 	/**
 	 * Tüzelései gyakoriság lekérdezése
+	 * 
 	 * @return tüzelési gyakoriság
 	 */
 	public int getTuzgyak();
-	
+
 	/**
 	 * Hatótávolság lekérdezése
+	 * 
 	 * @return hatótávolság
 	 */
 	public int getHatotav();
 	
-	/**
-	 * Költség lekérdezése
-	 * @return költség
-	 */
-	public int getKoltseg();
+	public List<Cella> getUtolsoLovesek();
 }

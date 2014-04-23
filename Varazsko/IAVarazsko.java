@@ -10,12 +10,6 @@ import Akadaly.IAkadaly;
  * 
  */
 public interface IAVarazsko {
-	/**
-	 * Visszaadja hogy hány varázserõbe kerül az adott kõ használata
-	 * 
-	 * @return
-	 */
-	public int getKoltseg();
 
 	/**
 	 * A függvény megvizsgálja hogy hathat-e akadályra. Ha igen kifejti hatását.

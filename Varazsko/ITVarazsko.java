@@ -8,12 +8,6 @@ import Torony.ITorony;
  * @author Varsi
  */
 public interface ITVarazsko {
-	/**
-	 * Visszaadja hogy hány varázserõbe kerül az adott kõ használata.
-	 * 
-	 * @return költség
-	 */
-	public int getKoltseg();
 
 	/**
 	 * A függvény megvizsgálja hogy hathat-e toronyra. Ha igen kifejti hatását.

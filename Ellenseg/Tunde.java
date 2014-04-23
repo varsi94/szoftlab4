@@ -1,12 +1,15 @@
 package Ellenseg;
 
+import java.awt.Color;
+
 import Palya.Palya;
 import Torony.ITorony;
 
 /**
  * Tündét reprezentáló osztály
+ * 
  * @author Sipka
- *
+ * 
  */
 public class Tunde extends Kaszt {
 
@@ -16,12 +19,12 @@ public class Tunde extends Kaszt {
 	 * Tünde megöléséért járó jutalom varázserõ.
 	 */
 	private static final int TUNDE_JUTALOM = 50;
-	
+
 	/**
 	 * Tünde kezdeti életpontja
 	 */
 	private static final int TUNDE_START_HP = 90;
-	
+
 	/**
 	 * Tünde kezdeti sebessége, minden körben lép
 	 */
@@ -56,7 +59,9 @@ public class Tunde extends Kaszt {
 
 	/**
 	 * Sebzõdés lekérdezése
-	 * @param t Torony, amelyik lõ
+	 * 
+	 * @param t
+	 *            Torony, amelyik lõ
 	 * @return sebzõdés mértéke
 	 */
 	@Override
@@ -65,20 +70,17 @@ public class Tunde extends Kaszt {
 	}
 
 	/**
-	 * Pálya kiíratásához a jelölõ
-	 * @return 't'
-	 */
-	@Override
-	public char getMarkChar() {
-		return 't';
-	}
-
-	/**
 	 * Kimeneti nyelvhez a kaszt neve
+	 * 
 	 * @return "Tünde"
 	 */
 	@Override
 	public String toString() {
 		return "Tünde";
+	}
+
+	@Override
+	protected Color getKasztSzin() {
+		return Color.WHITE;
 	}
 }
