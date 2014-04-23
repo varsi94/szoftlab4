@@ -75,7 +75,7 @@ public class Ranglista implements Serializable {
 			out = new ObjectOutputStream(new FileOutputStream(FILE_RANGLISTA_SER));
 			out.writeObject(this);
 		} catch (IOException e) {
-			e.printStackTrace();
+			// ignore
 		} finally {
 			if (out != null) {
 				try {
@@ -99,9 +99,9 @@ public class Ranglista implements Serializable {
 			ois = new ObjectInputStream(new FileInputStream(FILE_RANGLISTA_SER));
 			result = (Ranglista) ois.readObject();
 		} catch (IOException e) {
-			e.printStackTrace();
+			// ignore
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			// ignore
 		} finally {
 			if (ois != null) {
 				try {

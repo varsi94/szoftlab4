@@ -102,12 +102,21 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				if (torony != null) {
 					toronybuf.add(c);
 				}
+				final int pixelX = x * CELLA_PX_SIZE;
+				final int pixelY = y * CELLA_PX_SIZE;
 				// cellák
 				c.rajzol(g, x * CELLA_PX_SIZE, y * CELLA_PX_SIZE, CELLA_PX_SIZE, CELLA_PX_SIZE);
+
+				if (palya.isHegyCella(c)) {
+					g.setColor(Color.BLACK);
+					final int[] hegyX = new int[] { pixelX + CELLA_PX_SIZE / 2, pixelX + CELLA_PX_SIZE, pixelX };
+					final int[] hegyY = new int[] { pixelY, pixelY + CELLA_PX_SIZE, pixelY + CELLA_PX_SIZE };
+					g.fillPolygon(hegyX, hegyY, 3);
+				}
 				// négyzetháló
 				g.setColor(Color.BLACK);
-				g.drawLine(x * CELLA_PX_SIZE, y * CELLA_PX_SIZE, (x + 1) * CELLA_PX_SIZE, y * CELLA_PX_SIZE);
-				g.drawLine(x * CELLA_PX_SIZE, y * CELLA_PX_SIZE, x * CELLA_PX_SIZE, (y + 1) * CELLA_PX_SIZE);
+				g.drawLine(pixelX, pixelY, (x + 1) * CELLA_PX_SIZE, y * CELLA_PX_SIZE);
+				g.drawLine(pixelX, pixelY, x * CELLA_PX_SIZE, (y + 1) * CELLA_PX_SIZE);
 			}
 		}
 

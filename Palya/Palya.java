@@ -253,8 +253,9 @@ public class Palya implements Serializable {
 		}
 
 		// nem foreach, akadály removeolhat ellensegek kollekcióból
-		for (int i = 0; i < ellensegek.size(); i++) {
-			final IEllenseg e = ellensegek.get(i);
+		List<IEllenseg> hovaEllensegek = hova.getEllensegek();
+		for (int i = 0; i < hovaEllensegek.size(); i++) {
+			final IEllenseg e = hovaEllensegek.get(i);
 			hova.akadalyoz(e);
 
 			if (e.getHp() <= 0) {
