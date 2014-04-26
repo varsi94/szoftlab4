@@ -24,6 +24,7 @@ import Akadaly.IAkadaly;
 import Akadaly.Ork;
 import Akadaly.Pok;
 import Cella.Cella;
+import Ellenseg.IEllenseg;
 import Palya.Palya;
 import Torony.ITorony;
 import Torony.Torony;
@@ -87,6 +88,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		t.setRepeats(true);
 		addMouseListener(this);
 		addMouseMotionListener(this);
+
 	}
 
 	@Override
@@ -105,7 +107,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				final int pixelX = x * CELLA_PX_SIZE;
 				final int pixelY = y * CELLA_PX_SIZE;
 				// cellák
-				c.rajzol(g, x * CELLA_PX_SIZE, y * CELLA_PX_SIZE, CELLA_PX_SIZE, CELLA_PX_SIZE);
+				rajzoljCellat(g, c, x * CELLA_PX_SIZE, y * CELLA_PX_SIZE, CELLA_PX_SIZE, CELLA_PX_SIZE);
 
 				if (palya.isHegyCella(c)) {
 					g.setColor(Color.BLACK);
@@ -126,7 +128,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		for (Cella c : toronybuf) {
 			final ITorony t = c.getTorony();
 			for (Cella lov : t.getUtolsoLovesek()) {
-				g.drawLine(c.getX() * CELLA_PX_SIZE + CELLA_PX_SIZE / 2, c.getY() * CELLA_PX_SIZE + CELLA_PX_SIZE / 2, lov.getX() * CELLA_PX_SIZE
+				g.drawLine(c.getX() * CELLA_PX_SIZE + CELLA_PX_SIZE / 2, c.getY() * CELLA_PX_SIZE + CELLA_PX_SIZE / 4, lov.getX() * CELLA_PX_SIZE
 						+ CELLA_PX_SIZE / 2, lov.getY() * CELLA_PX_SIZE + CELLA_PX_SIZE / 2);
 			}
 		}
@@ -145,6 +147,68 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 
 		g.setColor(Color.WHITE);
 		g.drawString("Kör: " + palya.getKor(), 0, getHeight() - 25);
+	}
+
+	private static void rajzoljCellat(Graphics g, Cella c, int pixelX, int pixelY, int pixelW, int pixelH) {
+		if (c.isUteleme()) {
+			g.setColor(new Color(238, 213, 183));
+			g.fillRect(pixelX, pixelY, pixelW, pixelH);
+			final IAkadaly akadaly = c.getAkadaly();
+			if (akadaly != null) {
+				rajzoljAkadalyt(g, akadaly, pixelX, pixelY, pixelW, pixelH);
+			}
+
+			final List<IEllenseg> ellensegek = c.getEllensegek();
+			final int count = ellensegek.size();
+			for (IEllenseg ell : ellensegek) {
+				rajzoljEllenseget(g, ell, pixelX, pixelY, pixelW, pixelH);
+			}
+			if (count > 1) {
+				g.setColor(Color.WHITE);
+				g.setFont(g.getFont().deriveFont(Font.BOLD, 16f));
+				g.drawString(count + "", pixelX, pixelY + pixelH);
+			}
+		} else {
+			g.setColor(new Color(160, 160, 160));
+			g.fillRect(pixelX, pixelY, pixelW, pixelH);
+			final ITorony torony = c.getTorony();
+			if (torony != null) {
+				rajzoljTornyot(g, torony, pixelX, pixelY, pixelW, pixelH);
+			}
+		}
+	}
+
+	private static void rajzoljAkadalyt(Graphics g, IAkadaly a, int pixelX, int pixelY, int pixelW, int pixelH) {
+		final int[] akadalyX = new int[] { pixelX, pixelX + pixelW / 4, pixelX + pixelW / 4 * 3, pixelX + pixelW };
+		final int[] akadalyY = new int[] { pixelY + pixelH, pixelY + pixelH / 2, pixelY + pixelH / 2, pixelY + pixelH };
+		g.setColor(a.getSzin());
+		g.fillPolygon(akadalyX, akadalyY, 4);
+		g.setColor(Color.WHITE);
+		g.drawString(a.getHatas() + "", pixelX + pixelW / 3, pixelY + pixelH);
+	}
+
+	private static void rajzoljEllenseget(Graphics g, IEllenseg ell, int pixelX, int pixelY, int pixelW, int pixelH) {
+		final int[] kasztX = new int[] { pixelX + pixelW / 2, pixelX + pixelW / 4 * 3, pixelX + pixelW * 3 / 5, pixelX + pixelW * 2 / 5, pixelX + pixelW / 4 };
+		final int[] kasztY = new int[] { pixelY + pixelH / 4, pixelY + pixelH / 2, pixelY + pixelH, pixelY + pixelH, pixelY + pixelH / 2 };
+		g.setColor(ell.getSzin());
+		g.fillPolygon(kasztX, kasztY, kasztX.length);
+		g.setColor(Color.RED);
+		g.fillRect(pixelX, pixelY, pixelW, pixelH / 10);
+		g.setColor(Color.GREEN);
+		float hp = ell.getHp() / (float) ell.getStartHp();
+		if (hp <= 0f) {
+			hp = 0f;
+		}
+		g.fillRect(pixelX, pixelY, Math.round(pixelW * hp), pixelH / 10);
+	}
+
+	private static void rajzoljTornyot(Graphics g, ITorony t, int pixelX, int pixelY, int pixelW, int pixelH) {
+		if (t.isKod()) {
+			g.setColor(Color.WHITE);
+		} else {
+			g.setColor(Color.BLACK);
+		}
+		g.fillRect(pixelX + pixelW / 3, pixelY, pixelW / 3, pixelH);
 	}
 
 	@Override

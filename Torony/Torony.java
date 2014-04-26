@@ -232,15 +232,6 @@ public class Torony implements ITorony {
 		return kod ? this.hatotav * KOD_OSZTO_SZAMLALO / KOD_OSZTO_NEVEZO : this.hatotav;
 	}
 
-	@Override
-	public void rajzol(Graphics g, int pixelX, int pixelY, int pixelW, int pixelH) {
-		if (kod) {
-			g.setColor(Color.WHITE);
-		} else {
-			g.setColor(Color.BLACK);
-		}
-		g.fillRect(pixelX + pixelW / 3, pixelY, pixelW / 3, pixelH);
-	}
 
 	/**
 	 * @return the utolsoLovesek

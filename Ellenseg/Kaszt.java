@@ -1,8 +1,5 @@
 package Ellenseg;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 import Cella.Cella;
 import Palya.Palya;
 import Torony.ITorony;
@@ -45,7 +42,7 @@ public abstract class Kaszt implements IEllenseg {
 	/**
 	 * Megadja, hogy a kaszt megöléséért mennyi varázserõ jár.
 	 */
-	protected int jutalom;
+	private int jutalom;
 
 	private int startHp;
 
@@ -63,7 +60,7 @@ public abstract class Kaszt implements IEllenseg {
 	 * @param cellaIndex
 	 *            cella azonosítója
 	 */
-	public Kaszt(Palya palya, int speed, int hp, int utIndex, int cellaIndex) {
+	public Kaszt(Palya palya, int speed, int hp, int utIndex, int cellaIndex, int jutalom) {
 		this.palya = palya;
 		this.speed = speed;
 		this.kimarad = speed;
@@ -71,6 +68,7 @@ public abstract class Kaszt implements IEllenseg {
 		this.startHp = hp;
 		this.utIndex = utIndex;
 		this.cellaIndex = cellaIndex;
+		this.jutalom = jutalom;
 	}
 
 	/**
@@ -82,7 +80,6 @@ public abstract class Kaszt implements IEllenseg {
 	@Override
 	public final void sebzodik(ITorony t) {
 		hp -= getSebzodes(t);
-		System.out.println("Kaszt.sebzodik() " + this + " " + hp);
 		if (hp <= 0) {
 			meghal();
 		}
@@ -199,6 +196,11 @@ public abstract class Kaszt implements IEllenseg {
 	public final int getCellaIndex() {
 		return cellaIndex;
 	}
+	
+	@Override
+	public final int getStartHp() {
+		return startHp;
+	}
 
 	/**
 	 * Másoló metódus
@@ -226,21 +228,4 @@ public abstract class Kaszt implements IEllenseg {
 		return jutalom;
 	}
 
-	@Override
-	public void rajzol(Graphics g, int pixelX, int pixelY, int pixelW, int pixelH) {
-		final int[] kasztX = new int[] { pixelX + pixelW / 2, pixelX + pixelW / 4 * 3, pixelX + pixelW / 2, pixelX + pixelW / 4 };
-		final int[] kasztY = new int[] { pixelY + pixelH / 4, pixelY + pixelH / 2, pixelY + pixelH / 3 * 4, pixelY + pixelH / 2 };
-		g.setColor(getKasztSzin());
-		g.fillPolygon(kasztX, kasztY, 4);
-		g.setColor(Color.RED);
-		g.fillRect(pixelX, pixelY, pixelW, pixelH / 10);
-		g.setColor(Color.GREEN);
-		float hp = this.hp / (float) startHp;
-		if (hp <= 0f) {
-			hp = 0f;
-		}
-		g.fillRect(pixelX, pixelY, Math.round(pixelW * hp), pixelH / 10);
-	}
-
-	protected abstract Color getKasztSzin();
 }

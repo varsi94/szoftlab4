@@ -64,7 +64,7 @@ public class Ork extends AAkadaly {
 	}
 
 	@Override
-	protected Color getAkadalyColor() {
+	public Color getSzin() {
 		return new Color(139, 69, 19);
 	}
 

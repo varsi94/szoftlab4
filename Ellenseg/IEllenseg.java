@@ -2,7 +2,7 @@ package Ellenseg;
 
 import java.io.Serializable;
 
-import Grafikus.IRajzolhato;
+import Grafikus.KulonbozoSzinuRajzolhato;
 import Torony.ITorony;
 
 /**
@@ -10,7 +10,7 @@ import Torony.ITorony;
  * 
  * 
  */
-public interface IEllenseg extends Cloneable, Serializable, IRajzolhato {
+public interface IEllenseg extends Cloneable, Serializable, KulonbozoSzinuRajzolhato {
 	/**
 	 * Ez a függvény van meghívva amikor találat éri az objektumot. Õ lekéri sebzés nagyságát a toronytól.
 	 * 
@@ -57,6 +57,13 @@ public interface IEllenseg extends Cloneable, Serializable, IRajzolhato {
 	 * @return
 	 */
 	public int getHp();
+
+	/**
+	 * Visszaadja a kaszt kezdõ hp-ját
+	 * 
+	 * @return hp
+	 */
+	public int getStartHp();
 
 	/**
 	 * Visszaadja, az út indexének egész értékét, ahol áll éppen.

@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import Cella.Cella;
 import Ellenseg.IEllenseg;
-import Grafikus.IRajzolhato;
+import Grafikus.KulonbozoSzinuRajzolhato;
 
 /**
  * Az interfész felelõssége hogy elõre deklarálja a késõbbi metódusokat illetve hogy képet adjon az objektum viselkedésérõl.
  * 
  */
-public interface IAkadaly extends Serializable, IRajzolhato {
+public interface IAkadaly extends Serializable, KulonbozoSzinuRajzolhato {
 	/**
 	 * Ez a függvény mondja meg hogy mit tud az akadály csinálni az ellenféllel. Akkor van meghívva ha egy ellenség ráfut az akadályra.
 	 * 

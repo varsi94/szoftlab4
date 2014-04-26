@@ -52,8 +52,7 @@ public class Torp extends Kaszt {
 	 *            a cella indexe
 	 */
 	public Torp(Palya palya, int utIndex, int cellaIndex) {
-		super(palya, TORP_START_SPEED, TORP_START_HP, utIndex, cellaIndex);
-		jutalom = TORP_JUTALOM;
+		super(palya, TORP_START_SPEED, TORP_START_HP, utIndex, cellaIndex, TORP_JUTALOM);
 	}
 
 	/**
@@ -79,7 +78,7 @@ public class Torp extends Kaszt {
 	}
 
 	@Override
-	protected Color getKasztSzin() {
+	public Color getSzin() {
 		return Color.BLACK;
 	}
 

@@ -53,8 +53,7 @@ public class Ember extends Kaszt {
 	 *            a cella indexe
 	 */
 	public Ember(Palya palya, int utIndex, int cellaIndex) {
-		super(palya, EMBER_START_SPEED, EMBER_START_HP, utIndex, cellaIndex);
-		jutalom = EMBER_JUTALOM;
+		super(palya, EMBER_START_SPEED, EMBER_START_HP, utIndex, cellaIndex, EMBER_JUTALOM);
 	}
 
 	/**
@@ -80,7 +79,7 @@ public class Ember extends Kaszt {
 	}
 
 	@Override
-	protected Color getKasztSzin() {
+	public Color getSzin() {
 		return Color.YELLOW;
 	}
 

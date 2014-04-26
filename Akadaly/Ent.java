@@ -63,7 +63,7 @@ public class Ent extends AAkadaly {
 	}
 
 	@Override
-	protected Color getAkadalyColor() {
+	public Color getSzin() {
 		return new Color(0, 127, 0);
 	}
 

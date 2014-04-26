@@ -53,8 +53,7 @@ public class Tunde extends Kaszt {
 	 *            a cella indexe
 	 */
 	public Tunde(Palya palya, int utIndex, int cellaIndex) {
-		super(palya, TUNDE_START_SPEED, TUNDE_START_HP, utIndex, cellaIndex);
-		jutalom = TUNDE_JUTALOM;
+		super(palya, TUNDE_START_SPEED, TUNDE_START_HP, utIndex, cellaIndex, TUNDE_JUTALOM);
 	}
 
 	/**
@@ -80,7 +79,8 @@ public class Tunde extends Kaszt {
 	}
 
 	@Override
-	protected Color getKasztSzin() {
+	public Color getSzin() {
 		return Color.WHITE;
 	}
+
 }

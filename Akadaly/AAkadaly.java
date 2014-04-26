@@ -1,8 +1,5 @@
 package Akadaly;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 import Cella.Cella;
 import Ellenseg.IEllenseg;
 
@@ -66,15 +63,4 @@ public abstract class AAkadaly implements IAkadaly {
 		return hatas;
 	}
 
-	@Override
-	public void rajzol(Graphics g, int pixelX, int pixelY, int pixelW, int pixelH) {
-		final int[] akadalyX = new int[] { pixelX, pixelX + pixelW / 4, pixelX + pixelW / 4 * 3, pixelX + pixelW };
-		final int[] akadalyY = new int[] { pixelY + pixelH, pixelY + pixelH / 2, pixelY + pixelH / 2, pixelY + pixelH };
-		g.setColor(getAkadalyColor());
-		g.fillPolygon(akadalyX, akadalyY, 4);
-		g.setColor(Color.WHITE);
-		g.drawString(hatas + "", pixelX + pixelW / 3, pixelY + pixelH);
-	}
-
-	protected abstract Color getAkadalyColor();
 }

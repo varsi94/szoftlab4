@@ -52,8 +52,7 @@ public class Hobbit extends Kaszt {
 	 *            a cella indexe
 	 */
 	public Hobbit(Palya palya, int utIndex, int cellaIndex) {
-		super(palya, HOBBIT_START_SPEED, HOBBIT_START_HP, utIndex, cellaIndex);
-		jutalom = HOBBIT_JUTALOM;
+		super(palya, HOBBIT_START_SPEED, HOBBIT_START_HP, utIndex, cellaIndex, HOBBIT_JUTALOM);
 	}
 
 	/**
@@ -79,7 +78,7 @@ public class Hobbit extends Kaszt {
 	}
 
 	@Override
-	protected Color getKasztSzin() {
+	public Color getSzin() {
 		return Color.GREEN;
 	}
 

@@ -1,14 +1,11 @@
 package Cella;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import Akadaly.IAkadaly;
 import Ellenseg.IEllenseg;
-import Grafikus.IRajzolhato;
 import Grafikus.Veletlen;
 import Torony.ITorony;
 
@@ -18,7 +15,7 @@ import Torony.ITorony;
  * @author Sipka
  * 
  */
-public class Cella implements Serializable, IRajzolhato {
+public class Cella implements Serializable {
 	private static final long serialVersionUID = 7004825596826728002L;
 	/**
 	 * Az x koordinátája a pontnak.
@@ -182,26 +179,6 @@ public class Cella implements Serializable, IRajzolhato {
 	 */
 	public final int getY() {
 		return y;
-	}
-
-	@Override
-	public void rajzol(Graphics g, int pixelX, int pixelY, int pixelW, int pixelH) {
-		if (uteleme) {
-			g.setColor(new Color(238, 213, 183));
-			g.fillRect(pixelX, pixelY, pixelW, pixelH);
-			if (akadaly != null) {
-				akadaly.rajzol(g, pixelX, pixelY, pixelW, pixelH);
-			}
-			for (IEllenseg ell : ellensegek) {
-				ell.rajzol(g, pixelX, pixelY, pixelW, pixelH);
-			}
-		} else {
-			g.setColor(new Color(160, 160, 160));
-			g.fillRect(pixelX, pixelY, pixelW, pixelH);
-			if (torony != null) {
-				torony.rajzol(g, pixelX, pixelY, pixelW, pixelH);
-			}
-		}
 	}
 
 	public void akadalyoz(IEllenseg ell) {

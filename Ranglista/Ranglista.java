@@ -129,10 +129,10 @@ public class Ranglista implements Serializable {
 	/**
 	 * Megjeleniti a ranglista megjelenitõ dialógust
 	 * 
-	 * @param f
+	 * @param parent
 	 *            a szülõ ablaka a dialógusnak
 	 */
-	public void showRanglistaDialog(JFrame f) {
+	public void showRanglistaDialog(JFrame parent) {
 		class RanglistaEntry implements Comparable<RanglistaEntry> {
 			private final String name;
 			private final int pontszam;
@@ -144,13 +144,13 @@ public class Ranglista implements Serializable {
 
 			@Override
 			public int compareTo(RanglistaEntry other) {
-				return Integer.compare(pontszam, other.pontszam);
+				return -Integer.compare(pontszam, other.pontszam);
 			}
 		}
 
-		final JDialog dialog = new JDialog(f, true);
+		final JDialog dialog = new JDialog(parent, true);
 		dialog.setTitle("Ranglista");
-		dialog.setLocationRelativeTo(f);
+		dialog.setLocationRelativeTo(parent);
 		dialog.setLayout(new BorderLayout());
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

@@ -63,7 +63,7 @@ public class Pok extends AAkadaly {
 	}
 
 	@Override
-	protected Color getAkadalyColor() {
+	public Color getSzin() {
 		return new Color(64, 64, 64);
 	}
 

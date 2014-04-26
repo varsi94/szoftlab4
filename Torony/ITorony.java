@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import Cella.Cella;
-import Grafikus.IRajzolhato;
 
 /**
  * ITorony interfész a torony által elvárt metódusok definiálására.
@@ -12,7 +11,7 @@ import Grafikus.IRajzolhato;
  * @author Varsi
  * 
  */
-public interface ITorony extends Serializable, IRajzolhato {
+public interface ITorony extends Serializable {
 	/**
 	 * Torony építéséhez szükséges varázserõ
 	 */
@@ -89,6 +88,6 @@ public interface ITorony extends Serializable, IRajzolhato {
 	 * @return hatótávolság
 	 */
 	public int getHatotav();
-	
+
 	public List<Cella> getUtolsoLovesek();
 }
