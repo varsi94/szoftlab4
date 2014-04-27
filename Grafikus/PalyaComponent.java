@@ -40,6 +40,7 @@ import Varazsko.ZoldVarazsko;
  * A komponens ami képes megjeleniteni a Pályát
  */
 public class PalyaComponent extends JComponent implements MouseListener, MouseMotionListener {
+	private static final long serialVersionUID = -7175182164179721999L;
 	/**
 	 * Mennyi ms-enként legyen új kör, motor hivás
 	 */
@@ -88,7 +89,6 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		t.setRepeats(true);
 		addMouseListener(this);
 		addMouseMotionListener(this);
-
 	}
 
 	@Override
@@ -444,5 +444,12 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		this.palya = palya;
 		hatotavTorony = null;
 		repaint();
+	}
+
+	/**
+	 * Megállítjuk a timert.
+	 */
+	public void timerStop() {
+		t.stop();
 	}
 }

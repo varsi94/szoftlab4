@@ -1,20 +1,10 @@
 package Grafikus;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
 
-import Palya.Palya;
-import Ranglista.Ranglista;
 
 public class Main {
-	private static JMenuItem newGameAction;
+/*	private static JMenuItem newGameAction;
 	private static JMenuItem ranglistaAction;
 	private static JFrame frame;
 	private static PalyaComponent palyaComponent;
@@ -59,5 +49,17 @@ public class Main {
 		frame.pack();
 		frame.setVisible(true);
 	}
-
+*/
+	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Szoftlab4 Torony védés");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		MenuComponent comp = new MenuComponent(frame);
+		frame.getContentPane().add(comp);
+		frame.setResizable(false);
+		
+		frame.pack();
+		frame.setVisible(true);
+	}
 }
