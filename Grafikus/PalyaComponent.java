@@ -40,6 +40,7 @@ import Varazsko.ZoldVarazsko;
  * A komponens ami képes megjeleniteni a Pályát
  */
 public class PalyaComponent extends JComponent implements MouseListener, MouseMotionListener {
+	private static final long serialVersionUID = -7175182164179721999L;
 	/**
 	 * Mennyi ms-enként legyen új kör, motor hivás
 	 */
@@ -52,8 +53,6 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 	 * Referencia a pályára
 	 */
 	private Palya palya;
-
-	// feléviszed az egeret, hatótáv kijelzéshez
 
 	/**
 	 * Hatótávolság jelzés x koordináta
@@ -74,21 +73,31 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 	 */
 	private List<Cella> toronybuf = new ArrayList<Cella>();
 
+	/**
+	 * Timer, ami idõziti a lépéseket a pályán
+	 */
 	private Timer t = new Timer(KOR_TIME_DELAY, new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			// mozgatás
 			palya.motor();
+			// újrarajzolás
 			repaint();
 		}
 	});
 
+	/**
+	 * Konstruktor, a paraméterként átadott pályát jeleniti meg
+	 * 
+	 * @param palya
+	 *            a pálya
+	 */
 	public PalyaComponent(Palya palya) {
 		this.palya = palya;
 		t.start();
 		t.setRepeats(true);
 		addMouseListener(this);
 		addMouseMotionListener(this);
-
 	}
 
 	@Override
@@ -99,30 +108,33 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		// pálya kirajzolása
 		for (int x = 0; x <= Palya.PALYA_MAX_X_INDEX; x++) {
 			for (int y = 0; y <= Palya.PALYA_MAX_Y_INDEX; y++) {
+				//mindegyik cellát kirajzoljuk
 				final Cella c = palya.getTerkepCella(x, y);
 				final ITorony torony = c.getTorony();
 				if (torony != null) {
+					//hozzáadjuk a torony listához, a a lövések kirajzolásához
 					toronybuf.add(c);
 				}
 				final int pixelX = x * CELLA_PX_SIZE;
 				final int pixelY = y * CELLA_PX_SIZE;
-				// cellák
+				// a cella rajzolása
 				rajzoljCellat(g, c, x * CELLA_PX_SIZE, y * CELLA_PX_SIZE, CELLA_PX_SIZE, CELLA_PX_SIZE);
 
 				if (palya.isHegyCella(c)) {
+					//ha hegy, akkor egy fekete háromszög rajzolása
 					g.setColor(Color.BLACK);
 					final int[] hegyX = new int[] { pixelX + CELLA_PX_SIZE / 2, pixelX + CELLA_PX_SIZE, pixelX };
 					final int[] hegyY = new int[] { pixelY, pixelY + CELLA_PX_SIZE, pixelY + CELLA_PX_SIZE };
 					g.fillPolygon(hegyX, hegyY, 3);
 				}
-				// négyzetháló
+				// négyzetháló kirajzolása
 				g.setColor(Color.BLACK);
 				g.drawLine(pixelX, pixelY, (x + 1) * CELLA_PX_SIZE, y * CELLA_PX_SIZE);
 				g.drawLine(pixelX, pixelY, x * CELLA_PX_SIZE, (y + 1) * CELLA_PX_SIZE);
 			}
 		}
 
-		// lövések rajzolása
+		// lövések rajzolása, pirossal, vastag vonallal
 		g.setColor(Color.RED);
 		g2.setStroke(new BasicStroke(2.5f));
 		for (Cella c : toronybuf) {
@@ -133,14 +145,14 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 			}
 		}
 
-		// hatótáv indikátor rajzolása
+		// hatótáv indikátor rajzolása, fehér átlátszó szinnel
 		if (hatotavTorony != null) {
 			g.setColor(new Color(255, 255, 255, 64));
 			final int hatotav = hatotavTorony.getHatotav();
 			g.fillRect((hatotavX - hatotav) * CELLA_PX_SIZE, (hatotavY - hatotav) * CELLA_PX_SIZE, (hatotav * 2 + 1) * CELLA_PX_SIZE, (hatotav * 2 + 1)
 					* CELLA_PX_SIZE);
 		}
-		// varázserõ, jelenlegi kör rajzolása
+		// varázserõ, jelenlegi kör rajzolása a pálya bal alsó sarkába
 		g.setFont(g.getFont().deriveFont(Font.BOLD, 20f));
 		g.setColor(Color.WHITE);
 		g.drawString("Varázserõ: " + palya.getVarazsero(), 0, getHeight());
@@ -149,49 +161,109 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		g.drawString("Kör: " + palya.getKor(), 0, getHeight() - 25);
 	}
 
+	/**
+	 * Kirajzol egy cellát a kapott paraméterek alapján
+	 * 
+	 * @param g
+	 *            hova rajzoljon
+	 * @param c
+	 *            a cella amit ki kell rajzolni
+	 * @param pixelX
+	 *            g-n az x koordináta
+	 * @param pixelY
+	 *            g-n az y koordináta
+	 * @param pixelW
+	 *            milyen szélességben akarjuk kirajzolni
+	 * @param pixelH
+	 *            milyen magasságban akarjuk kirajzolni
+	 */
 	private static void rajzoljCellat(Graphics g, Cella c, int pixelX, int pixelY, int pixelW, int pixelH) {
 		if (c.isUteleme()) {
+			// ha õtelem
 			g.setColor(new Color(238, 213, 183));
 			g.fillRect(pixelX, pixelY, pixelW, pixelH);
 			final IAkadaly akadaly = c.getAkadaly();
 			if (akadaly != null) {
+				// ha van rajta akadály, akkor kirajzoljuk
 				rajzoljAkadalyt(g, akadaly, pixelX, pixelY, pixelW, pixelH);
 			}
 
 			final List<IEllenseg> ellensegek = c.getEllensegek();
 			final int count = ellensegek.size();
 			for (IEllenseg ell : ellensegek) {
+				// kirajzoljuk az ellenségeket
 				rajzoljEllenseget(g, ell, pixelX, pixelY, pixelW, pixelH);
 			}
 			if (count > 1) {
+				// ha több mint 1 ellenség van a cellán kiirjuk hogy darab
 				g.setColor(Color.WHITE);
 				g.setFont(g.getFont().deriveFont(Font.BOLD, 16f));
 				g.drawString(count + "", pixelX, pixelY + pixelH);
 			}
 		} else {
+			// ha nem útelem
 			g.setColor(new Color(160, 160, 160));
 			g.fillRect(pixelX, pixelY, pixelW, pixelH);
 			final ITorony torony = c.getTorony();
 			if (torony != null) {
+				// ha van torony kirajzoljuk
 				rajzoljTornyot(g, torony, pixelX, pixelY, pixelW, pixelH);
 			}
 		}
 	}
 
+	/**
+	 * Kirajzol egy akadályt a kapott paraméterek alapján
+	 * 
+	 * @param g
+	 *            hova rajzoljon
+	 * @param a
+	 *            az akadály amit ki kell rajzolni
+	 * @param pixelX
+	 *            g-n az x koordináta
+	 * @param pixelY
+	 *            g-n az y koordináta
+	 * @param pixelW
+	 *            milyen szélességben akarjuk kirajzolni
+	 * @param pixelH
+	 *            milyen magasságban akarjuk kirajzolni
+	 */
 	private static void rajzoljAkadalyt(Graphics g, IAkadaly a, int pixelX, int pixelY, int pixelW, int pixelH) {
+		// az akadály sokszögének koordinátái:
 		final int[] akadalyX = new int[] { pixelX, pixelX + pixelW / 4, pixelX + pixelW / 4 * 3, pixelX + pixelW };
 		final int[] akadalyY = new int[] { pixelY + pixelH, pixelY + pixelH / 2, pixelY + pixelH / 2, pixelY + pixelH };
+		// megfelelõ szinnel kirajzoljuk a sokszöget (trapézt)
 		g.setColor(a.getSzin());
 		g.fillPolygon(akadalyX, akadalyY, 4);
 		g.setColor(Color.WHITE);
 		g.drawString(a.getHatas() + "", pixelX + pixelW / 3, pixelY + pixelH);
 	}
 
+	/**
+	 * Kirajzol egy ellenséget a kapott paraméterek alapján
+	 * 
+	 * @param g
+	 *            hova rajzoljon
+	 * @param ell
+	 *            az ellenség amit ki kell rajzolni
+	 * @param pixelX
+	 *            g-n az x koordináta
+	 * @param pixelY
+	 *            g-n az y koordináta
+	 * @param pixelW
+	 *            milyen szélességben akarjuk kirajzolni
+	 * @param pixelH
+	 *            milyen magasságban akarjuk kirajzolni
+	 */
 	private static void rajzoljEllenseget(Graphics g, IEllenseg ell, int pixelX, int pixelY, int pixelW, int pixelH) {
+		// az ellenség sokszögének koordinátái:
 		final int[] kasztX = new int[] { pixelX + pixelW / 2, pixelX + pixelW / 4 * 3, pixelX + pixelW * 3 / 5, pixelX + pixelW * 2 / 5, pixelX + pixelW / 4 };
 		final int[] kasztY = new int[] { pixelY + pixelH / 4, pixelY + pixelH / 2, pixelY + pixelH, pixelY + pixelH, pixelY + pixelH / 2 };
+		// a megfelelõ szinnel kirajozljuk a sokszöget (ötszög)
 		g.setColor(ell.getSzin());
 		g.fillPolygon(kasztX, kasztY, kasztX.length);
+
+		// a HP csikot felülre kirajzoljuk
 		g.setColor(Color.RED);
 		g.fillRect(pixelX, pixelY, pixelW, pixelH / 10);
 		g.setColor(Color.GREEN);
@@ -202,10 +274,29 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		g.fillRect(pixelX, pixelY, Math.round(pixelW * hp), pixelH / 10);
 	}
 
+	/**
+	 * Kirajzol egy tornyot a kapott paraméterek alapján
+	 * 
+	 * @param g
+	 *            hova rajzoljon
+	 * @param t
+	 *            a torony amit ki kell rajzolni
+	 * @param pixelX
+	 *            g-n az x koordináta
+	 * @param pixelY
+	 *            g-n az y koordináta
+	 * @param pixelW
+	 *            milyen szélességben akarjuk kirajzolni
+	 * @param pixelH
+	 *            milyen magasságban akarjuk kirajzolni
+	 */
 	private static void rajzoljTornyot(Graphics g, ITorony t, int pixelX, int pixelY, int pixelW, int pixelH) {
+		// torony kirajzolása
 		if (t.isKod()) {
+			// ha van köd fehérrel
 			g.setColor(Color.WHITE);
 		} else {
+			// ha nincs köd feketével
 			g.setColor(Color.BLACK);
 		}
 		g.fillRect(pixelX + pixelW / 3, pixelY, pixelW / 3, pixelH);
@@ -219,6 +310,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// ha a user katting egy cellára, kiszámolyjuk melyik az a cella, majd meghivjuk a clickCella függvényt
 		final int x = e.getX() / CELLA_PX_SIZE;
 		final int y = e.getY() / CELLA_PX_SIZE;
 		final Cella c = palya.getTerkepCella(x, y);
@@ -250,6 +342,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				switch (n) {
 				case 0: {
 					if (varazsero >= Pok.KOLTSEG) {
+						// ha van elég varázserõ, lerakjuk az akadályt
 						palya.decVarazsero(Pok.KOLTSEG);
 						palya.akadalytLerak(new Pok(c), c);
 					} else {
@@ -259,6 +352,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				}
 				case 1: {
 					if (varazsero >= Ork.KOLTSEG) {
+						// ha van elég varázserõ, lerakjuk az akadályt
 						palya.decVarazsero(Ork.KOLTSEG);
 						palya.akadalytLerak(new Ork(c), c);
 					} else {
@@ -268,6 +362,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				}
 				case 2: {
 					if (varazsero >= Ent.KOLTSEG) {
+						// ha van elég varázserõ, lerakjuk az akadályt
 						palya.decVarazsero(Ent.KOLTSEG);
 						palya.akadalytLerak(new Ent(c), c);
 					} else {
@@ -287,6 +382,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 						options[0]);
 				if (n == 0) {
 					if (varazsero >= LilaVarazsko.KOLTSEG) {
+						// ha van elég varázserõ, fejlesztjük az akadályt
 						palya.decVarazsero(LilaVarazsko.KOLTSEG);
 						new LilaVarazsko().hat(akadaly);
 					} else {
@@ -295,6 +391,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				}
 			}
 		} else {
+			// ha nem útelem, tornyot rakhatunk le, vagy azt fejleszthetünk
 			title = "Torony";
 			final ITorony t = c.getTorony();
 			if (t == null) {
@@ -305,6 +402,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 						options[0]);
 				if (n == 0) {
 					if (varazsero >= ITorony.KOLTSEG) {
+						// ha van elég varázserõ, lerakjuk a tornyot
 						palya.decVarazsero(ITorony.KOLTSEG);
 						palya.tornyotLerak(new Torony(palya, c), c);
 					} else {
@@ -328,6 +426,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				switch (n) {
 				case 0: {
 					if (varazsero >= FeherVarazsko.KOLTSEG) {
+						// ha van elég varázserõ, fejlesztjük a tornyot
 						palya.decVarazsero(FeherVarazsko.KOLTSEG);
 						new FeherVarazsko().hat(t);
 					} else {
@@ -337,6 +436,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				}
 				case 1: {
 					if (varazsero >= FeketeVarazsko.KOLTSEG) {
+						// ha van elég varázserõ, fejlesztjük a tornyot
 						palya.decVarazsero(FeketeVarazsko.KOLTSEG);
 						new FeketeVarazsko().hat(t);
 					} else {
@@ -346,6 +446,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				}
 				case 2: {
 					if (varazsero >= KekVarazsko.KOLTSEG) {
+						// ha van elég varázserõ, fejlesztjük a tornyot
 						palya.decVarazsero(KekVarazsko.KOLTSEG);
 						new KekVarazsko().hat(t);
 					} else {
@@ -355,6 +456,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				}
 				case 3: {
 					if (varazsero >= PirosVarazsko.KOLTSEG) {
+						// ha van elég varázserõ, fejlesztjük a tornyot
 						palya.decVarazsero(PirosVarazsko.KOLTSEG);
 						new PirosVarazsko().hat(t);
 					} else {
@@ -364,6 +466,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				}
 				case 4: {
 					if (varazsero >= SargaVarazsko.KOLTSEG) {
+						// ha van elég varázserõ, fejlesztjük a tornyot
 						palya.decVarazsero(SargaVarazsko.KOLTSEG);
 						new SargaVarazsko().hat(t);
 					} else {
@@ -373,6 +476,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 				}
 				case 5: {
 					if (varazsero >= ZoldVarazsko.KOLTSEG) {
+						// ha van elég varázserõ, fejlesztjük a tornyot
 						palya.decVarazsero(ZoldVarazsko.KOLTSEG);
 						new ZoldVarazsko().hat(t);
 					} else {
@@ -391,7 +495,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 	}
 
 	/**
-	 * Meghivódik ha kevés a varázserõ vásárláshoz
+	 * Meghivódik ha kevés a varázserõ vásárláshoz, dialógusablakot dob fel
 	 */
 	private void kevesVarazsero() {
 		JOptionPane.showMessageDialog(this, "Kevés varászerõ");
@@ -403,6 +507,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
+		// torony hatótávolságának a kijelzésének a törlése
 		hatotavTorony = null;
 		repaint();
 	}
@@ -417,6 +522,7 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		// a draggolást delegáljuk a mozgatásra
 		mouseMoved(e);
 	}
 
@@ -426,6 +532,8 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		final int x = e.getX();
 		final int y = e.getY();
 		if (x > 0 && y > 0 && x < getWidth() && y < getWidth()) {
+			// ha valid a koordináta
+			// akkor a torony hatótávolságát beállitjuk, hogy melyiket jelenitse meg
 			hatotavX = x / CELLA_PX_SIZE;
 			hatotavY = y / CELLA_PX_SIZE;
 			final Cella c = palya.getTerkepCella(hatotavX, hatotavY);
@@ -444,5 +552,12 @@ public class PalyaComponent extends JComponent implements MouseListener, MouseMo
 		this.palya = palya;
 		hatotavTorony = null;
 		repaint();
+	}
+
+	/**
+	 * Megállítjuk a timert.
+	 */
+	public void timerStop() {
+		t.stop();
 	}
 }

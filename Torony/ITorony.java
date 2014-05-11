@@ -89,5 +89,10 @@ public interface ITorony extends Serializable {
 	 */
 	public int getHatotav();
 
+	/**
+	 * Visszaadja azokat a Cellákat ahova a torony az utolsó léptetéskor lõtt
+	 * 
+	 * @return a lista
+	 */
 	public List<Cella> getUtolsoLovesek();
 }

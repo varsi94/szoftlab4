@@ -320,7 +320,6 @@ public class Palya implements Serializable {
 	 * Kör növelése
 	 */
 	private void korNovel() {
-		System.out.println("Új kör.");
 		kodKiosztas();
 		this.kor++;
 		korSzamlalo = 0;
@@ -332,7 +331,6 @@ public class Palya implements Serializable {
 	 * Játék mentése. Csak a körök végén.
 	 */
 	private void ment() {
-		System.out.println("Mentés.");
 		try {
 			String path = System.getProperty("user.dir") + "\\";
 			File f1 = new File(path + "mentes.ser");
