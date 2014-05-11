@@ -41,7 +41,6 @@ public class Ork extends AAkadaly {
 	@Override
 	public boolean akadalyoz(IEllenseg e) {
 		e.meghal();
-		System.out.println("Ork.akadalyoz()");
 		return --hatas > 0;
 	}
 
